@@ -1,0 +1,15 @@
+<h2>CREATE NEW SURGE</h2>
+<div class="container">
+    <form>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input [(ngModel)]="name" type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input [(ngModel)]="description" type="text" class="form-control" id="description" name="description">
+        </div>
+        <button class="btn btn-info" [routerLink]="['/knightsRadiant/surges']">Back</button>
+        <button type="submit" class="btn btn-primary" (click)="createSurge()" style="margin-left: 5%;">Create</button>
+    </form>
+</div>

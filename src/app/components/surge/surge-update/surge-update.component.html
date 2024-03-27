@@ -1,0 +1,20 @@
+<h2>UPDATE SURGE</h2>
+
+<div class="container">
+    <form>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input [(ngModel)]="surge.name" type="text" class="form-control" id="surge.name" name="surge.name">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input [(ngModel)]="surge.description" type="text" class="form-control" id="surge.description" name="surge.description">
+        </div>        
+        <div class="mb-3">
+            <label for="ideal" class="form-label">Ideal</label>
+            <input [(ngModel)]="surge.ideal" type="text" class="form-control" id="surge.ideal" name="surge.ideal">
+        </div>
+        <button class="btn btn-info" [routerLink]="['/knightsRadiant/surges']">Back</button>
+        <button type="submit" class="btn btn-primary" (click)="updateSurge()" style="margin-left: 5%;">Update</button>
+    </form>
+</div>

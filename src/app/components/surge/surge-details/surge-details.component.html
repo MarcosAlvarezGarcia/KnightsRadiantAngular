@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>Surges list</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">NAME</th>
+            <th scope="col">DESCRIPTION</th>
+            <th scope="col">IDEAL</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{surge.name}}</td>
+            <td>{{surge.description}}</td>
+            <td>{{surge.ideal}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-info" [routerLink]="['/knightsRadiant/surges']">Back</button>
+    <button class="btn btn-primary" (click)="updateSurge(surge.id)" style="margin-left: 5%;">Update</button>
+    <button class="btn btn-danger" (click)="deleteSurge(surge.id)" style="margin-left: 5%;">Delete</button>
+</div>

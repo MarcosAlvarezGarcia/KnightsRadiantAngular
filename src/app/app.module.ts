@@ -1,17 +1,60 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SurgeListComponent } from './components/surge/surge-list/surge-list.component';
+import { SurgeAddComponent } from './components/surge/surge-add/surge-add.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { SurgeDetailsComponent } from './components/surge/surge-details/surge-details.component';
+import { SurgeUpdateComponent } from './components/surge/surge-update/surge-update.component';
+import { UserRegisterComponent } from './components/user/user-register/user-register.component';
+import { UserStartComponent } from './components/user/user-start/user-start.component';
+import { UserLoginComponent } from './components/user/user-login/user-login.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { WOKComponent } from './components/wallpaper/wok/wok.component';
+import { CustomCursorLightBallComponent } from './components/custom-cursor-light-ball/custom-cursor-light-ball.component';
+import { RadiantOrderListComponent } from './components/radiant-order/radiant-order-list/radiant-order-list.component';
+
+const routes : Routes = [
+  {path: '', redirectTo:'/knightsRadiant/home', pathMatch:'full'}, // http://localhost:4200/knightsRadiant/home
+  {path: 'knightsRadiant/home', component: HomePageComponent}, // http://localhost:4200/knightsRadiant/home
+  {path: 'knightsRadiant/users/start', component: UserStartComponent}, // http://localhost:4200/knightsRadiant/users/start
+  {path: 'knightsRadiant/users/register', component: UserRegisterComponent}, // http://localhost:4200/knightsRadiant/users/register
+  {path: 'knightsRadiant/users/login', component: UserLoginComponent}, // http://localhost:4200/knightsRadiant/users/login
+  {path: 'knightsRadiant/surges', component: SurgeListComponent}, // http://localhost:4200/knightsRadiant/surges
+  {path: 'knightsRadiant/surges/id/:id', component:SurgeDetailsComponent}, // http://localhost:4200/knightsRadiant/surges/id
+  {path: 'knightsRadiant/surges/create', component:SurgeAddComponent}, // http://localhost:4200/knightsRadiant/surges/create
+  {path: 'knightsRadiant/surges/update/:id', component:SurgeUpdateComponent}, // http://localhost:4200/knightsRadiant/surges/update
+  {path: 'knightsRadiant/radiant-orders', component: RadiantOrderListComponent}, // http://localhost:4200/knightsRadiant/radiant-orders
+
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SurgeListComponent,
+    SurgeAddComponent,
+    SurgeDetailsComponent,
+    SurgeUpdateComponent,
+    UserRegisterComponent,
+    UserStartComponent,
+    UserLoginComponent,
+    HomePageComponent,
+    WOKComponent,
+    CustomCursorLightBallComponent,
+    RadiantOrderListComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        RouterModule.forRoot(routes),
+        ReactiveFormsModule
+    ],
   providers: [
     provideClientHydration()
   ],

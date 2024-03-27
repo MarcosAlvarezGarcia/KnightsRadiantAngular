@@ -1,0 +1,21 @@
+#screen {
+    /* Establece la imagen de fondo */
+    background-image: url('/assets/img/knights-radiant-logo.jpg');
+    /* Establece el tamaño de la imagen de fondo para que cubra todo el cuerpo */
+    background-size: cover;
+    
+    /* Establece la posición de la imagen de fondo al centro */
+    background-position: center;
+    
+    /* Evita que la imagen de fondo se repita */
+    background-repeat: no-repeat;
+    
+    /* Establece la altura del body al 100% de la ventana */
+    height: 100vh;
+    
+    /* Establece el margin del body a 0 para evitar el espacio extra */
+    margin: 0;
+
+    /* Quitar scroll vertical */
+    overflow: hidden;
+}

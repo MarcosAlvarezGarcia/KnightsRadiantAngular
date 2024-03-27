@@ -1,0 +1,30 @@
+<div class="containers">
+    <div class="container">
+        <h1>Radiant orders list</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">NAME</th>
+            <th scope="col">SPREN TYPE</th>
+            <th scope="col">FIRST SURGE</th>
+            <th scope="col">SECOND SURGE</th>
+            <th scope="col">DETAILS</th>
+            <th scope="col">UPDATE</th>
+            <th scope="col">DELETE</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let ro of radiantOrders">
+            <td>{{ro.name}}</td>
+            <td>{{ro.sprenType}}</td>
+            <td>{{ro.surges[0].name}}</td>
+            <td>{{ro.surges[1].name}}</td>
+            <td><button class="btn btn-info" [routerLink]="['/knightsRadiant/surges/id', ro.id]">Details</button></td>
+            <td><button class="btn btn-primary" (click)="updateSurge(ro.id)">Update</button></td>
+            <td><button class="btn btn-danger" (click)="deleteSurge(ro.id)">Delete</button></td>
+        </tr>
+        </tbody>
+    </table>
+    <a routerLink="/knightsRadiant/surges/create" class="btn btn-primary"> Create Surge</a>
+</div>
+</div>

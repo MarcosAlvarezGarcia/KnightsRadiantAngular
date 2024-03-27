@@ -1,0 +1,71 @@
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+button {
+  height: 60%;
+  width: 60%; /* El ancho del botón será el 50% del div */
+  font-size: 100%;
+}
+
+#title-zone {
+  width: 100%;
+  height: 30%;
+}
+
+#half-one-row-one {
+  width: 100%;
+  height: 15%;
+}
+
+#row-title {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+#pre-column-title {
+  width: 5%;
+}
+
+#column-title {
+  width: 69%;
+  background-image: url('/assets/img/welcome-radiant.png');
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-size: contain; /* Ajusto img al tamaño del div */
+  background-position: center; /* La imagen se posiciona en el centro */
+}
+
+#zone-buttons {
+  width: 100%;
+  height: 70%;
+}
+
+.half-two {
+  width: 100%;
+  height: 12.5%;
+}
+
+#row-buttons {
+  display: flex;
+}
+
+.col-buttons {
+  width: 33%;
+  height: 100%;
+  display: flex;
+}
+
+.col-buttons-2-col {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente los elementos */
+  align-items: center; /* Centra verticalmente los elementos */
+}

@@ -1,0 +1,108 @@
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+button {
+  margin: 10%;
+  height: 51%;
+  width: 73%; /* El ancho del botón será el 50% del div */
+  font-size: 100%;
+}
+
+label {
+  color: #B31307;
+  font-weight: bold;
+  font-size: 150%;
+}
+
+input {
+  background-color: #8894b9;
+}
+input:focus {
+  background-color: rgb(185, 198, 220);
+}
+
+#title-zone {
+  width: 100%;
+  height: 30%;
+}
+
+#half-one-row-one {
+  width: 100%;
+  height: 15%;
+}
+
+#row-title {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+#pre-column-title {
+  width: 5%;
+}
+
+#column-title {
+  width: 69%;
+  background-image: url('/assets/img/welcome-radiant.png');
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-size: contain; /* Ajusto img al tamaño del div */
+  background-position: center; /* La imagen se posiciona en el centro */
+}
+
+#zone-form {
+  width: 100%;
+  height: 70%;
+}
+
+.half-two {
+  width: 100%;
+  height: 12.5%;
+}
+
+#row-form {
+  width: 100%;
+  height: 43%;
+  display: flex;
+}
+
+.col-row-form {
+  width: 14.3%;
+  height: 100%;
+}
+
+#form {
+  height: 100%;
+}
+
+.row-btw-input {
+  height: 5%;
+}
+
+.row-btns {
+  height: 10%;
+}
+
+#row-buttons {
+  display: flex;
+  height: 33%;
+}
+
+.col-buttons {
+  width: 50%;
+  height: 100%;
+}
+
+.col-buttons-2-col {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente los elementos */
+  align-items: center; /* Centra verticalmente los elementos */
+}

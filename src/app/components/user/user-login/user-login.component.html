@@ -1,0 +1,60 @@
+<div class="video-background">
+  <div id="title-zone">
+    <div id="half-one-row-one"></div>
+    <div id="row-title">
+      <div id="pre-column-title"></div>
+      <div id="column-title"></div>
+    </div>
+  </div>
+  <div id="zone-form">
+    <div class="half-two"></div>
+    <div class="half-two"></div>
+    <div id="row-form">
+      <div class="col-row-form"></div>
+      <div class="col-row-form"></div>
+      <div class="col-row-form"></div>
+      <div class="col-row-form">
+        <form id="form" [formGroup]="loginForm">
+          <p class="text-danger">{{loginError}}</p>
+          <div class="text-center">
+            <label for="userName" class="form-label">Email</label>
+            <input formControlName="email" type="text" class="form-control" id="userName" aria-describedby="email">
+              <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                class="text-danger">
+                <div *ngIf="email.errors?.['required']">
+                  The email is required.
+                </div>
+              </div>
+          </div>
+          <div class="row-btw-input"></div>
+          <div class="text-center">
+            <label for="userPassword" class="form-label">Password</label>
+            <input formControlName="password" type="password" class="form-control" id="userPassword">
+              <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                   class="text-danger">
+                  <div *ngIf="password.errors?.['required']">
+                    The password is required.
+                  </div>
+              </div>
+          </div>
+          <div class="row-btw-input"></div>
+          <div class="row-btns"></div>
+          <div id="row-buttons">
+            <div class="col-buttons text-center">
+              <button class="btn btn-info" (click)="back()">Back</button>
+            </div>
+            <div class="col-buttons text-center">
+              <button type="submit" class="btn btn-primary" (click)="loginUser()" style="margin-left: 5%;">LogIn</button>
+            </div>
+          </div>
+       </form>
+      </div>
+      <div class="col-row-form"></div>
+      <div class="col-row-form"></div>
+      <div class="col-row-form"></div>
+    </div>
+    <div class="half-two"></div>
+    <div class="half-two"></div>
+    <div class="half-two"></div>
+  </div>
+</div>

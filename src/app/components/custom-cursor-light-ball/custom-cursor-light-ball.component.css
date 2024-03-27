@@ -1,0 +1,24 @@
+.cursor {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(226, 246, 255, 0.8); /* Color de la bola de luz azul neón */
+    box-shadow: 0 0 10px 5px rgba(0, 187, 255, 0.5); /* Sombra que crea el efecto neón */
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+  }
+  
+  .trail {
+    position: fixed;
+    z-index: 9998;
+    pointer-events: none;
+  }
+  
+  .trail-line {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-opacity: 0.5; /* Opacidad del rastro de luz */
+  }
+  

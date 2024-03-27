@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "knights-radiant": {
+    "knights_radiant": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/knights-radiant",
+            "outputPath": "dist/knights_radiant",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -46,6 +46,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -63,7 +69,13 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -72,10 +84,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "knights-radiant:build:production"
+              "buildTarget": "knights_radiant:build:production"
             },
             "development": {
-              "buildTarget": "knights-radiant:build:development"
+              "buildTarget": "knights_radiant:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +95,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "knights-radiant:build"
+            "buildTarget": "knights_radiant:build"
           }
         },
         "test": {
@@ -106,5 +118,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
