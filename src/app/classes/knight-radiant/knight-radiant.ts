@@ -6,7 +6,7 @@ export class KnightRadiant {
   ideal: Ideal;
   currentMissionId: number;
   missionsCompleted: number;
-  radiantOrder: RadiantOrder;
+  radiantOrder?: RadiantOrder;
   constructor(id: number, ideal: Ideal, currentMissionId: number, missionsCompleted: number, radiantOrder: RadiantOrder){
     this.id = id;
     this.ideal = ideal;

@@ -63,7 +63,7 @@ export class UserLoginComponent implements OnInit {
       this.loginError="";
       this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
         next: (userData) => {
-          console.log(userData);
+            console.info(userData);
         },
         error: (errorData) => {
           console.error(errorData);
@@ -71,7 +71,9 @@ export class UserLoginComponent implements OnInit {
         },
         complete: () => {
           console.info("Login completed");
-          this.router.navigate(['knightsRadiant/radiant-orders']);
+          this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+          this.thunder.play();
+          this.router.navigate(['knightsRadiant/users/details']);
         }
       })
     }

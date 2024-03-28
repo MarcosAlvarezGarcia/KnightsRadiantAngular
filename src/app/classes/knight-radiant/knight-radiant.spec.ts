@@ -1,4 +1,4 @@
-import { KnightRadiant } from './knight-radiant';
+import {KnightRadiant} from "./knight-radiant";
 
 describe('KnightRadiant', () => {
   it('should create an instance', () => {

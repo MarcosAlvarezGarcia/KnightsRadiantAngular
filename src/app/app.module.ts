@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,9 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { WOKComponent } from './components/wallpaper/wok/wok.component';
 import { CustomCursorLightBallComponent } from './components/custom-cursor-light-ball/custom-cursor-light-ball.component';
 import { RadiantOrderListComponent } from './components/radiant-order/radiant-order-list/radiant-order-list.component';
+import {JwtInterceptorService} from "./services/auth/jwt-interceptor.service";
+import {ErrorInterceptorService} from "./services/auth/error-interceptor.service";
+import { UserDetailsComponent } from './components/user/user-details/user-details/user-details.component';
 
 const routes : Routes = [
   {path: '', redirectTo:'/knightsRadiant/home', pathMatch:'full'}, // http://localhost:4200/knightsRadiant/home
@@ -24,6 +27,7 @@ const routes : Routes = [
   {path: 'knightsRadiant/users/start', component: UserStartComponent}, // http://localhost:4200/knightsRadiant/users/start
   {path: 'knightsRadiant/users/register', component: UserRegisterComponent}, // http://localhost:4200/knightsRadiant/users/register
   {path: 'knightsRadiant/users/login', component: UserLoginComponent}, // http://localhost:4200/knightsRadiant/users/login
+  {path: 'knightsRadiant/users/details', component: UserDetailsComponent}, // http://localhost:4200/knightsRadiant/users/details
   {path: 'knightsRadiant/surges', component: SurgeListComponent}, // http://localhost:4200/knightsRadiant/surges
   {path: 'knightsRadiant/surges/id/:id', component:SurgeDetailsComponent}, // http://localhost:4200/knightsRadiant/surges/id
   {path: 'knightsRadiant/surges/create', component:SurgeAddComponent}, // http://localhost:4200/knightsRadiant/surges/create
@@ -46,6 +50,7 @@ const routes : Routes = [
     WOKComponent,
     CustomCursorLightBallComponent,
     RadiantOrderListComponent,
+    UserDetailsComponent,
   ],
     imports: [
         BrowserModule,
@@ -56,7 +61,9 @@ const routes : Routes = [
         ReactiveFormsModule
     ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptorService,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptorService,multi:true},
   ],
   bootstrap: [AppComponent]
 })

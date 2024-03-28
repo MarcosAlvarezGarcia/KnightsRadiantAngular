@@ -16,17 +16,17 @@
         <form id="form">
           <div class="text-center">
             <label for="userName" class="form-label">Name</label>
-            <input [(ngModel)]="email" type="text" class="form-control" id="userName" name="name">
+            <input [(ngModel)]="email" type="email" required class="form-control" id="userName" name="name">
           </div>
           <div class="row-btw-input"></div>
           <div class="text-center">
             <label for="userPassword" class="form-label">Password</label>
-            <input [(ngModel)]="password" type="text" class="form-control" id="userPassword" name="userPassword">
+            <input [(ngModel)]="password" type="password" required class="form-control" id="userPassword" name="userPassword">
           </div>
           <div class="row-btw-input"></div>
           <div class="text-center">
             <label for="repeatPassword" class="form-label">Repeat password</label>
-            <input [(ngModel)]="repeatPassword" type="text" class="form-control" id="repeatPassword" name="repeatPassword">
+            <input [(ngModel)]="repeatPassword" type="password" required class="form-control" id="repeatPassword" name="repeatPassword">
           </div>
           <div class="row-btw-input"></div>
           <div class="row-btns"></div>

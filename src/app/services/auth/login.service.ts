@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, throwError, catchError, tap, map} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {LoginRequest} from "./loginRequest";
-import {User} from "./user";
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +52,10 @@ export class LoginService {
 
   get userLoginOn():Observable<boolean>{
     return this.currentUserLoginOn.asObservable();
+  }
+
+  get userToken():String{
+    return this.currentUserData.value;
   }
 
 }
