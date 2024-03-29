@@ -19,7 +19,6 @@ export class LoginService {
   currentUserData: BehaviorSubject<String> = new BehaviorSubject<String>("");
   currentUserEmail: string = "";
 
-  currentUser: any = {}; // Almacena la información del usuario
   user?:User;
 
   constructor(private http: HttpClient, private userService: UserService) {
@@ -44,6 +43,7 @@ export class LoginService {
   logout():void{
     sessionStorage.removeItem("token");
     this.currentUserLoginOn.next(false);
+    this.currentUserEmail = "";
   }
 
   private handleError(error:HttpErrorResponse){

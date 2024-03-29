@@ -7,9 +7,8 @@
     <p><b> Spren type: </b> {{user?.knightRadiant?.radiantOrder?.sprenType}} </p>
     <p><b> Attributes: </b> {{user?.knightRadiant?.radiantOrder?.attributes}} </p>
     <p><b> Description: </b> {{user?.knightRadiant?.radiantOrder?.description}} </p>
-    <p><b> PRUEBA: </b> PRUEBA </p>
-    <p><b> PRUEBA: </b> PRUEBA </p>
-    <p><b> PRUEBA: </b> PRUEBA </p>
+    <button (click)="setRadiantOrder()">Set radiant order</button>
+    <button (click)="logout()">Log Out</button>
 
     <!--
     <button *ngIf="userLoginOn && !editMode" (click)="editMode=true"  class="btn btn-dark"><img

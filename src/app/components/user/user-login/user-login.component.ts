@@ -66,7 +66,12 @@ export class UserLoginComponent implements OnInit {
           this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
           this.thunder.play();
 
-          this.router.navigate(['knightsRadiant/user/details']);
+          if (this.user?.knightRadiant.radiantOrder == null) {
+              this.router.navigate(['knightsRadiant/knight-radiant/radiant-order-form']);
+          }
+          else {
+              this.router.navigate(['knightsRadiant/user/details']);
+          }
         }
       })
     }

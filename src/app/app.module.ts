@@ -20,6 +20,7 @@ import { RadiantOrderListComponent } from './components/radiant-order/radiant-or
 import {JwtInterceptorService} from "./services/auth/jwt-interceptor.service";
 import {ErrorInterceptorService} from "./services/auth/error-interceptor.service";
 import { UserDetailsComponent } from './components/user/user-details/user-details/user-details.component';
+import { KRRadiantOrderFormComponent } from "./components/knight-radiant/kr-radiant-order-form/kr-radiant-order-form.component";
 
 const routes : Routes = [
   {path: '', redirectTo:'/knightsRadiant/home', pathMatch:'full'}, // http://localhost:4200/knightsRadiant/home
@@ -28,6 +29,7 @@ const routes : Routes = [
   {path: 'knightsRadiant/user/register', component: UserRegisterComponent}, // http://localhost:4200/knightsRadiant/users/register
   {path: 'knightsRadiant/user/login', component: UserLoginComponent}, // http://localhost:4200/knightsRadiant/users/login
   {path: 'knightsRadiant/user/details', component: UserDetailsComponent}, // http://localhost:4200/knightsRadiant/users/details
+  {path: 'knightsRadiant/knight-radiant/radiant-order-form', component: KRRadiantOrderFormComponent}, // http://localhost:4200/knightsRadiant/users/radiant-order-form
   {path: 'knightsRadiant/surges', component: SurgeListComponent}, // http://localhost:4200/knightsRadiant/surges
   {path: 'knightsRadiant/surges/id/:id', component:SurgeDetailsComponent}, // http://localhost:4200/knightsRadiant/surges/id
   {path: 'knightsRadiant/surges/create', component:SurgeAddComponent}, // http://localhost:4200/knightsRadiant/surges/create
@@ -51,6 +53,7 @@ const routes : Routes = [
     CustomCursorLightBallComponent,
     RadiantOrderListComponent,
     UserDetailsComponent,
+    KRRadiantOrderFormComponent,
   ],
     imports: [
         BrowserModule,

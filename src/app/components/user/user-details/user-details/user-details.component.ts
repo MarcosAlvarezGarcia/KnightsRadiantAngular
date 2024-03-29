@@ -6,6 +6,7 @@ import {LoginService} from "../../../../services/auth/login.service";
 import {environment} from "../../../../../environments/environment";
 import {Role} from "../../../../classes/role/role";
 import {KnightRadiant} from "../../../../classes/knight-radiant/knight-radiant";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-details',
@@ -26,7 +27,7 @@ export class UserDetailsComponent implements OnInit{
       knightRadiant:['', Validators.required]
   })
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder, private loginService: LoginService) {
+  constructor(private userService: UserService, private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) {
 
       this.userService.getUserByEmail(loginService.currentUserEmail).subscribe({
           next: (userData) => {
@@ -34,7 +35,6 @@ export class UserDetailsComponent implements OnInit{
               let userId = userData.id.toString();
               this.registerForm.controls.id.setValue(userData.id.toString());
               //this.registerForm.controls.knightRadiant.setValue(userData.knightRadiant.radiantOrder?.name);
-                console.info(this.user);
           },
           error: (errorData) => {
               this.errorMessage=errorData
@@ -51,8 +51,17 @@ export class UserDetailsComponent implements OnInit{
             this.userLoginOn=userLoginOn;
           }
       })
-
   }
+
+    setRadiantOrder(){
+        this.router.navigate(['knightsRadiant/knight-radiant/radiant-order-form']);
+    }
+
+    logout()
+    {
+        this.loginService.logout();
+        this.router.navigate(['knightsRadiant/home'])
+    }
 
   ngOnInit() {
   }
