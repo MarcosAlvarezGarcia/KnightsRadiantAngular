@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, throwError, catchError, tap, map} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {LoginRequest} from "./loginRequest";
+import {Role} from "../../classes/role/role";
+import {KnightRadiant} from "../../classes/knight-radiant/knight-radiant";
+import {UserService} from "../user/user.service";
+import {User} from "./user";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +17,12 @@ export class LoginService {
 
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   currentUserData: BehaviorSubject<String> = new BehaviorSubject<String>("");
+  currentUserEmail: string = "";
 
-  constructor(private http: HttpClient) {
+  currentUser: any = {}; // Almacena la información del usuario
+  user?:User;
+
+  constructor(private http: HttpClient, private userService: UserService) {
     this.currentUserLoginOn= new BehaviorSubject<boolean>(sessionStorage.getItem("token")!=null);
     this.currentUserData= new BehaviorSubject<String>(sessionStorage.getItem("token") || "");
   }
@@ -25,11 +33,13 @@ export class LoginService {
         sessionStorage.setItem("token", userData.token);
         this.currentUserData.next(userData.token);
         this.currentUserLoginOn.next(true);
+        this.currentUserEmail = credentials.email;
       }),
       map((userData)=> userData.token),
       catchError(this.handleError)
       );
   }
+
 
   logout():void{
     sessionStorage.removeItem("token");

@@ -17,13 +17,13 @@ export class HomePageComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    
+
   }
 
   enter(){
     this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
     this.thunder.play();
-    this.router.navigate(['knightsRadiant/users/start']);
+    this.router.navigate(['knightsRadiant/user/start']);
   }
 
 }

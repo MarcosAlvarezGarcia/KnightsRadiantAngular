@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Role } from '../../../classes/role/role';
-import { User } from '../../../classes/user/user';
 import { UserService } from '../../../services/user/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AudioKnightsRadiantService } from '../../../services/audio/audioKnightsRadiant/audio-knights-radiant.service';
 import { WOKService } from '../../../services/wallpaper/wok.service';
-import {Surge} from "../../../classes/surge/surge";
 import {RadiantOrder} from "../../../classes/radiant-order/radiant-order";
 import {Ideal} from "../../../classes/ideal/ideal";
 import {KnightRadiant} from "../../../classes/knight-radiant/knight-radiant";
@@ -17,6 +14,7 @@ import {KnightRadiantService} from "../../../services/knightRadiant/knight-radia
   styleUrl: './user-register.component.css'
 })
 export class UserRegisterComponent implements OnInit{
+    name : string = '';
     email : string = '';
     password : string = '';
     repeatPassword : string = '';
@@ -27,15 +25,6 @@ export class UserRegisterComponent implements OnInit{
     missionsCompleted : number = 0;
     ideal : Ideal = Ideal.NO_IDEAL;
     radiantOrder: RadiantOrder = null!;
-
-    /*
-    id : number = 5;
-    role : Role = Role.KNIGHT_RADIANT;
-    surges : Surge [] = [];
-    radiantOrder : RadiantOrder = new RadiantOrder(0, '', '', '', '', this.surges)
-    knightRadiant : KnightRadiant = new KnightRadiant(0, Ideal.NO_IDEAL, 0, 0, this.radiantOrder);
-    user:User = new User(5, '', '', Role.KNIGHT_RADIANT, this.knightRadiant);
-    */
 
   thunder = new Audio();
 
@@ -51,18 +40,17 @@ export class UserRegisterComponent implements OnInit{
   back(){
     this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
     this.thunder.play();
-    this.router.navigate(['knightsRadiant/users/start']);
+    this.router.navigate(['knightsRadiant/user/start']);
   }
 
 
   registerUser(){
-    this.userService.registerUser(this.email, this.password, this.repeatPassword).subscribe(
+    this.userService.registerUser(this.name, this.email, this.password, this.repeatPassword).subscribe(
         () => {
-            this.createKnightRadiant();
             // Registro exitoso, redireccionar a la página de inicio de sesión o a otra página
             this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
             this.thunder.play();
-            this.router.navigate(['knightsRadiant/users/login']);
+            this.router.navigate(['knightsRadiant/user/login']);
         },
         error => {
             console.error('Error al registrar usuario:', error);
@@ -71,12 +59,13 @@ export class UserRegisterComponent implements OnInit{
     );
   }
 
-    createKnightRadiant(){
-        let knightRadiant = new KnightRadiant(this.id, this.ideal, this.currentMissionId, this.missionsCompleted, null!);
+    newKnightRadiant(){
+        let knightRadiant = new KnightRadiant(this.id, this.ideal, this.currentMissionId, this.missionsCompleted, this.radiantOrder);
         console.log(knightRadiant);
         this.knightRadiantService.createKnightRadiant(knightRadiant).subscribe(
             res => {
                 console.log(res);
+                this.registerUser();
             }
         )
     }

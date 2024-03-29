@@ -24,10 +24,10 @@ import { UserDetailsComponent } from './components/user/user-details/user-detail
 const routes : Routes = [
   {path: '', redirectTo:'/knightsRadiant/home', pathMatch:'full'}, // http://localhost:4200/knightsRadiant/home
   {path: 'knightsRadiant/home', component: HomePageComponent}, // http://localhost:4200/knightsRadiant/home
-  {path: 'knightsRadiant/users/start', component: UserStartComponent}, // http://localhost:4200/knightsRadiant/users/start
-  {path: 'knightsRadiant/users/register', component: UserRegisterComponent}, // http://localhost:4200/knightsRadiant/users/register
-  {path: 'knightsRadiant/users/login', component: UserLoginComponent}, // http://localhost:4200/knightsRadiant/users/login
-  {path: 'knightsRadiant/users/details', component: UserDetailsComponent}, // http://localhost:4200/knightsRadiant/users/details
+  {path: 'knightsRadiant/user/start', component: UserStartComponent}, // http://localhost:4200/knightsRadiant/users/start
+  {path: 'knightsRadiant/user/register', component: UserRegisterComponent}, // http://localhost:4200/knightsRadiant/users/register
+  {path: 'knightsRadiant/user/login', component: UserLoginComponent}, // http://localhost:4200/knightsRadiant/users/login
+  {path: 'knightsRadiant/user/details', component: UserDetailsComponent}, // http://localhost:4200/knightsRadiant/users/details
   {path: 'knightsRadiant/surges', component: SurgeListComponent}, // http://localhost:4200/knightsRadiant/surges
   {path: 'knightsRadiant/surges/id/:id', component:SurgeDetailsComponent}, // http://localhost:4200/knightsRadiant/surges/id
   {path: 'knightsRadiant/surges/create', component:SurgeAddComponent}, // http://localhost:4200/knightsRadiant/surges/create

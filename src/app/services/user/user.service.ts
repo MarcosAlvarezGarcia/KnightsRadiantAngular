@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {catchError, Observable, throwError} from 'rxjs';
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {User} from "../auth/user";
+import {FormControl} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,12 @@ export class UserService {
     )
   }
 
+  getUserByEmail(email: string):Observable<User>{
+    return this.http.get<User>(this.baseUrl + "/email/" + email).pipe(
+        catchError(this.handleError)
+    )
+  }
+
   updateUser(userRquest:User):Observable<any>
   {
     return this.http.put(this.baseUrl + "/update/", userRquest).pipe(
@@ -27,8 +34,8 @@ export class UserService {
     )
   }
 
-  registerUser(email: string, password: string, repeatPassword: string):Observable<any>{
-    return this.http.post<User>(this.baseUrl + "/register", { email, password, repeatPassword });
+  registerUser(name: string, email: string, password: string, repeatPassword: string):Observable<any>{
+    return this.http.post<User>(this.baseUrl + "/register", {name, email, password, repeatPassword });
   }
 
 

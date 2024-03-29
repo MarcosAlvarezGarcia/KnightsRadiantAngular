@@ -25,12 +25,12 @@ ngOnInit(): void {
 register(){
   this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
   this.thunder.play();
-  this.router.navigate(['knightsRadiant/users/register']);
+  this.router.navigate(['knightsRadiant/user/register']);
 }
 
 logIn(){
   this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
   this.thunder.play();
-  this.router.navigate(['knightsRadiant/users/login']);
+  this.router.navigate(['knightsRadiant/user/login']);
 }
 }

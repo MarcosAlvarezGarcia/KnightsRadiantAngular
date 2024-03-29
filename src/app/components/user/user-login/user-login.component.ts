@@ -6,6 +6,7 @@ import { WOKService } from '../../../services/wallpaper/wok.service';
 import {FormBuilder, Validators} from "@angular/forms";
 import {LoginService} from "../../../services/auth/login.service";
 import {LoginRequest} from "../../../services/auth/loginRequest";
+import {User} from "../../../services/auth/user";
 
 @Component({
   selector: 'app-user-login',
@@ -19,21 +20,12 @@ export class UserLoginComponent implements OnInit {
     password:['',Validators.required],
   })
 
-
-  /*
-  id : number = 5;
-  email : string = '';
-   password : string = '';
-  repeatPassword : string = '';
-  role : Role = Role.KNIGHT_RADIANT;
-  surges : Surge [] = [];
-  radiantOrder : RadiantOrder = new RadiantOrder(0, '', '', '', '', this.surges)
-  knightRadiant : KnightRadiant = new KnightRadiant(0, Ideal.NO_IDEAL, 0, 0, this.radiantOrder);
-  user:User = new User(5, '', '', Role.KNIGHT_RADIANT, this.knightRadiant);
-  */
+    stringEmail : string = "marcos.alv.garcia@gmail.com";
+    currentUser: any = {}; // Almacena la información del usuario
+    user?:User;
 
 
-  thunder = new Audio();
+    thunder = new Audio();
 
   constructor(private userService : UserService, private router : Router, private activatedRoute : ActivatedRoute, private audioKnightsRadiantService: AudioKnightsRadiantService, private wokService: WOKService, private loginService: LoginService, private formBuilder: FormBuilder){
   this.thunder.src = '/assets/audio/sounds/thunder.mp3';
@@ -47,7 +39,7 @@ export class UserLoginComponent implements OnInit {
   back(){
     this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
     this.thunder.play();
-    this.router.navigate(['knightsRadiant/users/start']);
+    this.router.navigate(['knightsRadiant/user/start']);
   }
 
   get email(){
@@ -61,7 +53,7 @@ export class UserLoginComponent implements OnInit {
   loginUser(){
     if(this.loginForm.valid){
       this.loginError="";
-      this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
+        this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
         next: (userData) => {
             console.info(userData);
         },
@@ -73,7 +65,8 @@ export class UserLoginComponent implements OnInit {
           console.info("Login completed");
           this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
           this.thunder.play();
-          this.router.navigate(['knightsRadiant/users/details']);
+
+          this.router.navigate(['knightsRadiant/user/details']);
         }
       })
     }

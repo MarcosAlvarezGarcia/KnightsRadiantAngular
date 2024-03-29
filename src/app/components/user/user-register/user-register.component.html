@@ -15,8 +15,13 @@
       <div class="col-row-form">
         <form id="form">
           <div class="text-center">
-            <label for="userName" class="form-label">Name</label>
-            <input [(ngModel)]="email" type="email" required class="form-control" id="userName" name="name">
+            <label for="name" class="form-label">User name</label>
+            <input [(ngModel)]="name" type="text" required class="form-control" id="name" name="name">
+          </div>
+          <div class="row-btw-input"></div>
+          <div class="text-center">
+            <label for="email" class="form-label">Email</label>
+            <input [(ngModel)]="email" type="email" required class="form-control" id="email" name="email">
           </div>
           <div class="row-btw-input"></div>
           <div class="text-center">
@@ -35,7 +40,7 @@
               <button class="btn btn-info" (click)="back()">Back</button>
             </div>
             <div class="col-buttons text-center">
-              <button type="submit" class="btn btn-primary" (click)="registerUser()" style="margin-left: 5%;">Register</button>
+              <button type="submit" class="btn btn-primary" (click)="newKnightRadiant()" style="margin-left: 5%;">Register</button>
             </div>
           </div>
         </form>
