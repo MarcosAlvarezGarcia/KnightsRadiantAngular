@@ -1,4 +1,44 @@
 
 h1 {
-    margin-top: 10%;
+    margin-top: 5%;
 }
+
+.container-quiz {
+  width: 40%;
+  background-color: white;
+  opacity: 70%;
+}
+
+.container-attributes{
+  display: flex;
+}
+
+.container-attribute {
+  display: flex;
+  width: 33%;
+}
+
+.l-a-right {
+  text-align: right;
+}
+
+.label-attribute, .label-percentage-attribute {
+  font-size: 140%;
+}
+
+.label-percentage-attribute {
+  font-weight: bold;
+}
+
+span {
+  font-size: 120%;
+}
+
+ input {
+   width: 100%;
+
+ }
+
+
+
+

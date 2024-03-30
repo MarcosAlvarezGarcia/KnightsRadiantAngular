@@ -1,3 +1,4 @@
+<!--
 <div class="div-select-order text-center">
     <h1>What type of radiant are you?</h1>
     <button (click)="setOrderRadiant(1)">Windrunner</button> <br>
@@ -10,4 +11,570 @@
     <button (click)="setOrderRadiant(8)">Willshaper</button> <br>
     <button (click)="setOrderRadiant(9)">Stoneward</button> <br>
     <button (click)="setOrderRadiant(10)">Bondsmith</button> <br>
+</div>
+-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<div class="div-select-order text-center">
+  <div id="" class="" style="display: flex">
+    <div style="width: 30%"></div>
+    <div class="container-quiz">
+      <div class="container">
+        <h1>What type of radiant are you?</h1>
+        <p>The fate of Roshar hangs in the balance, and once again radiant spren seek to bond with humankind. The Knights Radiant must stand again!</p>
+        <p>Move the sliders toward the attributes you most identify with, and the quiz will sort you into the Order of Knights Radiant you would most likely belong to, along with the likelihoods of your belonging to the other Orders. This quiz will only take a few minutes.</p>
+      </div>
+      <ul id="quiz" class="list-group">
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Heart on Sleeve&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor1Left(valueSlider1left)" class="label-percentage-attribute">{{ valueSlider1left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor1Right(valueSlider1right)" id="slider-1-%-left" class="label-percentage-attribute l-a-right" style="width: 55%;">{{ valueSlider1right }}%</p>
+              <p id="slider-1-%-right" class="label-attribute l-a-right" style="width: 45%">Poker Face</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange1($event)" id="slider-1" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Confident&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor2Left(valueSlider2left)" class="label-percentage-attribute">{{ valueSlider2left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor2Right(valueSlider2right)" id="slider-2-%-left" class="label-percentage-attribute l-a-right" style="width: 20%;">{{ valueSlider2right }}%</p>
+              <p id="slider-2-%-right" class="label-attribute l-a-right" style="width: 80%">Needs Reassurance</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange2($event)" id="slider-2" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Cautious&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor3Left(valueSlider3left)" class="label-percentage-attribute">{{ valueSlider3left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor3Right(valueSlider3right)" id="slider-3-%-left" class="label-percentage-attribute l-a-right" style="width: 70%;">{{ valueSlider3right }}%</p>
+              <p id="slider-3-%-right" class="label-attribute l-a-right" style="width: 30%">Daring</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange3($event)" id="slider-3" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Library&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor4Left(valueSlider4left)" class="label-percentage-attribute">{{ valueSlider4left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor4Right(valueSlider4right)" id="slider-4-%-left" class="label-percentage-attribute l-a-right" style="width: 75%;">{{ valueSlider4right }}%</p>
+              <p id="slider-4-%-right" class="label-attribute l-a-right" style="width: 25%">Dojo</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange4($event)" id="slider-4" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Wolf Pack&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor5Left(valueSlider5left)" class="label-percentage-attribute">{{ valueSlider5left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor5Right(valueSlider5right)" id="slider-5-%-left" class="label-percentage-attribute l-a-right" style="width: 55%;">{{ valueSlider5right }}%</p>
+              <p id="slider-5-%-right" class="label-attribute l-a-right" style="width: 45%">Lone Wolf</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange5($event)" id="slider-5" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Peacemaker&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor6Left(valueSlider6left)" class="label-percentage-attribute">{{ valueSlider6left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor6Right(valueSlider6right)" id="slider-6-%-left" class="label-percentage-attribute l-a-right" style="width: 58%;">{{ valueSlider6right }}%</p>
+              <p id="slider-6-%-right" class="label-attribute l-a-right" style="width: 42%">Firebrand</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange6($event)" id="slider-6" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Spiritual&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor7Left(valueSlider7left)" class="label-percentage-attribute">{{ valueSlider7left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor7Right(valueSlider7right)" id="slider-7-%-left" class="label-percentage-attribute l-a-right" style="width: 60%;">{{ valueSlider7right }}%</p>
+              <p id="slider-7-%-right" class="label-attribute l-a-right" style="width: 40%">Skeptical</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange7($event)" id="slider-7" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Leader&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor8Left(valueSlider8left)" class="label-percentage-attribute">{{ valueSlider8left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor8Right(valueSlider8right)" id="slider-8-%-left" class="label-percentage-attribute l-a-right" style="width: 58%;">{{ valueSlider8right }}%</p>
+              <p id="slider-8-%-right" class="label-attribute l-a-right" style="width: 42%">Facilitator</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange8($event)" id="slider-8" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Guard dog&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor9Left(valueSlider9left)" class="label-percentage-attribute">{{ valueSlider9left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor9Right(valueSlider9right)" id="slider-9-%-left" class="label-percentage-attribute l-a-right" style="width: 62%;">{{ valueSlider9right }}%</p>
+              <p id="slider-9-%-right" class="label-attribute l-a-right" style="width: 38%">Alley cat</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange9($event)" id="slider-9" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Compassionate&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor10Left(valueSlider10left)" class="label-percentage-attribute">{{ valueSlider10left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor10Right(valueSlider10right)" id="slider-10-%-left" class="label-percentage-attribute l-a-right" style="width: 40%;">{{ valueSlider10right }}%</p>
+              <p id="slider-10-%-right" class="label-attribute l-a-right" style="width: 60%">Disspasionate</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange10($event)" id="slider-10" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Heart&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor11Left(valueSlider11left)" class="label-percentage-attribute">{{ valueSlider11left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor11Right(valueSlider11right)" id="slider-11-%-left" class="label-percentage-attribute l-a-right" style="width: 75%;">{{ valueSlider11right }}%</p>
+              <p id="slider-11-%-right" class="label-attribute l-a-right" style="width: 25%">Head</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange11($event)" id="slider-11" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Flamboyant&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor12Left(valueSlider12left)" class="label-percentage-attribute">{{ valueSlider12left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor12Right(valueSlider12right)" id="slider-12-%-left" class="label-percentage-attribute l-a-right" style="width: 62%;">{{ valueSlider12right }}%</p>
+              <p id="slider-12-%-right" class="label-attribute l-a-right" style="width: 38%">Reserved</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange12($event)" id="slider-12" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Letter of the Law&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor13Left(valueSlider13left)" class="label-percentage-attribute">{{ valueSlider13left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor13Right(valueSlider13right)" id="slider-13-%-left" class="label-percentage-attribute l-a-right" style="width: 30%;">{{ valueSlider13right }}%</p>
+              <p id="slider-13-%-right" class="label-attribute l-a-right" style="width: 70%">Spirit of the Law</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange13($event)" id="slider-13" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Free-spirited&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor14Left(valueSlider14left)" class="label-percentage-attribute">{{ valueSlider14left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor14Right(valueSlider14right)" id="slider-14-%-left" class="label-percentage-attribute l-a-right" style="width: 50%;">{{ valueSlider14right }}%</p>
+              <p id="slider-14-%-right" class="label-attribute l-a-right" style="width: 50%">Disciplined</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange14($event)" id="slider-14" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Obedient&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor15Left(valueSlider15left)" class="label-percentage-attribute">{{ valueSlider15left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor15Right(valueSlider15right)" id="slider-15-%-left" class="label-percentage-attribute l-a-right" style="width: 55%;">{{ valueSlider15right }}%</p>
+              <p id="slider-15-%-right" class="label-attribute l-a-right" style="width: 45%">Rebellious</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange15($event)" id="slider-15" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Creative&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor16Left(valueSlider16left)" class="label-percentage-attribute">{{ valueSlider16left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor16Right(valueSlider16right)" id="slider-16-%-left" class="label-percentage-attribute l-a-right" style="width: 43%;">{{ valueSlider16right }}%</p>
+              <p id="slider-16-%-right" class="label-attribute l-a-right" style="width: 57%">Conventional</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange16($event)" id="slider-16" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Dependable&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor17Left(valueSlider17left)" class="label-percentage-attribute">{{ valueSlider17left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor17Right(valueSlider17right)" id="slider-17-%-left" class="label-percentage-attribute l-a-right" style="width: 65%;">{{ valueSlider17right }}%</p>
+              <p id="slider-17-%-right" class="label-attribute l-a-right" style="width: 35%">Flexible</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange17($event)" id="slider-17" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Down to Earth&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor18Left(valueSlider18left)" class="label-percentage-attribute">{{ valueSlider18left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor18Right(valueSlider18right)" id="slider-18-%-left" class="label-percentage-attribute l-a-right" style="width: 20%;">{{ valueSlider18right }}%</p>
+              <p id="slider-18-%-right" class="label-attribute l-a-right" style="width: 80%">Head in the Clouds</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange18($event)" id="slider-18" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left" style="width: 40%">
+              <p class="label-attribute">Thinks Outside the Box&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor19Left(valueSlider19left)" class="label-percentage-attribute">{{ valueSlider19left }}%</p>
+            </div>
+            <div class="container-attribute" style="width: 20%"></div>
+            <div class="container-attribute" style="width: 40%">
+              <p [style.color]="getTextValueColor19Right(valueSlider19right)" id="slider-19-%-left" class="label-percentage-attribute l-a-right" style="width: 23%;">{{ valueSlider19right }}%</p>
+              <p id="slider-19-%-right" class="label-attribute l-a-right" style="width: 77%">Colors Inside the Lines</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange19($event)" id="slider-19" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Tense&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor20Left(valueSlider20left)" class="label-percentage-attribute">{{ valueSlider20left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor20Right(valueSlider20right)" id="slider-20-%-left" class="label-percentage-attribute l-a-right" style="width: 65%;">{{ valueSlider20right }}%</p>
+              <p id="slider-20-%-right" class="label-attribute l-a-right" style="width: 35%">Relaxed</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange20($event)" id="slider-20" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Decisive&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor21Left(valueSlider21left)" class="label-percentage-attribute">{{ valueSlider21left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor21Right(valueSlider21right)" id="slider-21-%-left" class="label-percentage-attribute l-a-right" style="width: 55%;">{{ valueSlider21right }}%</p>
+              <p id="slider-21-%-right" class="label-attribute l-a-right" style="width: 45%">Indecisive</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange21($event)" id="slider-21" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Likes Change&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor22Left(valueSlider22left)" class="label-percentage-attribute">{{ valueSlider22left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor22Right(valueSlider22right)" id="slider-22-%-left" class="label-percentage-attribute l-a-right" style="width: 43%;">{{ valueSlider22right }}%</p>
+              <p id="slider-22-%-right" class="label-attribute l-a-right" style="width: 57%">Likes Stability</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange22($event)" id="slider-22" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Planner&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor23Left(valueSlider23left)" class="label-percentage-attribute">{{ valueSlider23left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor23Right(valueSlider23right)" id="slider-23-%-left" class="label-percentage-attribute l-a-right" style="width: 44%;">{{ valueSlider23right }}%</p>
+              <p id="slider-23-%-right" class="label-attribute l-a-right" style="width: 56%">Spontaneous</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange23($event)" id="slider-23" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left" style="width: 40%">
+              <p class="label-attribute">Ends Justifies the Means&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor24Left(valueSlider24left)" class="label-percentage-attribute">{{ valueSlider24left }}%</p>
+            </div>
+            <div class="container-attribute" style="width: 20%"></div>
+            <div class="container-attribute" style="width: 40%">
+              <p [style.color]="getTextValueColor24Right(valueSlider24right)" id="slider-24-%-left" class="label-percentage-attribute l-a-right" style="width: 35%;">{{ valueSlider24right }}%</p>
+              <p id="slider-24-%-right" class="label-attribute l-a-right" style="width: 65%">Honorable Actions</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange24($event)" id="slider-24" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Playful&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor25Left(valueSlider25left)" class="label-percentage-attribute">{{ valueSlider25left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor25Right(valueSlider25right)" id="slider-25-%-left" class="label-percentage-attribute l-a-right" style="width: 68%;">{{ valueSlider25right }}%</p>
+              <p id="slider-25-%-right" class="label-attribute l-a-right" style="width: 32%">Seriuos</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange25($event)" id="slider-25" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Tells the Truth&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor26Left(valueSlider26left)" class="label-percentage-attribute">{{ valueSlider26left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor26Right(valueSlider26right)" id="slider-26-%-left" class="label-percentage-attribute l-a-right" style="width: 32%;">{{ valueSlider26right }}%</p>
+              <p id="slider-26-%-right" class="label-attribute l-a-right" style="width: 68%">Bends the Truth</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange26($event)" id="slider-26" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left" style="width: 40%">
+              <p class="label-attribute">Likes to take things apart&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor27Left(valueSlider27left)" class="label-percentage-attribute">{{ valueSlider27left }}%</p>
+            </div>
+            <div class="container-attribute" style="width: 15%"></div>
+            <div class="container-attribute" style="width: 45%">
+              <p [style.color]="getTextValueColor27Right(valueSlider27right)" id="slider-27-%-left" class="label-percentage-attribute l-a-right" style="width: 22%;">{{ valueSlider27right }}%</p>
+              <p id="slider-27-%-right" class="label-attribute l-a-right" style="width: 78%">If it ain't broke, don't fix it</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange27($event)" id="slider-27" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Hotel&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor28Left(valueSlider28left)" class="label-percentage-attribute">{{ valueSlider28left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor28Right(valueSlider28right)" id="slider-28-%-left" class="label-percentage-attribute l-a-right" style="width: 58%;">{{ valueSlider28right }}%</p>
+              <p id="slider-28-%-right" class="label-attribute l-a-right" style="width: 42%">Camping</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange28($event)" id="slider-28" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Fencing&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor29Left(valueSlider29left)" class="label-percentage-attribute">{{ valueSlider29left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor29Right(valueSlider29right)" id="slider-29-%-left" class="label-percentage-attribute l-a-right" style="width: 68%;">{{ valueSlider29right }}%</p>
+              <p id="slider-29-%-right" class="label-attribute l-a-right" style="width: 34%">Boxing</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange29($event)" id="slider-29" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Artistic&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor30Left(valueSlider30left)" class="label-percentage-attribute">{{ valueSlider30left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor30Right(valueSlider30right)" id="slider-30-%-left" class="label-percentage-attribute l-a-right" style="width: 58%;">{{ valueSlider30right }}%</p>
+              <p id="slider-30-%-right" class="label-attribute l-a-right" style="width: 42%">Scientific</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange30($event)" id="slider-30" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Book Smart&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor31Left(valueSlider31left)" class="label-percentage-attribute">{{ valueSlider31left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor31Right(valueSlider31right)" id="slider-31-%-left" class="label-percentage-attribute l-a-right" style="width: 45%;">{{ valueSlider31right }}%</p>
+              <p id="slider-31-%-right" class="label-attribute l-a-right" style="width: 55%">Street Smart</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange31($event)" id="slider-31" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Paladin&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor32Left(valueSlider32left)" class="label-percentage-attribute">{{ valueSlider32left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor32Right(valueSlider32right)" id="slider-32-%-left" class="label-percentage-attribute l-a-right" style="width: 65%;">{{ valueSlider32right }}%</p>
+              <p id="slider-32-%-right" class="label-attribute l-a-right" style="width: 35%">Rogue</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange32($event)" id="slider-32" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Competitive&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor33Left(valueSlider33left)" class="label-percentage-attribute">{{ valueSlider33left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor33Right(valueSlider33right)" id="slider-33-%-left" class="label-percentage-attribute l-a-right" style="width: 65%;">{{ valueSlider33right }}%</p>
+              <p id="slider-33-%-right" class="label-attribute l-a-right" style="width: 35%">Casual</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange33($event)" id="slider-33" class="custom-range">
+          </div>
+        </li>
+        <li class="list-group-item rounded-lg prompt">
+          <div class="container-attributes">
+            <div class="container-attribute c-a-left">
+              <p class="label-attribute">Transparency&nbsp;&nbsp;</p>
+              <p [style.color]="getTextValueColor34Left(valueSlider34left)" class="label-percentage-attribute">{{ valueSlider34left }}%</p>
+            </div>
+            <div class="container-attribute"></div>
+            <div class="container-attribute">
+              <p [style.color]="getTextValueColor34Right(valueSlider34right)" id="slider-34-%-left" class="label-percentage-attribute l-a-right" style="width: 33%;">{{ valueSlider34right }}%</p>
+              <p id="slider-34-%-right" class="label-attribute l-a-right" style="width: 67%">Need-to-Know</p>
+            </div>
+          </div>
+          <div class="container-slider">
+            <input type="range" min="0" max="100" value="50" (input)="onInputChange34($event)" id="slider-34" class="custom-range">
+          </div>
+        </li>
+      </ul>
+
+
+
+      <button style="height: 80px; font-size: 150%">Say the words</button>
+    </div>
+    <div style="width: 30%"></div>
+
+  </div>
 </div>
