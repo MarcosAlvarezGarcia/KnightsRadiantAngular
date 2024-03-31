@@ -4,6 +4,9 @@ import {UserService} from "../../../services/user/user.service";
 import {LoginService} from "../../../services/auth/login.service";
 import {KnightRadiantService} from "../../../services/knightRadiant/knight-radiant.service";
 import {Router} from "@angular/router";
+import {RadiantOrderService} from "../../../services/radiant-order/radiant-order.service";
+import {RadiantOrder} from "../../../classes/radiant-order/radiant-order";
+import {Surge} from "../../../classes/surge/surge";
 
 @Component({
   selector: 'app-kr-radiant-order-form',
@@ -22,23 +25,84 @@ export class KRRadiantOrderFormComponent {
   userLoginOn:boolean=false;
   editMode:boolean=false;
 
-  // Initial sliders values
+  // Variable orden elegida
+  surges: Surge[] = [];
+  radiantOrder: RadiantOrder = new RadiantOrder(0, "", "", "", "", this.surges);
+
+  // Variable sonido
+  thunder = new Audio();
+
+  // Variables para controlar la visibilidad de las pantallas
+  quizScreenVisible: boolean = true;
+  resultsScreenVisible: boolean = false;
+
+  // Initial attributes values
   valueSlider1left: number = 50; valueSlider1right: number = 50; valueSlider2left: number = 50; valueSlider2right: number = 50; valueSlider3left: number = 50; valueSlider3right: number = 50; valueSlider4left: number = 50; valueSlider4right: number = 50; valueSlider5left: number = 50; valueSlider5right: number = 50; valueSlider6left: number = 50; valueSlider6right: number = 50; valueSlider7left: number = 50; valueSlider7right: number = 50; valueSlider8left: number = 50; valueSlider8right: number = 50; valueSlider9left: number = 50; valueSlider9right: number = 50; valueSlider10left: number = 50; valueSlider10right: number = 50; valueSlider11left: number = 50; valueSlider11right: number = 50; valueSlider12left: number = 50; valueSlider12right: number = 50; valueSlider13left: number = 50; valueSlider13right: number = 50; valueSlider14left: number = 50; valueSlider14right: number = 50; valueSlider15left: number = 50; valueSlider15right: number = 50; valueSlider16left: number = 50; valueSlider16right: number = 50; valueSlider17left: number = 50; valueSlider17right: number = 50; valueSlider18left: number = 50; valueSlider18right: number = 50; valueSlider19left: number = 50; valueSlider19right: number = 50; valueSlider20left: number = 50; valueSlider20right: number = 50; valueSlider21left: number = 50; valueSlider21right: number = 50; valueSlider22left: number = 50; valueSlider22right: number = 50; valueSlider23left: number = 50; valueSlider23right: number = 50; valueSlider24left: number = 50; valueSlider24right: number = 50; valueSlider25left: number = 50; valueSlider25right: number = 50; valueSlider26left: number = 50; valueSlider26right: number = 50; valueSlider27left: number = 50; valueSlider27right: number = 50; valueSlider28left: number = 50; valueSlider28right: number = 50; valueSlider29left: number = 50; valueSlider29right: number = 50; valueSlider30left: number = 50; valueSlider30right: number = 50; valueSlider31left: number = 50; valueSlider31right: number = 50; valueSlider32left: number = 50; valueSlider32right: number = 50; valueSlider33left: number = 50; valueSlider33right: number = 50; valueSlider34left: number = 50; valueSlider34right: number = 50; valueSlider35left: number = 50; valueSlider35right: number = 50; valueSlider36left: number = 50; valueSlider36right: number = 50;
 
+  // Initial sliders values
+  resultSlidersValues : number[] = [50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50];
+
+  orders = [
+    "Windrunner",
+    "Skybreaker",
+    "Dustbringer",
+    "Edgedancer",
+    "Truthwatcher",
+    "Lightweaver",
+    "Elsecaller",
+    "Willshaper",
+    "Stoneward",
+    "Bondsmith"
+  ];
+
+  quizPrompts = ["1b", "2b", "3b", "4b", "5b", "6b", "7b", "8b", "9b", "10b", "11b", "12b", "13b", "14b", "15b", "16b", "17b", "18b", "19b", "20b", "21b", "22b", "23b", "24b", "25b", "26b", "27b", "28b", "29b", "30b", "31b", "32b", "33b", "34b"]
+
+  traitData = {
+    "1b": [35,	75,	20,	15,	80,	0,	100,	35,	50,	70],
+    "2b": [25,	0,	10,	60,	100,	30,	20,	25,	15,	30],
+    "3b": [60,	40,	100,	20,	15,	85,	0,	65,	75,	80],
+    "4b": [90,	55,	95,	47,	10,	50,	13,	57,	93,	30],
+    "5b": [10,	0,	61,	25,	89,	55,	100,	45,	23,	20],
+    "6b": [9,	52,	100,	7,	47,	53,	41,	59,	65,	0],
+    "7b": [45,	79,	52,	10,	85,	41,	80,	53,	37,	0],
+    "8b": [15,	25,	70,	35,	100,	43,	20,	11,	42,	0],
+    "9b": [0,	15,	80,	10,	50,	90,	30,	70,	15,	20],
+    "10b": [10,	100,	55,	0,	20,	25,	79,	42,	50,	25],
+    "11b": [35,	90,	15,	0,	100,	10,	85,	20,	40,	15],
+    "12b": [48,	60,	12,	61,	100,	39,	85,	0,	50,	75],
+    "13b": [60,	0,	23,	85,	45,	81,	75,	100,	30,	70],
+    "14b": [45,	75,	87,	50,	50,	13,	79,	15,	85,	70],
+    "15b": [25,	15,	0,	8,	45,	85,	57,	100,	15,	11],
+    "16b": [69,	88,	45,	20,	53,	0,	25,	30,	100,	20],
+    "17b": [12,	15,	100,	15,	50,	78,	13,	60,	0,	10],
+    "18b": [70,	75,	45,	0,	100,	85,	10,	90,	10,	30],
+    "19b": [35,	100,	65,	50,	60,	20,	15,	25,	0,	20],
+    "20b": [25,	11,	55,	69,	22,	31,	44,	75,	30,	70],
+    "21b": [0,	25,	22,	55,	85,	100,	15,	75,	15,	15],
+    "22b": [75,	85,	23,	59,	85,	25,	22,	15,	30,	90],
+    "23b": [25,	15,	85,	20,	20,	75,	0,	70,	20,	20],
+    "24b": [85,	85,	47,	90,	49,	35,	0,	30,	70,	100],
+    "25b": [55,	81,	45,	60,	89,	31,	85,	30,	47,	80],
+    "26b": [15,	55,	55,	0,	15,	100,	76,	53,	45,	10],
+    "27b": [75,	90,	0,	40,	85,	25,	88,	100,	70,	25],
+    "28b": [65,	31,	40,	0,	40,	45,	15,	85,	100,	20],
+    "29b": [25,	45,	100,	0,	41,	35,	10, 75,	76,	25],
+    "30b": [42,	75,	40,	22,	80,	0,	100,	64,	80,	15],
+    "31b": [78,	70,	80,	50,	0,	60,	50,	50,	100,	75],
+    "32b": [0,	10,	100,	10,	41,	69,	79,	85,	50,	20],
+    "33b": [58,	20,	20,	100,	84,	59,	16,	25,	0,	70],
+    "34b": [25,	40,	20,	10,	0,	70,	30,	20,	70,	0]
+  };
+
+  index : any = "1b"
+  // @ts-ignore
+    prueba = this.traitData[this.index][1];
 
 
 
 
 
-
-
-
-
-
-
-
-
-  constructor(private userService: UserService, private loginService: LoginService, private krService: KnightRadiantService, private router: Router) {
+  constructor(private userService: UserService, private loginService: LoginService, private krService: KnightRadiantService, private router: Router, private radiantOrderService: RadiantOrderService) {
 
     this.userService.getUserByEmail(loginService.currentUserEmail).subscribe({
       next: (userData) => {
@@ -58,13 +122,23 @@ export class KRRadiantOrderFormComponent {
         this.userLoginOn=userLoginOn;
       }
     })
+
+    this.thunder.src = '/assets/audio/sounds/thunder.mp3';
+    this.thunder.volume = 0.3;
+    this.thunder.load();
+  }
+
+  goToProfil(){
+    this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+    this.thunder.play();
+    this.router.navigate(['knightsRadiant/user/details']);
   }
 
   setOrderRadiant(radiantOrderId: number) {
     this.krService.setRadiantOrder(this.user?.id!, radiantOrderId).subscribe(
     response => {
         console.log('Orden radiante establecida correctamente:', response);
-        this.router.navigate(['knightsRadiant/user/details']);
+        //this.router.navigate(['knightsRadiant/user/details']);
         // Aquí puedes manejar la respuesta si es necesario
       },
       error => {
@@ -73,6 +147,91 @@ export class KRRadiantOrderFormComponent {
       }
     );
   }
+
+  getRadiantOrderById(id : number){
+    this.radiantOrderService.getRadiantOrderById(id).subscribe(data => {
+      this.radiantOrder = data;
+    }, error => console.log(error));
+  }
+
+  sayTheWords() {
+    var results: number[] = this.calculateResults();
+    var chosenOrder = 0;
+    var lowScore = 999999;
+    for (var k = 0; k < results.length; k++) {
+      if (results[k] < lowScore) {
+        chosenOrder = k;
+        lowScore = results[k];
+      }
+    }
+    console.info("results")
+    console.info(results);
+    var sortResults = this.sortWithIndices(results);
+    console.info("toSort")
+    console.info(sortResults);
+    var normalizedResults = this.normalizedResults(sortResults);
+    console.info("normalizedResults");
+    console.info(normalizedResults);
+    console.info("chosen order" + chosenOrder);
+    this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+    this.thunder.play();
+    this.toggleScreens();
+    this.setOrderRadiant(chosenOrder + 1);
+    this.getRadiantOrderById(chosenOrder + 1);
+  }
+
+  calculateResults() {
+    var results : number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var sliders = this.resultSlidersValues;
+    var promptTrait : string;
+    for (var i = 0; i < Object.keys(this.traitData).length; i++) {
+      var promptSliderValue = sliders[i];
+      promptTrait = this.quizPrompts[i];
+      var tempResults = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      for (var j = 0; j < this.orders.length; j++) {
+          // @ts-ignore
+        tempResults[j] = Math.abs(this.traitData[promptTrait][j] - promptSliderValue) ** 2;
+        results[j] += tempResults[j];
+      }
+      console.info("Trait " + promptTrait + " resulted in " + tempResults);
+    }
+    results[9] *= 1.3;
+    console.info("Order totals: " + results);
+    return results;
+  }
+
+  sortWithIndices(toSort: number[]): number[] {
+      const indexedArray: [number, number][] = [];
+      for (let i = 0; i < toSort.length; i++) {
+          indexedArray.push([toSort[i], i]);
+      }
+      indexedArray.sort(function(left, right) {
+          return left[0] < right[0] ? -1 : 1;
+      });
+      const sortIndices: number[] = [];
+      for (let j = 0; j < indexedArray.length; j++) {
+          sortIndices.push(indexedArray[j][1]);
+          toSort[j] = indexedArray[j][0];
+      }
+      (toSort as any).sortIndices = sortIndices;
+      return toSort;
+  }
+
+  normalizedResults(results: number[]) {
+    var normalizedResults = [];
+    for (var i = 0; i < results.length; i++) {
+      normalizedResults[i] = Math.floor((120000 - results[i]) / 1200);
+    }
+    return normalizedResults;
+  }
+
+  // Método para cambiar entre las pantallas
+  toggleScreens() {
+    this.quizScreenVisible = !this.quizScreenVisible;
+    this.resultsScreenVisible = !this.resultsScreenVisible;
+  }
+
+
 
   onInputChange1(event: any) {
     this.valueSlider1left = 100 - event.target.value; // Actualiza el valor del slider
@@ -1986,120 +2145,6 @@ export class KRRadiantOrderFormComponent {
     return `rgb(${red}, ${green}, ${blue})`;
   }
   getTextValueColor34Right(value: number): string {
-    // Calcula el valor interpolado entre 0 y 100 en función del valor del slider
-    const interpolatedValue = Math.round((value - 50) * 2);
-    // Limita el valor interpolado dentro del rango 0-100
-    const finalValue = Math.max(0, Math.min(100, interpolatedValue));
-    const finalValue2 = 100 - value;
-
-    let red = 0;
-    let green = 0;
-    let blue = 0;
-
-    if (value > 50) {
-      red = Math.round(0 + (0 - 0) * (finalValue / 100));
-      green = Math.round(0 + (255 - 0) * (finalValue / 100));
-      blue = Math.round(0 + (0 - 0) * (finalValue / 100));
-    }
-    if (value < 50) {
-      red = Math.round(0 + (255 - 0) * (finalValue2 / 100));
-      green = Math.round(0 + (0 - 0) * (finalValue2 / 100));
-      blue = Math.round(0 + (0 - 0) * (finalValue2 / 100));
-    }
-
-
-    // Devuelve el color en formato hexadecimal RGB
-    return `rgb(${red}, ${green}, ${blue})`;
-  }
-
-  onInputChange35(event: any) {
-    this.valueSlider35left = 100 - event.target.value; // Actualiza el valor del slider
-    this.valueSlider35right = event.target.value; // Actualiza el valor del slider
-  }
-  getTextValueColor35Left(value: number): string {
-    // Calcula el valor interpolado entre 0 y 100 en función del valor del slider
-    const interpolatedValue = Math.round((value - 50) * 2);
-    // Limita el valor interpolado dentro del rango 0-100
-    const finalValue = Math.max(0, Math.min(100, interpolatedValue));
-    const finalValue2 = 100 - value;
-
-    let red = 0;
-    let green = 0;
-    let blue = 0;
-
-    if (value > 50) {
-      red = Math.round(0 + (0 - 0) * (finalValue / 100));
-      green = Math.round(0 + (255 - 0) * (finalValue / 100));
-      blue = Math.round(0 + (0 - 0) * (finalValue / 100));
-    }
-    if (value < 50) {
-      red = Math.round(0 + (255 - 0) * (finalValue2 / 100));
-      green = Math.round(0 + (0 - 0) * (finalValue2 / 100));
-      blue = Math.round(0 + (0 - 0) * (finalValue2 / 100));
-    }
-
-
-    // Devuelve el color en formato hexadecimal RGB
-    return `rgb(${red}, ${green}, ${blue})`;
-  }
-  getTextValueColor35Right(value: number): string {
-    // Calcula el valor interpolado entre 0 y 100 en función del valor del slider
-    const interpolatedValue = Math.round((value - 50) * 2);
-    // Limita el valor interpolado dentro del rango 0-100
-    const finalValue = Math.max(0, Math.min(100, interpolatedValue));
-    const finalValue2 = 100 - value;
-
-    let red = 0;
-    let green = 0;
-    let blue = 0;
-
-    if (value > 50) {
-      red = Math.round(0 + (0 - 0) * (finalValue / 100));
-      green = Math.round(0 + (255 - 0) * (finalValue / 100));
-      blue = Math.round(0 + (0 - 0) * (finalValue / 100));
-    }
-    if (value < 50) {
-      red = Math.round(0 + (255 - 0) * (finalValue2 / 100));
-      green = Math.round(0 + (0 - 0) * (finalValue2 / 100));
-      blue = Math.round(0 + (0 - 0) * (finalValue2 / 100));
-    }
-
-
-    // Devuelve el color en formato hexadecimal RGB
-    return `rgb(${red}, ${green}, ${blue})`;
-  }
-
-  onInputChange36(event: any) {
-    this.valueSlider36left = 100 - event.target.value; // Actualiza el valor del slider
-    this.valueSlider36right = event.target.value; // Actualiza el valor del slider
-  }
-  getTextValueColor36Left(value: number): string {
-    // Calcula el valor interpolado entre 0 y 100 en función del valor del slider
-    const interpolatedValue = Math.round((value - 50) * 2);
-    // Limita el valor interpolado dentro del rango 0-100
-    const finalValue = Math.max(0, Math.min(100, interpolatedValue));
-    const finalValue2 = 100 - value;
-
-    let red = 0;
-    let green = 0;
-    let blue = 0;
-
-    if (value > 50) {
-      red = Math.round(0 + (0 - 0) * (finalValue / 100));
-      green = Math.round(0 + (255 - 0) * (finalValue / 100));
-      blue = Math.round(0 + (0 - 0) * (finalValue / 100));
-    }
-    if (value < 50) {
-      red = Math.round(0 + (255 - 0) * (finalValue2 / 100));
-      green = Math.round(0 + (0 - 0) * (finalValue2 / 100));
-      blue = Math.round(0 + (0 - 0) * (finalValue2 / 100));
-    }
-
-
-    // Devuelve el color en formato hexadecimal RGB
-    return `rgb(${red}, ${green}, ${blue})`;
-  }
-  getTextValueColor36Right(value: number): string {
     // Calcula el valor interpolado entre 0 y 100 en función del valor del slider
     const interpolatedValue = Math.round((value - 50) * 2);
     // Limita el valor interpolado dentro del rango 0-100

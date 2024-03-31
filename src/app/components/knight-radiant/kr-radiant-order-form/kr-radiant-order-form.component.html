@@ -13,8 +13,10 @@
     <button (click)="setOrderRadiant(10)">Bondsmith</button> <br>
 </div>
 -->
+
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<div class="div-select-order text-center">
+<div id="quiz-screen" class="div-select-order text-center" *ngIf="quizScreenVisible">
   <div id="" class="" style="display: flex">
     <div style="width: 30%"></div>
     <div class="container-quiz">
@@ -37,7 +39,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange1($event)" id="slider-1" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[0]" (input)="onInputChange1($event)" id="slider-1" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -53,7 +55,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange2($event)" id="slider-2" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[1]" (input)="onInputChange2($event)" id="slider-2" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -69,7 +71,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange3($event)" id="slider-3" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[2]" (input)="onInputChange3($event)" id="slider-3" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -85,7 +87,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange4($event)" id="slider-4" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[3]" (input)="onInputChange4($event)" id="slider-4" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -101,7 +103,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange5($event)" id="slider-5" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[4]" (input)="onInputChange5($event)" id="slider-5" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -117,7 +119,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange6($event)" id="slider-6" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[5]" (input)="onInputChange6($event)" id="slider-6" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -133,7 +135,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange7($event)" id="slider-7" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[6]" (input)="onInputChange7($event)" id="slider-7" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -149,7 +151,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange8($event)" id="slider-8" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[7]" (input)="onInputChange8($event)" id="slider-8" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -165,7 +167,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange9($event)" id="slider-9" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[8]" (input)="onInputChange9($event)" id="slider-9" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -181,7 +183,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange10($event)" id="slider-10" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[9]" (input)="onInputChange10($event)" id="slider-10" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -197,7 +199,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange11($event)" id="slider-11" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[10]" (input)="onInputChange11($event)" id="slider-11" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -213,7 +215,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange12($event)" id="slider-12" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[11]" (input)="onInputChange12($event)" id="slider-12" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -229,7 +231,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange13($event)" id="slider-13" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[12]" (input)="onInputChange13($event)" id="slider-13" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -245,7 +247,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange14($event)" id="slider-14" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[13]" (input)="onInputChange14($event)" id="slider-14" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -261,7 +263,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange15($event)" id="slider-15" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[14]" (input)="onInputChange15($event)" id="slider-15" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -277,7 +279,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange16($event)" id="slider-16" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[15]" (input)="onInputChange16($event)" id="slider-16" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -293,7 +295,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange17($event)" id="slider-17" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[16]" (input)="onInputChange17($event)" id="slider-17" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -309,7 +311,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange18($event)" id="slider-18" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[17]" (input)="onInputChange18($event)" id="slider-18" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -325,7 +327,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange19($event)" id="slider-19" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[18]" (input)="onInputChange19($event)" id="slider-19" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -341,7 +343,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange20($event)" id="slider-20" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[19]" (input)="onInputChange20($event)" id="slider-20" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -357,7 +359,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange21($event)" id="slider-21" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[20]" (input)="onInputChange21($event)" id="slider-21" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -373,7 +375,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange22($event)" id="slider-22" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[21]" (input)="onInputChange22($event)" id="slider-22" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -389,7 +391,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange23($event)" id="slider-23" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[22]" (input)="onInputChange23($event)" id="slider-23" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -405,7 +407,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange24($event)" id="slider-24" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[23]" (input)="onInputChange24($event)" id="slider-24" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -421,7 +423,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange25($event)" id="slider-25" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[24]" (input)="onInputChange25($event)" id="slider-25" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -437,7 +439,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange26($event)" id="slider-26" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[25]" (input)="onInputChange26($event)" id="slider-26" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -453,7 +455,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange27($event)" id="slider-27" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[26]" (input)="onInputChange27($event)" id="slider-27" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -469,7 +471,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange28($event)" id="slider-28" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[27]" (input)="onInputChange28($event)" id="slider-28" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -485,7 +487,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange29($event)" id="slider-29" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[28]" (input)="onInputChange29($event)" id="slider-29" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -501,7 +503,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange30($event)" id="slider-30" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[29]" (input)="onInputChange30($event)" id="slider-30" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -517,7 +519,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange31($event)" id="slider-31" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[30]" (input)="onInputChange31($event)" id="slider-31" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -533,7 +535,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange32($event)" id="slider-32" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[31]" (input)="onInputChange32($event)" id="slider-32" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -549,7 +551,7 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange33($event)" id="slider-33" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[32]" (input)="onInputChange33($event)" id="slider-33" class="custom-range">
           </div>
         </li>
         <li class="list-group-item rounded-lg prompt">
@@ -565,16 +567,35 @@
             </div>
           </div>
           <div class="container-slider">
-            <input type="range" min="0" max="100" value="50" (input)="onInputChange34($event)" id="slider-34" class="custom-range">
+            <input type="range" min="0" max="100" [(ngModel)]="resultSlidersValues[33]" (input)="onInputChange34($event)" id="slider-34" class="custom-range">
           </div>
         </li>
       </ul>
 
 
 
-      <button style="height: 80px; font-size: 150%">Say the words</button>
+      <button (click)="sayTheWords()" style="height: 80px; font-size: 150%">Say the words</button>
     </div>
     <div style="width: 30%"></div>
-
   </div>
 </div>
+
+<div id="results-screen" class="div-select-order text-center" *ngIf="resultsScreenVisible">
+  <h1>Welcome to the {{radiantOrder.name}}!</h1>
+  <h4>{{radiantOrder.attributes}}</h4>
+  <h4>{{radiantOrder.sprenType}}</h4>
+  <h4>{{radiantOrder.description}}</h4>
+  <h4>{{radiantOrder.surges[1].name}}</h4>
+  <p>{{radiantOrder.surges[1].description}}</p>
+  <h4>{{radiantOrder.surges[1].name}}</h4>
+  <p>{{radiantOrder.surges[1].description}}</p>
+
+
+
+  <button (click)="goToProfil()">Go to your profile</button>
+</div>
+
+
+
+
+
