@@ -16,31 +16,31 @@
         <form id="form">
           <div class="text-center">
             <label for="name" class="form-label">User name</label>
-            <input [(ngModel)]="name" type="text" required class="form-control" id="name" name="name">
+            <input [(ngModel)]="name"type="text" class="form-control" id="name" name="name" required>
           </div>
           <div class="row-btw-input"></div>
           <div class="text-center">
             <label for="email" class="form-label">Email</label>
-            <input [(ngModel)]="email" type="email" required class="form-control" id="email" name="email">
+            <input [(ngModel)]="email" type="email" class="form-control" id="email" name="email" required>
           </div>
           <div class="row-btw-input"></div>
           <div class="text-center">
             <label for="userPassword" class="form-label">Password</label>
-            <input [(ngModel)]="password" type="password" required class="form-control" id="userPassword" name="userPassword">
+            <input [(ngModel)]="password" type="password" class="form-control" id="userPassword" name="userPassword" minlength="4" required>
           </div>
           <div class="row-btw-input"></div>
           <div class="text-center">
             <label for="repeatPassword" class="form-label">Repeat password</label>
-            <input [(ngModel)]="repeatPassword" type="password" required class="form-control" id="repeatPassword" name="repeatPassword">
+            <input [(ngModel)]="repeatPassword" type="password" class="form-control" id="repeatPassword" name="repeatPassword" minlength="4" required>
           </div>
           <div class="row-btw-input"></div>
           <div class="row-btns"></div>
           <div id="row-buttons">
             <div class="col-buttons text-center">
-              <button class="btn btn-info" (click)="back()">Back</button>
+              <button id="bttn-back" class="btn" (click)="back()">Back</button>
             </div>
             <div class="col-buttons text-center">
-              <button type="submit" class="btn btn-primary" (click)="newKnightRadiant()" style="margin-left: 5%;">Register</button>
+              <button type="submit" id="bttn-register" class="btn" (click)="newKnightRadiant()" style="margin-left: 5%;">Register</button>
             </div>
           </div>
         </form>

@@ -19,11 +19,16 @@ export class UserRegisterComponent implements OnInit{
     password : string = '';
     repeatPassword : string = '';
 
-    knightRadiant:KnightRadiant= new KnightRadiant(0, Ideal.NO_IDEAL, 0, 0, null!);
+    knightRadiant:KnightRadiant= new KnightRadiant(0, Ideal.NO_IDEAL, '', '', '', '', '',0, 0, null!);
     id : number = 0;
+    ideal : Ideal = Ideal.NO_IDEAL;
+    firstIdeal : string = "";
+    secondIdeal : string = "";
+    thirdIdeal : string = "";
+    fourthIdeal : string = "";
+    fifthIdeal : string = "";
     currentMissionId : number = null!;
     missionsCompleted : number = 0;
-    ideal : Ideal = Ideal.NO_IDEAL;
     radiantOrder: RadiantOrder = null!;
 
   thunder = new Audio();
@@ -60,7 +65,7 @@ export class UserRegisterComponent implements OnInit{
   }
 
     newKnightRadiant(){
-        let knightRadiant = new KnightRadiant(this.id, this.ideal, this.currentMissionId, this.missionsCompleted, this.radiantOrder);
+        let knightRadiant = new KnightRadiant(this.id, this.ideal, this.firstIdeal, this.secondIdeal, this.thirdIdeal, this.fourthIdeal, this.fifthIdeal, this.currentMissionId, this.missionsCompleted, this.radiantOrder);
         console.log(knightRadiant);
         this.knightRadiantService.createKnightRadiant(knightRadiant).subscribe(
             res => {

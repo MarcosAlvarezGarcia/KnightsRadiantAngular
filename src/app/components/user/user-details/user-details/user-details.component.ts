@@ -15,6 +15,9 @@ import {Router} from "@angular/router";
 })
 export class UserDetailsComponent implements OnInit{
 
+
+    loadPage: boolean = false;
+
   errorMessage:String="";
   user?:User;
   id?: number = this.user?.id;
@@ -41,6 +44,14 @@ export class UserDetailsComponent implements OnInit{
           },
           complete: () => {
               console.info("User Data ok");
+              if (this.user!.knightRadiant.radiantOrder == null){
+                  console.info("no order asigned")
+                  this.router.navigate(['knightsRadiant/knight-radiant/radiant-order-form']);
+              }
+              else {
+                  this.loadPage = true;
+                  console.log("order asigned")
+              }
           }
       })
 
@@ -64,6 +75,7 @@ export class UserDetailsComponent implements OnInit{
     }
 
   ngOnInit() {
+
   }
 
     get radiantOrder()
@@ -79,8 +91,7 @@ export class UserDetailsComponent implements OnInit{
               next:() => {
                   this.editMode=false;
                   this.user=this.registerForm.value as unknown as User;
-              },
-              error:(errorData)=> console.error(errorData)
+              }, error:(errorData)=> console.error(errorData)
           })
       }
   }

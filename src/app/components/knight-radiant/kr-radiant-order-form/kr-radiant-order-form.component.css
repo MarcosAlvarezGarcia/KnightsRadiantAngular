@@ -1,9 +1,15 @@
 
 h1 {
     margin-top: 5%;
+    color: #193166;
+}
+
+.intro {
+    color: #213966;
 }
 
 .container-quiz {
+  height: 100%;
   width: 40%;
   background-color: white;
   opacity: 70%;
@@ -39,6 +45,74 @@ span {
 
  }
 
+img {
+    width: 100%;
+    height: auto;
+}
+#bttn-say-the-words {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    color: #866c46;
+    border-color: #866c46;
+}
+#bttn-say-the-words:hover {
+    color: white;
+    font-weight: bold;
+    background-color: #866c46;
+}
 
+.bttn-results {
+    margin-top: 2%;
+    margin-bottom: 5%;
+    color: var(--button-color, #866c46); /* Utiliza un color de respaldo en caso de que la variable no esté definida */
+    border-color: var(--button-color, #866c46);
+  margin-right: 5%;
+}
+.bttn-results:hover {
+    color: white;
+    background-color: var(--button-color, #866c46);
+}
 
+li:hover {
+    font-weight: bold;
+    background-color: rgb(185, 198, 220);
+}
 
+h4{
+    font-size: 140%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+#description {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.container-progress {
+    display: flex;
+    justify-content: center; /* Alinea horizontalmente el contenido */
+    align-items: center; /* Alinea verticalmente el contenido */
+    margin-bottom: 2%;
+}
+
+progress {
+    width: 85%;
+    height: 30px;
+    border-radius: 0;
+}
+
+progress::-webkit-progress-value {
+    background-color: var(--progress-color, #866c46);
+}
+
+.orders-name {
+    text-align: left;
+    margin-left: 5%;
+    font-size: 120%;
+}
+
+span {
+    margin-left: 2%;
+
+}

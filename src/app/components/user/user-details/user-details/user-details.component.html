@@ -1,5 +1,5 @@
 <p *ngIf="errorMessage.length!=0" class="text-danger">{{errorMessage}}</p>
-<div *ngIf="(userLoginOn && !editMode) || !userLoginOn">
+<div *ngIf="((userLoginOn && !editMode) || !userLoginOn) && loadPage ">
     <h1><b> User name: </b> {{user?.name}} </h1>
     <p><b> Role: </b> {{user?.role}} </p>
     <p><b> Missions completed: </b> {{user?.knightRadiant?.missionsCompleted}} </p>

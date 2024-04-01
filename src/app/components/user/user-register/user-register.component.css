@@ -22,7 +22,11 @@ label {
 }
 
 input {
+  opacity: 70%;
   background-color: #8894b9;
+}
+input:hover {
+  background-color: #667dc5;
 }
 input:focus {
   background-color: rgb(185, 198, 220);
@@ -50,7 +54,7 @@ input:focus {
 
 #column-title {
   width: 69%;
-  background-image: url('/assets/img/welcome-radiant.png');
+  background-image: url('/assets/img/titles/welcome-radiant.png');
   background-repeat: no-repeat; /* Evita que la imagen se repita */
   background-size: contain; /* Ajusto img al tamaño del div */
   background-position: center; /* La imagen se posiciona en el centro */
@@ -105,4 +109,34 @@ input:focus {
   display: flex;
   justify-content: center; /* Centra horizontalmente los elementos */
   align-items: center; /* Centra verticalmente los elementos */
+}
+
+#bttn-back {
+  color: #ab5b39;
+  font-weight: bold;
+  border: 2px solid #ab5b39;
+  opacity: 70%;
+  background-color: #e8c3b3;
+}
+#bttn-back:hover {
+  color: #e8c3b3;
+  border: 2px solid #e8c3b3;
+  font-weight: bolder;
+  opacity: 70%;
+  background-color: #ab5b39;
+}
+
+#bttn-register {
+  color: #b45176;
+  font-weight: bold;
+  border: 2px solid #b45176;
+  opacity: 70%;
+  background-color: #efb6cc;
+}
+#bttn-register:hover {
+  color: #efb6cc;
+  border: 2px solid #efb6cc;
+  font-weight: bolder;
+  opacity: 70%;
+  background-color: #b45176;
 }

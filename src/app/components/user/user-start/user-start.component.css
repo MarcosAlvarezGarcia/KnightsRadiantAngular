@@ -14,6 +14,36 @@ button {
   font-size: 100%;
 }
 
+#bttn-login {
+  color: #505471;
+  font-weight: bold;
+  border: 2px solid #505471;
+  opacity: 70%;
+  background-color: #bdc2ec;
+}
+#bttn-login:hover {
+  color: #bdc2ec;
+  border: 2px solid #bdc2ec;
+  font-weight: bolder;
+  opacity: 70%;
+  background-color: #505471;
+}
+
+#bttn-register {
+  color: #7b6566;
+  font-weight: bold;
+  border: 2px solid #7b6566;
+  opacity: 70%;
+  background-color: #f3cdcf;
+}
+#bttn-register:hover {
+  color: #f3cdcf;
+  border: 2px solid #f3cdcf;
+  font-weight: bolder;
+  opacity: 70%;
+  background-color: #7b6566;
+}
+
 #title-zone {
   width: 100%;
   height: 30%;
@@ -36,7 +66,7 @@ button {
 
 #column-title {
   width: 69%;
-  background-image: url('/assets/img/welcome-radiant.png');
+  background-image: url('/assets/img/titles/welcome-radiant.png');
   background-repeat: no-repeat; /* Evita que la imagen se repita */
   background-size: contain; /* Ajusto img al tamaño del div */
   background-position: center; /* La imagen se posiciona en el centro */

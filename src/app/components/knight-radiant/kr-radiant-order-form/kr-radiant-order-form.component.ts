@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {User} from "../../../services/auth/user";
 import {UserService} from "../../../services/user/user.service";
 import {LoginService} from "../../../services/auth/login.service";
@@ -27,14 +27,18 @@ export class KRRadiantOrderFormComponent {
 
   // Variable orden elegida
   surges: Surge[] = [];
-  radiantOrder: RadiantOrder = new RadiantOrder(0, "", "", "", "", this.surges);
+  radiantOrder: RadiantOrder = new RadiantOrder(0, "", "", "", "", "", "", "", "", "", "", "", this.surges);
 
   // Variable sonido
   thunder = new Audio();
 
+  // Colores botones
+  normalColor: string = '#866c46';
+
   // Variables para controlar la visibilidad de las pantallas
   quizScreenVisible: boolean = true;
-  resultsScreenVisible: boolean = false;
+  orderScreenVisible: boolean = false;
+  stadisticsViewVisible: boolean = false;
 
   // Initial attributes values
   valueSlider1left: number = 50; valueSlider1right: number = 50; valueSlider2left: number = 50; valueSlider2right: number = 50; valueSlider3left: number = 50; valueSlider3right: number = 50; valueSlider4left: number = 50; valueSlider4right: number = 50; valueSlider5left: number = 50; valueSlider5right: number = 50; valueSlider6left: number = 50; valueSlider6right: number = 50; valueSlider7left: number = 50; valueSlider7right: number = 50; valueSlider8left: number = 50; valueSlider8right: number = 50; valueSlider9left: number = 50; valueSlider9right: number = 50; valueSlider10left: number = 50; valueSlider10right: number = 50; valueSlider11left: number = 50; valueSlider11right: number = 50; valueSlider12left: number = 50; valueSlider12right: number = 50; valueSlider13left: number = 50; valueSlider13right: number = 50; valueSlider14left: number = 50; valueSlider14right: number = 50; valueSlider15left: number = 50; valueSlider15right: number = 50; valueSlider16left: number = 50; valueSlider16right: number = 50; valueSlider17left: number = 50; valueSlider17right: number = 50; valueSlider18left: number = 50; valueSlider18right: number = 50; valueSlider19left: number = 50; valueSlider19right: number = 50; valueSlider20left: number = 50; valueSlider20right: number = 50; valueSlider21left: number = 50; valueSlider21right: number = 50; valueSlider22left: number = 50; valueSlider22right: number = 50; valueSlider23left: number = 50; valueSlider23right: number = 50; valueSlider24left: number = 50; valueSlider24right: number = 50; valueSlider25left: number = 50; valueSlider25right: number = 50; valueSlider26left: number = 50; valueSlider26right: number = 50; valueSlider27left: number = 50; valueSlider27right: number = 50; valueSlider28left: number = 50; valueSlider28right: number = 50; valueSlider29left: number = 50; valueSlider29right: number = 50; valueSlider30left: number = 50; valueSlider30right: number = 50; valueSlider31left: number = 50; valueSlider31right: number = 50; valueSlider32left: number = 50; valueSlider32right: number = 50; valueSlider33left: number = 50; valueSlider33right: number = 50; valueSlider34left: number = 50; valueSlider34right: number = 50; valueSlider35left: number = 50; valueSlider35right: number = 50; valueSlider36left: number = 50; valueSlider36right: number = 50;
@@ -94,15 +98,25 @@ export class KRRadiantOrderFormComponent {
     "34b": [25,	40,	20,	10,	0,	70,	30,	20,	70,	0]
   };
 
-  index : any = "1b"
-  // @ts-ignore
-    prueba = this.traitData[this.index][1];
+  imagePaths: string[] = [
+    'assets/img/Orders_Logo/01_windrunner_placard.jpg',
+    'assets/img/Orders_Logo/02_skybreaker_placard.jpg',
+    'assets/img/Orders_Logo/03_dustbringer_placard.jpg',
+    'assets/img/Orders_Logo/04_edgedancer_placard.jpg',
+    'assets/img/Orders_Logo/05_truthwatcher_placard.jpg',
+    'assets/img/Orders_Logo/06_lightweaver_placard.jpg',
+    'assets/img/Orders_Logo/07_elsecaller_placard.jpg',
+    'assets/img/Orders_Logo/08_willshaper_placard.jpg',
+    'assets/img/Orders_Logo/09_stoneward_placard.jpg',
+    'assets/img/Orders_Logo/10_bondsmith_placard.jpg'
+  ];
+
+  orderAsigned :number = 0;
+  radiantOrders: RadiantOrder[] = [];
+  resultsInPercentage : number[] = [];
 
 
-
-
-
-  constructor(private userService: UserService, private loginService: LoginService, private krService: KnightRadiantService, private router: Router, private radiantOrderService: RadiantOrderService) {
+  constructor(private userService: UserService, private loginService: LoginService, private krService: KnightRadiantService, private router: Router, private radiantOrderService: RadiantOrderService, private elRef: ElementRef) {
 
     this.userService.getUserByEmail(loginService.currentUserEmail).subscribe({
       next: (userData) => {
@@ -126,9 +140,14 @@ export class KRRadiantOrderFormComponent {
     this.thunder.src = '/assets/audio/sounds/thunder.mp3';
     this.thunder.volume = 0.3;
     this.thunder.load();
+
+    this.getRadiantOrderList();
+
+    document.documentElement.style.setProperty('--button-color', this.normalColor);
+    document.documentElement.style.setProperty('--progress-color', this.normalColor);
   }
 
-  goToProfil(){
+  start(){
     this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
     this.thunder.play();
     this.router.navigate(['knightsRadiant/user/details']);
@@ -148,9 +167,25 @@ export class KRRadiantOrderFormComponent {
     );
   }
 
+  getRadiantOrderList(){
+    this.radiantOrderService.getRadiantOrderList().subscribe(radiantOrders => {
+          this.radiantOrders = radiantOrders;
+          // Convertir los campos logo y glyph a cadenas base64
+          this.radiantOrders.forEach(order => {
+            order.logo = 'data:image/jpeg;base64,' + order.logo;
+            order.glyph = 'data:image/jpeg;base64,' + order.glyph;
+          });
+        }
+    );
+  }
+
   getRadiantOrderById(id : number){
     this.radiantOrderService.getRadiantOrderById(id).subscribe(data => {
       this.radiantOrder = data;
+      this.radiantOrder = data;
+      // Convertir los campos logo y glyph a cadenas base64
+      this.radiantOrder.logo = 'data:image/jpeg;base64,' + this.radiantOrder.logo;
+      this.radiantOrder.glyph = 'data:image/jpeg;base64,' + this.radiantOrder.glyph;
     }, error => console.log(error));
   }
 
@@ -164,8 +199,10 @@ export class KRRadiantOrderFormComponent {
         lowScore = results[k];
       }
     }
+    this.orderAsigned = chosenOrder + 1;
     console.info("results")
     console.info(results);
+    this.radiantOrders = this.sortObjectsWithIndices(this.radiantOrders, results);
     var sortResults = this.sortWithIndices(results);
     console.info("toSort")
     console.info(sortResults);
@@ -173,11 +210,12 @@ export class KRRadiantOrderFormComponent {
     console.info("normalizedResults");
     console.info(normalizedResults);
     console.info("chosen order" + chosenOrder);
+    this.resultsInPercentage = normalizedResults;
     this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
     this.thunder.play();
     this.toggleScreens();
-    this.setOrderRadiant(chosenOrder + 1);
-    this.getRadiantOrderById(chosenOrder + 1);
+    this.setOrderRadiant(this.orderAsigned);
+    this.getRadiantOrderById(this.orderAsigned);
   }
 
   calculateResults() {
@@ -217,6 +255,29 @@ export class KRRadiantOrderFormComponent {
       return toSort;
   }
 
+  sortObjectsWithIndices<T>(objects: T[], indices: number[]): T[] {
+    const indexedArray: [T, number][] = [];
+
+    // Creamos un array de tuplas [objeto, índice]
+    for (let i = 0; i < objects.length; i++) {
+      indexedArray.push([objects[i], indices[i]]);
+    }
+
+    // Ordenamos el array de acuerdo a los índices
+    indexedArray.sort((left, right) => {
+      return left[1] - right[1];
+    });
+
+    // Actualizamos la lista original de objetos con el nuevo orden
+    const sortedObjects: T[] = [];
+    for (let j = 0; j < indexedArray.length; j++) {
+      sortedObjects.push(indexedArray[j][0]);
+    }
+
+    return sortedObjects;
+  }
+
+
   normalizedResults(results: number[]) {
     var normalizedResults = [];
     for (var i = 0; i < results.length; i++) {
@@ -228,7 +289,21 @@ export class KRRadiantOrderFormComponent {
   // Método para cambiar entre las pantallas
   toggleScreens() {
     this.quizScreenVisible = !this.quizScreenVisible;
-    this.resultsScreenVisible = !this.resultsScreenVisible;
+    this.orderScreenVisible = !this.orderScreenVisible;
+  }
+
+  seeStadistics() {
+    this.stadisticsViewVisible = !this.stadisticsViewVisible;
+    const scrollStep = window.innerHeight / 60; // Divide la ventana en x pasos de desplazamiento
+    let scrollCount = 0;
+    const scrollInterval = setInterval(() => {
+      if (scrollCount < 60) {
+        window.scrollBy(0, scrollStep); // Desplaza hacia abajo un paso
+        scrollCount++;
+      } else {
+        clearInterval(scrollInterval); // Detiene el desplazamiento después de 3 segundos
+      }
+    }, 25); // Realiza un paso cada 100 milisegundos
   }
 
 

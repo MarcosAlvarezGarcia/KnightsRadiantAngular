@@ -20,9 +20,9 @@ export class UserLoginComponent implements OnInit {
     password:['',Validators.required],
   })
 
-    stringEmail : string = "marcos.alv.garcia@gmail.com";
-    currentUser: any = {}; // Almacena la información del usuario
-    user?:User;
+    currentUserEmail : string = "";
+    user?: User; // Almacena la información del usuario
+    userData?:User;
 
 
     thunder = new Audio();
@@ -56,6 +56,8 @@ export class UserLoginComponent implements OnInit {
         this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
         next: (userData) => {
             console.info(userData);
+            this.userData = userData;
+            this.currentUserEmail = this.loginForm.value.email!;
         },
         error: (errorData) => {
           console.error(errorData);
@@ -65,13 +67,25 @@ export class UserLoginComponent implements OnInit {
           console.info("Login completed");
           this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
           this.thunder.play();
-
+            /*
+            this.userService.getUserByEmail(this.currentUserEmail).subscribe({
+                next: (userData) => {
+                    this.user=userData;
+                    let userId = userData.id.toString();
+                },
+                error: (errorData) => {
+                    this.loginError=errorData
+                },
+                complete: () => {
+                    console.info("User Data ok");
+                }
+            })
+            console.info(this.user?.id);
           if (this.user?.knightRadiant.radiantOrder == null) {
               this.router.navigate(['knightsRadiant/knight-radiant/radiant-order-form']);
           }
-          else {
+          */
               this.router.navigate(['knightsRadiant/user/details']);
-          }
         }
       })
     }
