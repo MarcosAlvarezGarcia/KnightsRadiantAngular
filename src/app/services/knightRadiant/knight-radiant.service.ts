@@ -13,6 +13,7 @@ export class KnightRadiantService {
   private baseUrl: string = 'http://localhost:8080/knightsRadiant/' + this.zone;
 
   private urlSetOrder: string = this.baseUrl + "/setRadiantOrder";
+  private urlSetMissionsCompleted: string = this.baseUrl + "/setMissionsCompleted";
 
   constructor(private http: HttpClient) {
   }
@@ -33,10 +34,14 @@ export class KnightRadiantService {
     return this.http.put<KnightRadiant>(this.baseUrl + "/update/" + id, knightRadiant);
   }
 
-  setRadiantOrder(id: number, radiantOrderId: number):Observable<KnightRadiant>{
-    const url = `${this.urlSetOrder}/${id}`;
-    return this.http.patch<KnightRadiant>(url, radiantOrderId);
-    //return this.http.patch<KnightRadiant>(this.baseUrl + "/setRadiantOrder/" + id + "/", radiantOrderId)
+  setRadiantOrder(id: number, radiantOrderId: number): Observable<KnightRadiant> {
+      const url = `${this.urlSetOrder}/${id}?radiantOrderId=${radiantOrderId}`;
+      return this.http.patch<KnightRadiant>(url, {});
+  }
+
+  setMissionsCompleted(id: number): Observable<KnightRadiant> {
+      const url = `${this.urlSetMissionsCompleted}/${id}`;
+      return this.http.patch<KnightRadiant>(url, {});
   }
 
   deleteKnightRadiant(id: number): Observable<any> {

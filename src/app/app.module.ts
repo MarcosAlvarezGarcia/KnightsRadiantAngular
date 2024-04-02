@@ -21,6 +21,11 @@ import {JwtInterceptorService} from "./services/auth/jwt-interceptor.service";
 import {ErrorInterceptorService} from "./services/auth/error-interceptor.service";
 import { UserDetailsComponent } from './components/user/user-details/user-details/user-details.component';
 import { KRRadiantOrderFormComponent } from "./components/knight-radiant/kr-radiant-order-form/kr-radiant-order-form.component";
+import { WokVideoComponent } from './components/wallpaper/wok-video/wok-video.component';
+import { WorVideoComponent } from './components/wallpaper/wor-video/wor-video.component';
+import { ObVideoComponent } from './components/wallpaper/ob-video/ob-video.component';
+import { RowVideoComponent } from './components/wallpaper/row-video/row-video.component';
+import {HeaderComponent} from "./components/header/header.component";
 
 const routes : Routes = [
   {path: '', redirectTo:'/knightsRadiant/home', pathMatch:'full'}, // http://localhost:4200/knightsRadiant/home
@@ -54,6 +59,11 @@ const routes : Routes = [
     RadiantOrderListComponent,
     UserDetailsComponent,
     KRRadiantOrderFormComponent,
+    WokVideoComponent,
+    WorVideoComponent,
+    ObVideoComponent,
+    RowVideoComponent,
+    HeaderComponent
   ],
     imports: [
         BrowserModule,

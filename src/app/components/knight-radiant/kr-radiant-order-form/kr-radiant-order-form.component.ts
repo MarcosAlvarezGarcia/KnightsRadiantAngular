@@ -27,7 +27,7 @@ export class KRRadiantOrderFormComponent {
 
   // Variable orden elegida
   surges: Surge[] = [];
-  radiantOrder: RadiantOrder = new RadiantOrder(0, "", "", "", "", "", "", "", "", "", "", "", this.surges);
+  radiantOrder: RadiantOrder = new RadiantOrder(0, "", "", "", "", "", "", "", "", "", this.surges);
 
   // Variable sonido
   thunder = new Audio();
@@ -153,9 +153,10 @@ export class KRRadiantOrderFormComponent {
     this.router.navigate(['knightsRadiant/user/details']);
   }
 
+
   setOrderRadiant(radiantOrderId: number) {
-    this.krService.setRadiantOrder(this.user?.id!, radiantOrderId).subscribe(
-    response => {
+    this.krService.setRadiantOrder(this.user?.knightRadiant.id!, radiantOrderId).subscribe(
+      response => {
         console.log('Orden radiante establecida correctamente:', response);
         //this.router.navigate(['knightsRadiant/user/details']);
         // Aquí puedes manejar la respuesta si es necesario
@@ -169,13 +170,8 @@ export class KRRadiantOrderFormComponent {
 
   getRadiantOrderList(){
     this.radiantOrderService.getRadiantOrderList().subscribe(radiantOrders => {
-          this.radiantOrders = radiantOrders;
-          // Convertir los campos logo y glyph a cadenas base64
-          this.radiantOrders.forEach(order => {
-            order.logo = 'data:image/jpeg;base64,' + order.logo;
-            order.glyph = 'data:image/jpeg;base64,' + order.glyph;
-          });
-        }
+        this.radiantOrders = radiantOrders;
+      }
     );
   }
 
@@ -183,9 +179,6 @@ export class KRRadiantOrderFormComponent {
     this.radiantOrderService.getRadiantOrderById(id).subscribe(data => {
       this.radiantOrder = data;
       this.radiantOrder = data;
-      // Convertir los campos logo y glyph a cadenas base64
-      this.radiantOrder.logo = 'data:image/jpeg;base64,' + this.radiantOrder.logo;
-      this.radiantOrder.glyph = 'data:image/jpeg;base64,' + this.radiantOrder.glyph;
     }, error => console.log(error));
   }
 
@@ -227,7 +220,7 @@ export class KRRadiantOrderFormComponent {
       promptTrait = this.quizPrompts[i];
       var tempResults = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       for (var j = 0; j < this.orders.length; j++) {
-          // @ts-ignore
+        // @ts-ignore
         tempResults[j] = Math.abs(this.traitData[promptTrait][j] - promptSliderValue) ** 2;
         results[j] += tempResults[j];
       }
@@ -239,20 +232,20 @@ export class KRRadiantOrderFormComponent {
   }
 
   sortWithIndices(toSort: number[]): number[] {
-      const indexedArray: [number, number][] = [];
-      for (let i = 0; i < toSort.length; i++) {
-          indexedArray.push([toSort[i], i]);
-      }
-      indexedArray.sort(function(left, right) {
-          return left[0] < right[0] ? -1 : 1;
-      });
-      const sortIndices: number[] = [];
-      for (let j = 0; j < indexedArray.length; j++) {
-          sortIndices.push(indexedArray[j][1]);
-          toSort[j] = indexedArray[j][0];
-      }
-      (toSort as any).sortIndices = sortIndices;
-      return toSort;
+    const indexedArray: [number, number][] = [];
+    for (let i = 0; i < toSort.length; i++) {
+      indexedArray.push([toSort[i], i]);
+    }
+    indexedArray.sort(function(left, right) {
+      return left[0] < right[0] ? -1 : 1;
+    });
+    const sortIndices: number[] = [];
+    for (let j = 0; j < indexedArray.length; j++) {
+      sortIndices.push(indexedArray[j][1]);
+      toSort[j] = indexedArray[j][0];
+    }
+    (toSort as any).sortIndices = sortIndices;
+    return toSort;
   }
 
   sortObjectsWithIndices<T>(objects: T[], indices: number[]): T[] {

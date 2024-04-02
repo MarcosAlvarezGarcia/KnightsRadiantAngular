@@ -1,15 +1,32 @@
 <p *ngIf="errorMessage.length!=0" class="text-danger">{{errorMessage}}</p>
 <div *ngIf="((userLoginOn && !editMode) || !userLoginOn) && loadPage ">
-    <h1><b> User name: </b> {{user?.name}} </h1>
-    <p><b> Role: </b> {{user?.role}} </p>
-    <p><b> Missions completed: </b> {{user?.knightRadiant?.missionsCompleted}} </p>
-    <p><b> Radiant order: </b> {{user?.knightRadiant?.radiantOrder?.name}} </p>
-    <p><b> Spren type: </b> {{user?.knightRadiant?.radiantOrder?.sprenType}} </p>
-    <p><b> Attributes: </b> {{user?.knightRadiant?.radiantOrder?.attributes}} </p>
-    <p><b> Description: </b> {{user?.knightRadiant?.radiantOrder?.description}} </p>
-    <button (click)="setRadiantOrder()">Set radiant order</button>
-    <button (click)="logout()">Log Out</button>
+  <app-wor-video></app-wor-video>
 
+  <div id="fullScreen">
+    <div style="width: 33%"></div>
+    <div id="container-info"
+       [style.--container-info-color]="orderColor"
+    >
+      <div id="container-header">
+        <app-header></app-header>
+      </div>
+      <div id="container-orderLogo">
+        <img [src]="ordersLogo[orderId-1]">
+      </div>
+      <div id="container-info-text">
+        <h2 id="radiantName">{{user?.name}} </h2>
+        <p><b> Role: </b> {{user?.role}} </p>
+        <p><b> Missions completed: </b> {{user?.knightRadiant?.missionsCompleted}} </p>
+        <p><b> Radiant order: </b> {{user?.knightRadiant?.radiantOrder?.name}} </p>
+        <p><b> Spren type: </b> {{user?.knightRadiant?.radiantOrder?.sprenType}} </p>
+        <p><b> Attributes: </b> {{user?.knightRadiant?.radiantOrder?.attributes}} </p>
+        <p><b> Description: </b> {{user?.knightRadiant?.radiantOrder?.description}} </p>
+        <button (click)="setRadiantOrder()">Set radiant order</button>
+        <button (click)="setMissionsCompleted(1)">Set missions completed</button>
+      </div>
+    </div>
+    <div style="width: 33%"></div>
+  </div>
     <!--
     <button *ngIf="userLoginOn && !editMode" (click)="editMode=true"  class="btn btn-dark"><img
             src="https://cdn.icon-icons.com/icons2/1572/PNG/96/3592815-compose-create-edit-edit-file-office-pencil-writing_107734.png"

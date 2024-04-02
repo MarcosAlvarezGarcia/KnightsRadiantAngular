@@ -1,32 +1,35 @@
 <div class="video-background">
-  <div id="title-zone">
-    <div id="half-one-row-one"></div>
-    <div id="row-title">
-      <div id="pre-column-title"></div>
-      <div id="column-title"></div>
-    </div>
-  </div>
-  <div id="zone-buttons">
-    <div class="half-two"></div>
-    <div class="half-two"></div>
-    <div class="half-two"></div>
-    <div class="half-two"></div>
-    <div class="half-two" id="row-buttons">
-      <div class="col-buttons"></div>
-      <div class="col-buttons">
-        <div class="col-buttons-2-col"></div>
-        <div class="col-buttons-2-col">
-          <button id="bttn-login" type="button" class="btn me-2" (click)="logIn()">Log In</button>
-        </div>
-        <div class="col-buttons-2-col">
-          <button id="bttn-register" type="button" class="btn ms-2" (click)="register()">Register</button>
-        </div>
-        <div class="col-buttons-2-col"></div>
+  <app-wok-video></app-wok-video>
+    <div id="title-zone">
+      <div id="half-one-row-one"></div>
+      <div id="row-title">
+        <div id="pre-column-title"></div>
+        <div id="column-title"></div>
       </div>
-      <div class="col-buttons"></div>
     </div>
-    <div class="half-two"></div>
-    <div class="half-two"></div>
-    <div class="half-two"></div>
+    <div id="zone-buttons" *ngIf="viewStart">
+      <div class="half-two"></div>
+      <div class="half-two"></div>
+      <div class="half-two"></div>
+      <div class="half-two"></div>
+      <div class="half-two" id="row-buttons">
+        <div class="col-buttons"></div>
+        <div class="col-buttons">
+          <div class="col-buttons-2-col"></div>
+          <div class="col-buttons-2-col">
+            <button id="bttn-login" type="button" class="btn me-2" (click)="logIn()">Log In</button>
+          </div>
+          <div class="col-buttons-2-col">
+            <button id="bttn-register" type="button" class="btn ms-2" (click)="register()">Register</button>
+          </div>
+          <div class="col-buttons-2-col"></div>
+        </div>
+        <div class="col-buttons"></div>
+      </div>
+      <div class="half-two"></div>
+      <div class="half-two"></div>
+      <div class="half-two"></div>
   </div>
+  <app-user-login *ngIf="viewLogin"></app-user-login>
+  <app-user-register *ngIf="viewRegister"></app-user-register>
 </div>

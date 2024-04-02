@@ -11,10 +11,8 @@ export class RadiantOrder {
     color: String;
     oathTheme: string;
     description: string;
-    logo: string; // base64
-    glyph: string; // base64
     surges: Surge[];
-    constructor(id: number, name: string, herald: string, archetype: string, gemstone: string, sprenType: string, attributes: string, color: string, oathTheme: string, description: string, logo: string, glyph: string, surges: Surge[]) {
+    constructor(id: number, name: string, herald: string, archetype: string, gemstone: string, sprenType: string, attributes: string, color: string, oathTheme: string, description: string, surges: Surge[]) {
         this.id = id;
         this.name = name;
         this.herald = herald;
@@ -25,8 +23,6 @@ export class RadiantOrder {
         this.color = color;
         this.oathTheme = oathTheme;
         this.description = description;
-        this.logo = logo;
-        this.glyph = glyph;
         this.surges = surges;
     }
 }

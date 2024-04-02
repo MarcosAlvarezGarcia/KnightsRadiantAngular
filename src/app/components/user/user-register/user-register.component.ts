@@ -7,6 +7,7 @@ import {RadiantOrder} from "../../../classes/radiant-order/radiant-order";
 import {Ideal} from "../../../classes/ideal/ideal";
 import {KnightRadiant} from "../../../classes/knight-radiant/knight-radiant";
 import {KnightRadiantService} from "../../../services/knightRadiant/knight-radiant.service";
+import {UserStartComponent} from "../user-start/user-start.component";
 
 @Component({
   selector: 'app-user-register',
@@ -33,7 +34,7 @@ export class UserRegisterComponent implements OnInit{
 
   thunder = new Audio();
 
-  constructor(private userService : UserService, private knightRadiantService: KnightRadiantService, private router : Router, private activatedRoute : ActivatedRoute, private audioKnightsRadiantService: AudioKnightsRadiantService, private wokService: WOKService){
+  constructor(private userService : UserService, private knightRadiantService: KnightRadiantService, private userStart: UserStartComponent, private router : Router, private activatedRoute : ActivatedRoute, private audioKnightsRadiantService: AudioKnightsRadiantService, private wokService: WOKService){
     this.thunder.src = '/assets/audio/sounds/thunder.mp3';
     this.thunder.volume = 0.3;
     this.thunder.load();
@@ -45,7 +46,9 @@ export class UserRegisterComponent implements OnInit{
   back(){
     this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
     this.thunder.play();
-    this.router.navigate(['knightsRadiant/user/start']);
+    this.userStart.viewStart = true;
+    this.userStart.viewRegister = false;
+    //this.router.navigate(['knightsRadiant/user/start']);
   }
 
 
@@ -55,7 +58,9 @@ export class UserRegisterComponent implements OnInit{
             // Registro exitoso, redireccionar a la página de inicio de sesión o a otra página
             this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
             this.thunder.play();
-            this.router.navigate(['knightsRadiant/user/login']);
+            this.userStart.viewLogin = true;
+            this.userStart.viewRegister = false;
+            //this.router.navigate(['knightsRadiant/user/login']);
         },
         error => {
             console.error('Error al registrar usuario:', error);

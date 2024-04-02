@@ -10,6 +10,9 @@ import { WOKService } from '../../../services/wallpaper/wok.service';
 })
 export class UserStartComponent implements OnInit{
 
+  viewStart = true;
+  viewLogin = false;
+  viewRegister = false;
   thunder = new Audio();
 
 constructor(private router : Router, private audioKnightsRadiantService: AudioKnightsRadiantService, private wokService: WOKService){
@@ -25,12 +28,16 @@ ngOnInit(): void {
 register(){
   this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
   this.thunder.play();
-  this.router.navigate(['knightsRadiant/user/register']);
+  this.viewRegister = true;
+  this.viewStart = false;
+  //this.router.navigate(['knightsRadiant/user/register']);
 }
 
 logIn(){
   this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
   this.thunder.play();
-  this.router.navigate(['knightsRadiant/user/login']);
+  this.viewLogin = true;
+  this.viewStart = false;
+  //this.router.navigate(['knightsRadiant/user/login']);
 }
 }
