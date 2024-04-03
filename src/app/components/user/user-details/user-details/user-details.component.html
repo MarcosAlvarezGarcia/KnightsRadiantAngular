@@ -1,6 +1,7 @@
 <p *ngIf="errorMessage.length!=0" class="text-danger">{{errorMessage}}</p>
+<app-wor-video *ngIf="(userLoginOn && !editMode) || !userLoginOn"></app-wor-video>
+
 <div *ngIf="((userLoginOn && !editMode) || !userLoginOn) && loadPage ">
-  <app-wor-video></app-wor-video>
 
   <div id="fullScreen">
     <div style="width: 33%"></div>
@@ -14,25 +15,79 @@
         <img [src]="ordersLogo[orderId-1]">
       </div>
       <div id="container-info-text">
-        <h2 id="radiantName">{{user?.name}} </h2>
-        <p><b> Role: </b> {{user?.role}} </p>
-        <p><b> Missions completed: </b> {{user?.knightRadiant?.missionsCompleted}} </p>
-        <p><b> Radiant order: </b> {{user?.knightRadiant?.radiantOrder?.name}} </p>
-        <p><b> Spren type: </b> {{user?.knightRadiant?.radiantOrder?.sprenType}} </p>
-        <p><b> Attributes: </b> {{user?.knightRadiant?.radiantOrder?.attributes}} </p>
-        <p><b> Description: </b> {{user?.knightRadiant?.radiantOrder?.description}} </p>
+        <div id="container-name-missions">
+          <div id="container-name">
+            <h2 id="radiantName">{{user?.name}} </h2>
+          </div>
+          <div id="container-missions">
+            <h5 id="missionsCompleted"><b> Missions completed: </b> {{user?.knightRadiant?.missionsCompleted}} </h5>
+          </div>
+        </div>
+        <div id="container-radiantOrder">
+          <h4><b> {{user?.knightRadiant?.radiantOrder?.name}} </b></h4><div id="container-orderGlyph"><img id="orderGlyphImg" [src]="ordersGlyph[orderId-1]"></div>
+        </div>
+        <div id="container-surges">
+          <h4 id="title-surges"><b>Surges</b></h4>
+          <div class="container-surge">
+            <ng-container *ngIf="user && user.knightRadiant && user.knightRadiant.radiantOrder && user.knightRadiant.radiantOrder.surges[0]">
+              <p><b>
+                <!-- Utilizando el operador de navegación segura para evitar el error -->
+                {{ user.knightRadiant.radiantOrder.surges[0].name ? user.knightRadiant.radiantOrder.surges[0].name : 'Nombre no disponible' }}
+              </b></p>
+            </ng-container>
+            <div class="container-surgeGlyph">
+              <img class="surgeGlyphImg" [src]="surgesGlyph[firstSurgeGlyph]">
+            </div>
+            <p><b>{{firstSurgeText}}</b></p>
+          </div>
+          <div class="container-surge">
+            <ng-container *ngIf="user && user.knightRadiant && user.knightRadiant.radiantOrder && user.knightRadiant.radiantOrder.surges[1]">
+              <p><b>
+                <!-- Utilizando el operador de navegación segura para evitar el error -->
+                {{ user.knightRadiant.radiantOrder.surges[1].name ? user.knightRadiant.radiantOrder.surges[1].name : 'Nombre no disponible' }}
+              </b></p>
+            </ng-container>
+            <div class="container-surgeGlyph">
+              <img class="surgeGlyphImg" [src]="surgesGlyph[secondSurgeGlyph]">
+            </div>
+            <p><b>{{secondSurgeText}}</b></p>
+          </div>
+
+        </div>
+        <div class="container-shard">
+          <h4><b>Shardblade</b></h4><div id="container-shardbladeImg"><img id="shardbladeImg" src="assets/img/icons/shardblade.png"></div>
+          <p class="shard-available"><b>{{shardblade}}</b></p>
+        </div>
+        <div class="container-shard">
+          <h4><b>Shardplate</b></h4><div id="container-shardplateImg"><img id="shardplateImg" src="assets/img/icons/shardplate.png"></div>
+          <p class="shard-available"><b>{{shardplate}}</b></p>
+        </div>
+
+        <h4 id="title-pronuncedIdeals"><b>Pronunced Ideals</b></h4>
+        <h5 class="titles-ideals">First ideal</h5>
+        <p class="text-ideals">{{radiantFirstIdeal}}</p>
+        <h5 class="titles-ideals">Second ideal</h5>
+        <p class="text-ideals">{{radiantSecondIdeal}}</p>
+        <div>
+
+        </div>
         <button (click)="setRadiantOrder()">Set radiant order</button>
-        <button (click)="setMissionsCompleted(1)">Set missions completed</button>
+        <button (click)="setMissionsCompleted(radiantId)">Set missions completed</button>
+        <button (click)="setIdeal(radiantId)">Set missions completed</button>
       </div>
     </div>
     <div style="width: 33%"></div>
   </div>
+
+
     <!--
     <button *ngIf="userLoginOn && !editMode" (click)="editMode=true"  class="btn btn-dark"><img
             src="https://cdn.icon-icons.com/icons2/1572/PNG/96/3592815-compose-create-edit-edit-file-office-pencil-writing_107734.png"
             width="8%" alt="editar" />Editar Datos Personales</button>
     -->
 </div>
+
+<app-kr-radiant-order-form *ngIf="orderForm"></app-kr-radiant-order-form>
 <!--
 <form *ngIf="userLoginOn && editMode" [formGroup]="registerForm" >
     <div class="form-group row">

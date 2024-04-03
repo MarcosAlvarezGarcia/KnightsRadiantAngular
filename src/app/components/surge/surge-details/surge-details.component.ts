@@ -11,7 +11,7 @@ import { Ideal } from '../../../classes/ideal/ideal';
 })
 export class SurgeDetailsComponent {
   id: number = 0;
-  surge: Surge = new Surge(0, '', '', Ideal.NO_IDEAL);
+  surge: Surge = new Surge(0, '', '', 0);
   surges : Surge [] = [];
 
   constructor(private surgeService : SurgeService, private route : ActivatedRoute, private router : Router) {}

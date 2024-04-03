@@ -10,18 +10,18 @@ import { Ideal } from '../../../classes/ideal/ideal';
   styleUrl: './surge-add.component.css'
 })
 export class SurgeAddComponent implements OnInit{
-  surge:Surge = new Surge(0, '', '', Ideal.NO_IDEAL);
+  surge:Surge = new Surge(0, '', '', 0);
   id : number = 0;
   name : string = '';
   description : string = '';
-  ideal : Ideal = Ideal.NO_IDEAL;
+  ideal : number = 0;
 
   constructor(private surgeService : SurgeService, private router : Router, private activatedRoute : ActivatedRoute){ }
 
   ngOnInit(): void {
     this.upload();
   }
-  
+
   createSurge(){
     let surge = new Surge(this.id, this.name, this.description, this.ideal);
     console.log(surge);

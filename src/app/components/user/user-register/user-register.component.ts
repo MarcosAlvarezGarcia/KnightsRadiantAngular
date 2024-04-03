@@ -20,9 +20,9 @@ export class UserRegisterComponent implements OnInit{
     password : string = '';
     repeatPassword : string = '';
 
-    knightRadiant:KnightRadiant= new KnightRadiant(0, Ideal.NO_IDEAL, '', '', '', '', '',0, 0, null!);
+    knightRadiant:KnightRadiant= new KnightRadiant(0, 0, '', '', '', '', '',0, 0, null!);
     id : number = 0;
-    ideal : Ideal = Ideal.NO_IDEAL;
+    ideal : number = 0;
     firstIdeal : string = "";
     secondIdeal : string = "";
     thirdIdeal : string = "";

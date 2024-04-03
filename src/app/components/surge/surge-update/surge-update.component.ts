@@ -12,7 +12,7 @@ import { Ideal } from '../../../classes/ideal/ideal';
 export class SurgeUpdateComponent implements OnInit{
 
   id: number = 0;
-  surge: Surge = new Surge(0, '', '', Ideal.NO_IDEAL);
+  surge: Surge = new Surge(0, '', '', 0);
   constructor(private surgeService : SurgeService, private route : ActivatedRoute, private router : Router) {}
 
   ngOnInit(): void {

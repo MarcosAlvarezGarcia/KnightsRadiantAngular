@@ -4,8 +4,8 @@ export class Surge {
     id: number;
     name: string;
     description: string;
-    ideal: Ideal;
-    constructor(id: number, name: string, description: string, ideal: Ideal) {
+    ideal: number;
+    constructor(id: number, name: string, description: string, ideal: number) {
         this.id = id;
         this.name = name;
         this.description = description;

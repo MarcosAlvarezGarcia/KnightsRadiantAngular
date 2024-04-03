@@ -25,6 +25,21 @@ export class HeaderComponent {
   setRadiantOrder(){
     this.router.navigate(['knightsRadiant/knight-radiant/radiant-order-form']);
   }
+
+  sayTheWords()
+  {
+    this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+    this.thunder.play();
+    this.router.navigate(['knightsRadiant/radiant/say-the-words'])
+  }
+
+  profile()
+  {
+    this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+    this.thunder.play();
+    this.router.navigate(['knightsRadiant/user/details'])
+  }
+
   logout()
   {
     this.loginService.logout();

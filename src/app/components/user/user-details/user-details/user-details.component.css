@@ -1,3 +1,20 @@
+h1, h2, h3, h4, h5, p{
+  color: white;
+}
+
+h2 {
+  margin-bottom: 3%;
+}
+
+p {
+  font-size: 110%;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
 #fullScreen {
   height: 100%;
   width: 100%;
@@ -19,22 +36,138 @@
   overflow: hidden; /* Para recortar la imagen si es más grande que el contenedor */
   position: relative; /* Para establecer el contexto de posición */
   border: 1px solid black; /* Para visualizar el contenedor */
-
-}
-
-
-h1, h2, h3, h4, h5, p{
-  color: white;
-}
-
-img {
-  width: 100%;
-  height: auto;
 }
 
 #container-info-text {
   margin: 3%;
 }
 
+#container-name-missions {
+  width: 100%;
+  display: flex;
+  margin-bottom: 3%;
+}
 
+#container-name {
+  width: 50%;
+}
+#container-missions {
+  width: 50%;
+}
 
+#missionsCompleted {
+  margin-top: 2%;
+  text-align: right;
+}
+
+#radiantName {
+  margin-right: 5%;
+}
+
+#container-radiantOrder {
+  width: 100%;
+  display: flex;
+  margin-bottom: 3%;
+}
+
+#container-orderGlyph {
+  width: 6%; /* Ancho del contenedor */
+  height: 6%; /* Altura del contenedor */
+  border-radius: 50%; /* Hace que el contenedor sea circular */
+  overflow: hidden; /* Oculta cualquier parte de la imagen que se salga del contenedor */
+  background-color: lightgray; /* Color de fondo del contenedor */
+  margin-left: 3%;
+  margin-top: -1%; /* Ajusta el margen superior para mover el contenedor hacia arriba */
+  display: inline-block; /* Hace que el contenedor se comporte como un elemento en línea */
+  vertical-align: middle; /* Alinea el contenedor verticalmente con respecto al texto */
+}
+#orderGlyphImg {
+  width: 100%; /* La imagen ocupará el 100% del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  border-radius: 50%; /* Hace que la imagen sea circular */
+}
+
+#title-surges {
+  text-decoration: underline;
+  margin-bottom: 3%;
+
+}
+
+.container-surge {
+  width: 100%;
+  display: flex;
+  margin-left: 4%;
+}
+
+.container-surgeGlyph {
+  width: 6%; /* Ancho del contenedor */
+  height: 6%; /* Altura del contenedor */
+  border-radius: 50%; /* Hace que el contenedor sea circular */
+  overflow: hidden; /* Oculta cualquier parte de la imagen que se salga del contenedor */
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: -1%; /* Ajusta el margen superior para mover el contenedor hacia arriba */
+  display: inline-block; /* Hace que el contenedor se comporte como un elemento en línea */
+  vertical-align: middle; /* Alinea el contenedor verticalmente con respecto al texto */
+}
+.surgeGlyphImg {
+  width: 100%; /* La imagen ocupará el 100% del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  border-radius: 50%; /* Hace que la imagen sea circular */
+}
+
+.container-shard {
+    width: 100%;
+    display: flex;
+    margin-top: 2%;
+}
+
+#container-shardbladeImg {
+    width: 8%; /* Ancho del contenedor */
+    height: 8%; /* Altura del contenedor */
+    border-radius: 50%; /* Hace que el contenedor sea circular */
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se salga del contenedor */
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: -1%; /* Ajusta el margen superior para mover el contenedor hacia arriba */
+    display: inline-block; /* Hace que el contenedor se comporte como un elemento en línea */
+    vertical-align: middle; /* Alinea el contenedor verticalmente con respecto al texto */
+}
+#shardbladeImg {
+    width: 100%; /* La imagen ocupará el 100% del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 50%; /* Hace que la imagen sea circular */
+}
+
+#container-shardplateImg {
+    width: 18%; /* Ancho del contenedor */
+    height: 18%; /* Altura del contenedor */
+    border-radius: 50%; /* Hace que el contenedor sea circular */
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se salga del contenedor */
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: -1%; /* Ajusta el margen superior para mover el contenedor hacia arriba */
+    display: inline-block; /* Hace que el contenedor se comporte como un elemento en línea */
+    vertical-align: middle; /* Alinea el contenedor verticalmente con respecto al texto */
+}
+#shardplateImg {
+    width: 100%; /* La imagen ocupará el 100% del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 50%; /* Hace que la imagen sea circular */
+}
+
+.shard-available {
+    margin-top: 0.7%;
+}
+
+#title-pronuncedIdeals {
+    text-decoration: underline;
+}
+
+.titles-ideals {
+    text-decoration: underline;
+}
+
+.text-ideals {
+    font-style: italic;
+}

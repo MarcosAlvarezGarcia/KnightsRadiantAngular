@@ -3,7 +3,7 @@ import {RadiantOrder} from "../radiant-order/radiant-order";
 
 export class KnightRadiant {
   id: number;
-  ideal: Ideal;
+  ideal: number;
   firstIdeal: string;
   secondIdeal: string;
   thirdIdeal: string;
@@ -12,7 +12,7 @@ export class KnightRadiant {
   currentMissionId: number;
   missionsCompleted: number;
   radiantOrder?: RadiantOrder;
-  constructor(id: number, ideal: Ideal, firstIdeal: string, secondIdeal: string, thirdIdeal: string, fourthIdeal: string, fifthIdeal: string, currentMissionId: number, missionsCompleted: number, radiantOrder: RadiantOrder){
+  constructor(id: number, ideal: number, firstIdeal: string, secondIdeal: string, thirdIdeal: string, fourthIdeal: string, fifthIdeal: string, currentMissionId: number, missionsCompleted: number, radiantOrder: RadiantOrder){
     this.id = id;
     this.ideal = ideal;
     this.firstIdeal = firstIdeal;

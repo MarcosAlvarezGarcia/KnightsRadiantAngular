@@ -26,15 +26,17 @@ import { WorVideoComponent } from './components/wallpaper/wor-video/wor-video.co
 import { ObVideoComponent } from './components/wallpaper/ob-video/ob-video.component';
 import { RowVideoComponent } from './components/wallpaper/row-video/row-video.component';
 import {HeaderComponent} from "./components/header/header.component";
+import { SayTheWordsComponent } from './components/knight-radiant/say-the-words/say-the-words.component';
 
 const routes : Routes = [
   {path: '', redirectTo:'/knightsRadiant/home', pathMatch:'full'}, // http://localhost:4200/knightsRadiant/home
   {path: 'knightsRadiant/home', component: HomePageComponent}, // http://localhost:4200/knightsRadiant/home
-  {path: 'knightsRadiant/user/start', component: UserStartComponent}, // http://localhost:4200/knightsRadiant/users/start
-  {path: 'knightsRadiant/user/register', component: UserRegisterComponent}, // http://localhost:4200/knightsRadiant/users/register
-  {path: 'knightsRadiant/user/login', component: UserLoginComponent}, // http://localhost:4200/knightsRadiant/users/login
-  {path: 'knightsRadiant/user/details', component: UserDetailsComponent}, // http://localhost:4200/knightsRadiant/users/details
-  {path: 'knightsRadiant/knight-radiant/radiant-order-form', component: KRRadiantOrderFormComponent}, // http://localhost:4200/knightsRadiant/users/radiant-order-form
+  {path: 'knightsRadiant/user/start', component: UserStartComponent}, // http://localhost:4200/knightsRadiant/user/start
+  {path: 'knightsRadiant/user/register', component: UserRegisterComponent}, // http://localhost:4200/knightsRadiant/user/register
+  {path: 'knightsRadiant/user/login', component: UserLoginComponent}, // http://localhost:4200/knightsRadiant/user/login
+  {path: 'knightsRadiant/user/details', component: UserDetailsComponent}, // http://localhost:4200/knightsRadiant/user/details
+  {path: 'knightsRadiant/radiant/say-the-words', component:SayTheWordsComponent}, // http://localhost:4200/knightsRadiant/user/say-the-words
+  //{path: 'knightsRadiant/knight-radiant/radiant-order-form', component: KRRadiantOrderFormComponent}, // http://localhost:4200/knightsRadiant/users/radiant-order-form
   {path: 'knightsRadiant/surges', component: SurgeListComponent}, // http://localhost:4200/knightsRadiant/surges
   {path: 'knightsRadiant/surges/id/:id', component:SurgeDetailsComponent}, // http://localhost:4200/knightsRadiant/surges/id
   {path: 'knightsRadiant/surges/create', component:SurgeAddComponent}, // http://localhost:4200/knightsRadiant/surges/create
@@ -63,7 +65,8 @@ const routes : Routes = [
     WorVideoComponent,
     ObVideoComponent,
     RowVideoComponent,
-    HeaderComponent
+    HeaderComponent,
+    SayTheWordsComponent
   ],
     imports: [
         BrowserModule,

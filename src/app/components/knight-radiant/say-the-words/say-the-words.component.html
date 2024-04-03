@@ -1,0 +1,31 @@
+<p *ngIf="errorMessage.length!=0" class="text-danger">{{errorMessage}}</p>
+<app-row-video *ngIf="(userLoginOn && !editMode) || !userLoginOn"></app-row-video>
+
+<div *ngIf="((userLoginOn && !editMode) || !userLoginOn)">
+
+    <div id="fullScreen">
+        <div style="width: 33%"></div>
+        <div id="container-info"
+             [style.--container-info-color]="orderColor"
+        >
+            <div id="container-header">
+                <app-header></app-header>
+            </div>
+            <div id="container-say-the-words" class="text-center">
+                <h1 id="text-say-the-words">SAY THE WORDS</h1>
+                <div id="container-input-say-the-words">
+                    <input id="input-say-the-words" [(ngModel)]="ideal" type="text" placeholder="Say the Words, Radiant"><br>
+                    <button id="bttn-say-the-words" (click)="sayNextIdeal()">Say the words</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div style="width: 33%"></div>
+</div>
+
+
+    <!--
+    <button *ngIf="userLoginOn && !editMode" (click)="editMode=true"  class="btn btn-dark"><img
+            src="https://cdn.icon-icons.com/icons2/1572/PNG/96/3592815-compose-create-edit-edit-file-office-pencil-writing_107734.png"
+            width="8%" alt="editar" />Editar Datos Personales</button>
+    -->

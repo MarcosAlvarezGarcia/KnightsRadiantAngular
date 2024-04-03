@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {RadiantOrderService} from "../../../services/radiant-order/radiant-order.service";
 import {RadiantOrder} from "../../../classes/radiant-order/radiant-order";
 import {Surge} from "../../../classes/surge/surge";
+import {UserDetailsComponent} from "../../user/user-details/user-details/user-details.component";
 
 @Component({
   selector: 'app-kr-radiant-order-form',
@@ -116,7 +117,7 @@ export class KRRadiantOrderFormComponent {
   resultsInPercentage : number[] = [];
 
 
-  constructor(private userService: UserService, private loginService: LoginService, private krService: KnightRadiantService, private router: Router, private radiantOrderService: RadiantOrderService, private elRef: ElementRef) {
+  constructor(private userService: UserService, private loginService: LoginService, private krService: KnightRadiantService, private userDetails: UserDetailsComponent, private router: Router, private radiantOrderService: RadiantOrderService, private elRef: ElementRef) {
 
     this.userService.getUserByEmail(loginService.currentUserEmail).subscribe({
       next: (userData) => {
@@ -150,7 +151,9 @@ export class KRRadiantOrderFormComponent {
   start(){
     this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
     this.thunder.play();
-    this.router.navigate(['knightsRadiant/user/details']);
+    this.userDetails.orderForm = false;
+    this.userDetails.loadPage = true;
+    //this.router.navigate(['knightsRadiant/user/details']);
   }
 
 
