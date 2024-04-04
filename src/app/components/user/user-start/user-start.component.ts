@@ -22,7 +22,7 @@ constructor(private router : Router, private audioKnightsRadiantService: AudioKn
  }
 
 ngOnInit(): void {
-  this.audioKnightsRadiantService.playAudio();
+  this.audioKnightsRadiantService.playNextSong();
 }
 
 register(){

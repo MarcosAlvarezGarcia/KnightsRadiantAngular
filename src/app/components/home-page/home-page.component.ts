@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import { Router } from '@angular/router';
+import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-home-page',
@@ -8,12 +9,13 @@ import { Router } from '@angular/router';
 })
 export class HomePageComponent implements OnInit{
 
-  thunder = new Audio();
+  thunder = isPlatformBrowser(this.platformId) ? new Audio('/assets/audio/sounds/thunder.mp3') : null ;
 
-  constructor(private router: Router) {
-    this.thunder.src = '/assets/audio/sounds/thunder.mp3';
-    this.thunder.volume = 0.3;
-    this.thunder.load();
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) {
+    if (this.thunder) {
+      this.thunder.volume = 0.3;
+      this.thunder.load();
+    }
   }
 
   ngOnInit(): void {
@@ -21,8 +23,10 @@ export class HomePageComponent implements OnInit{
   }
 
   enter(){
-    this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
-    this.thunder.play();
+    if (this.thunder) {
+      this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+      this.thunder.play();
+    }
     this.router.navigate(['knightsRadiant/user/start']);
   }
 

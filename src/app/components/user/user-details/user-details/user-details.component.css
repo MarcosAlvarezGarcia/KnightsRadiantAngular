@@ -21,7 +21,7 @@ img {
   display: flex;
 }
 #container-info {
-  height: 100vh;
+  height: 100%;
   width: 34%;
   opacity: 70%;
   background-color: var(--container-info-color, #866c46);
@@ -67,7 +67,14 @@ img {
 #container-radiantOrder {
   width: 100%;
   display: flex;
+  align-items: center; /* Centra verticalmente los elementos */
+  justify-content: center; /* Centra horizontalmente los elementos */
   margin-bottom: 3%;
+}
+
+#radiantOrder-name {
+  margin-left: 3%;
+  text-decoration: underline;
 }
 
 #container-orderGlyph {
@@ -87,16 +94,33 @@ img {
   border-radius: 50%; /* Hace que la imagen sea circular */
 }
 
-#title-surges {
-  text-decoration: underline;
-  margin-bottom: 3%;
+.container-table-powers {
+  display: grid;
+  grid-template-columns: 15% 50% 30%;
+  gap: 2.5%; /* Espacio entre las columnas */
+  margin-bottom: 6%;
+}
 
+.column1, .column2, .column3 {
+  border-bottom: 1px solid white;
+  border-bottom: 1px solid white;
+  display: flex; /* Utilizamos flexbox */
+  justify-content: center; /* Centramos horizontalmente */
+  align-items: center; /* Centramos verticalmente */
+}
+
+.column1 > *, .column2 > *, .column3 > * {
+  display: inline-block; /* Permite que text-align: center; surta efecto */
+  max-width: 100%; /* Opcional: establece una anchura máxima para el contenido */
+}
+
+.col3lastFile {
+  border: none;
 }
 
 .container-surge {
   width: 100%;
   display: flex;
-  margin-left: 4%;
 }
 
 .container-surgeGlyph {
@@ -111,9 +135,8 @@ img {
   vertical-align: middle; /* Alinea el contenedor verticalmente con respecto al texto */
 }
 .surgeGlyphImg {
-  width: 100%; /* La imagen ocupará el 100% del contenedor */
+  width:35%; /* La imagen ocupará el 100% del contenedor */
   height: auto; /* Mantiene la proporción de la imagen */
-  border-radius: 50%; /* Hace que la imagen sea circular */
 }
 
 .container-shard {
@@ -134,9 +157,8 @@ img {
     vertical-align: middle; /* Alinea el contenedor verticalmente con respecto al texto */
 }
 #shardbladeImg {
-    width: 100%; /* La imagen ocupará el 100% del contenedor */
+    width: 40%; /* La imagen ocupará el 100% del contenedor */
     height: auto; /* Mantiene la proporción de la imagen */
-    border-radius: 50%; /* Hace que la imagen sea circular */
 }
 
 #container-shardplateImg {
@@ -151,23 +173,41 @@ img {
     vertical-align: middle; /* Alinea el contenedor verticalmente con respecto al texto */
 }
 #shardplateImg {
-    width: 100%; /* La imagen ocupará el 100% del contenedor */
+    width: 34%; /* La imagen ocupará el 100% del contenedor */
     height: auto; /* Mantiene la proporción de la imagen */
-    border-radius: 50%; /* Hace que la imagen sea circular */
 }
 
 .shard-available {
     margin-top: 0.7%;
 }
 
+#container-ideals {
+  text-align: center;
+}
+
 #title-pronuncedIdeals {
     text-decoration: underline;
+    margin-bottom: 3%;
 }
 
 .titles-ideals {
-    text-decoration: underline;
 }
 
 .text-ideals {
     font-style: italic;
+    font-size: 120%;
+}
+
+.tachon {
+  position: relative;
+}
+
+.tachon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 35%;
+  width: 100%;
+  height: 6%; /* Grosor de la línea de tachado */
+  background-color: white; /* Color de la línea de tachado */
 }

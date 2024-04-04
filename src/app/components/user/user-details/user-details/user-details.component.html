@@ -17,63 +17,97 @@
       <div id="container-info-text">
         <div id="container-name-missions">
           <div id="container-name">
-            <h2 id="radiantName">{{user?.name}} </h2>
+            <h1 id="radiantName"><b>{{user?.name}}</b></h1>
           </div>
           <div id="container-missions">
-            <h5 id="missionsCompleted"><b> Missions completed: </b> {{user?.knightRadiant?.missionsCompleted}} </h5>
+            <h4 id="missionsCompleted"><b> Missions completed: </b> {{user?.knightRadiant?.missionsCompleted}} </h4>
           </div>
         </div>
         <div id="container-radiantOrder">
-          <h4><b> {{user?.knightRadiant?.radiantOrder?.name}} </b></h4><div id="container-orderGlyph"><img id="orderGlyphImg" [src]="ordersGlyph[orderId-1]"></div>
+          <div id="container-orderGlyph"><img id="orderGlyphImg" [src]="ordersGlyph[orderId-1]"></div>
+          <h3 id="radiantOrder-name"><b> {{user?.knightRadiant?.radiantOrder?.name}} </b></h3>
         </div>
-        <div id="container-surges">
-          <h4 id="title-surges"><b>Surges</b></h4>
-          <div class="container-surge">
+
+        <div class="container-table-powers">
+          <!-- Primera fila -->
+          <div class="column1">
+            <img class="surgeGlyphImg" [src]="surgesGlyph[firstSurgeGlyph]">
+          </div>
+          <div class="column2">
             <ng-container *ngIf="user && user.knightRadiant && user.knightRadiant.radiantOrder && user.knightRadiant.radiantOrder.surges[0]">
-              <p><b>
+              <h4><b>
                 <!-- Utilizando el operador de navegación segura para evitar el error -->
-                {{ user.knightRadiant.radiantOrder.surges[0].name ? user.knightRadiant.radiantOrder.surges[0].name : 'Nombre no disponible' }}
-              </b></p>
+                Surge of {{ user.knightRadiant.radiantOrder.surges[0].name ? user.knightRadiant.radiantOrder.surges[0].name : 'Nombre no disponible' }}
+              </b></h4>
             </ng-container>
-            <div class="container-surgeGlyph">
-              <img class="surgeGlyphImg" [src]="surgesGlyph[firstSurgeGlyph]">
-            </div>
-            <p><b>{{firstSurgeText}}</b></p>
           </div>
-          <div class="container-surge">
+          <div class="column3">
+            <h4><b>{{firstSurgeText}}</b></h4>
+          </div>
+
+          <!-- Segunda fila -->
+          <div class="column1">
+            <img class="surgeGlyphImg" [src]="surgesGlyph[secondSurgeGlyph]">
+          </div>
+          <div class="column2">
             <ng-container *ngIf="user && user.knightRadiant && user.knightRadiant.radiantOrder && user.knightRadiant.radiantOrder.surges[1]">
-              <p><b>
+              <h4><b>
                 <!-- Utilizando el operador de navegación segura para evitar el error -->
-                {{ user.knightRadiant.radiantOrder.surges[1].name ? user.knightRadiant.radiantOrder.surges[1].name : 'Nombre no disponible' }}
-              </b></p>
+                Surge of {{ user.knightRadiant.radiantOrder.surges[1].name ? user.knightRadiant.radiantOrder.surges[1].name : 'Nombre no disponible' }}
+              </b></h4>
             </ng-container>
-            <div class="container-surgeGlyph">
-              <img class="surgeGlyphImg" [src]="surgesGlyph[secondSurgeGlyph]">
-            </div>
-            <p><b>{{secondSurgeText}}</b></p>
+          </div>
+          <div class="column3">
+            <h4><b>{{secondSurgeText}}</b></h4>
           </div>
 
-        </div>
-        <div class="container-shard">
-          <h4><b>Shardblade</b></h4><div id="container-shardbladeImg"><img id="shardbladeImg" src="assets/img/icons/shardblade.png"></div>
-          <p class="shard-available"><b>{{shardblade}}</b></p>
-        </div>
-        <div class="container-shard">
-          <h4><b>Shardplate</b></h4><div id="container-shardplateImg"><img id="shardplateImg" src="assets/img/icons/shardplate.png"></div>
-          <p class="shard-available"><b>{{shardplate}}</b></p>
-        </div>
+          <!-- Tercera fila -->
+          <div class="column1">
+            <img id="shardbladeImg" src="assets/img/icons/shardblade.png">
+          </div>
+          <div class="column2">
+            <h4><b>Shardblade</b></h4>
+          </div>
+          <div class="column3">
+            <h4><b>{{shardblade}}</b></h4>
+          </div>
 
-        <h4 id="title-pronuncedIdeals"><b>Pronunced Ideals</b></h4>
-        <h5 class="titles-ideals">First ideal</h5>
-        <p class="text-ideals">{{radiantFirstIdeal}}</p>
-        <h5 class="titles-ideals">Second ideal</h5>
-        <p class="text-ideals">{{radiantSecondIdeal}}</p>
-        <div>
-
+          <!-- Cuarta fila -->
+          <div class="column1 col3lastFile">
+            <img id="shardplateImg" src="assets/img/icons/shardplate.png">
+          </div>
+          <div class="column2 col3lastFile">
+            <h4><b>Shardplate</b></h4>
+          </div>
+          <div class="column3 col3lastFile">
+            <h4><b>{{shardplate}}</b></h4>
+          </div>
+        </div>
+        <div id="container-ideals" *ngIf="isRadiantIdeal">
+          <h3 id="title-pronuncedIdeals"><b>Pronunced Ideals</b></h3>
+          <div class="container-ideal" *ngIf="isRadiantFirstIdeal">
+            <h4 class="titles-ideals">First ideal</h4>
+            <p class="text-ideals">{{radiantFirstIdeal}}</p>
+          </div>
+          <div class="container-ideal" *ngIf="isRadiantSecondIdeal">
+            <h4 class="titles-ideals">Second ideal</h4>
+            <p class="text-ideals">{{radiantSecondIdeal}}</p>
+          </div>
+          <div class="container-ideal" *ngIf="isRadiantThirdIdeal">
+            <h4 class="titles-ideals">Third ideal</h4>
+            <p class="text-ideals">{{radiantThirdIdeal}}</p>
+          </div>
+          <div class="container-ideal" *ngIf="isRadiantFourthIdeal">
+            <h4 class="titles-ideals">Fourth ideal</h4>
+            <p class="text-ideals">{{radiantFourthIdeal}}</p>
+          </div>
+          <div class="container-ideal" *ngIf="isRadiantFifthIdeal">
+            <h4 class="titles-ideals">Fifth ideal</h4>
+            <p class="text-ideals">{{radiantFifthIdeal}}</p>
+          </div>
         </div>
         <button (click)="setRadiantOrder()">Set radiant order</button>
         <button (click)="setMissionsCompleted(radiantId)">Set missions completed</button>
-        <button (click)="setIdeal(radiantId)">Set missions completed</button>
       </div>
     </div>
     <div style="width: 33%"></div>

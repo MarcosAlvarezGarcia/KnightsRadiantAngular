@@ -6,7 +6,7 @@ import {LoginService} from "../../../services/auth/login.service";
 import {Router} from "@angular/router";
 import {Ideal} from "../../../classes/ideal/ideal";
 import {User} from "../../../services/auth/user";
-import {forkJoin, Observable, switchMap} from "rxjs";
+import {forkJoin, Observable, switchMap, throwError} from "rxjs";
 import {KnightRadiant} from "../../../classes/knight-radiant/knight-radiant";
 
 @Component({
@@ -21,7 +21,6 @@ export class SayTheWordsComponent {
   id?: number = this.user?.id;
   radiantId : number = 0;
   currentRadiantIdeal : number = 0;
-  nextRadiantIdeal : number = 1;
   nextIdeal: boolean = false;
 
   ideal: string = "";
@@ -76,94 +75,50 @@ export class SayTheWordsComponent {
 
 
 
-    sayNextIdeal() {
-        this.userService.getUserByEmail(this.loginService.currentUserEmail).pipe(
-            switchMap(userData => {
-                this.user = userData;
-                this.radiantId = this.user.knightRadiant.id;
-                return this.krService.setIdeal(this.radiantId);
-            }),
-            switchMap(() => {
-                return this.krService.setFirstIdeal(this.radiantId, this.ideal);
-            })
-        ).subscribe(
-            () => {
-                console.log('Ambas operaciones completadas con éxito');
-                // Realizar acciones adicionales después de que ambas operaciones se completen
-            },
-            (error) => {
-                console.error('Error al realizar las operaciones:', error);
-                // Manejar errores si es necesario
-            }
-        );
-    }
+  sayNextIdeal() {
+    this.userService.getUserByEmail(this.loginService.currentUserEmail).pipe(
+      switchMap(userData => {
+        this.user = userData;
+        this.radiantId = this.user.knightRadiant.id;
+        return this.krService.setIdeal(this.radiantId);
+      }),
+      switchMap(() => {
+        let nextIdealMethod: Observable<any>;
 
-  setIdeal(){
-    this.krService.setIdeal(8).subscribe(
-      response => {
-        console.log("Next Ideal:", response);
+        switch (this.currentRadiantIdeal) {
+          case 0:
+            nextIdealMethod = this.krService.setFirstIdeal(this.radiantId, this.ideal);
+            break;
+          case 1:
+            nextIdealMethod = this.krService.setSecondIdeal(this.radiantId, this.ideal);
+            break;
+          case 2:
+            nextIdealMethod = this.krService.setThirdIdeal(this.radiantId, this.ideal);
+            break;
+          case 3:
+            nextIdealMethod = this.krService.setFourthIdeal(this.radiantId, this.ideal);
+            break;
+          case 4:
+            nextIdealMethod = this.krService.setFifthIdeal(this.radiantId, this.ideal);
+            break;
+          default:
+            console.error('Valor de currentRadiantIdeal no válido');
+            return throwError('Valor de currentRadiantIdeal no válido');
+        }
+
+        return nextIdealMethod;
+      })
+    ).subscribe(
+      () => {
+        console.log('Ambas operaciones completadas con éxito');
+        this.stormFatherVoice.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+        this.stormFatherVoice.play();
+        // Realizar acciones adicionales después de que ambas operaciones se completen
       },
-        error => {
-        console.error('Error al subir de ideal', error);
-        }
-    )
-  }
-
-  setFirstIdeal(firstIdeal: string) {
-    this.krService.setFirstIdeal(8, firstIdeal).subscribe(
-        response => {
-          console.log('Accepted Ideal:', response);
-          //this.router.navigate(['knightsRadiant/user/details']);
-        },
-        error => {
-          console.error('Error el poner el ideal:', error);
-        }
+      (error) => {
+        console.error('Error al realizar las operaciones:', error);
+        // Manejar errores si es necesario
+      }
     );
   }
-  setSecondIdeal(secondIdeal: string) {
-    this.krService.setSecondIdeal(this.radiantId, secondIdeal).subscribe(
-        response => {
-          console.log('Accepted Ideal:', response);
-          //this.router.navigate(['knightsRadiant/user/details']);
-        },
-        error => {
-          console.error('Error el poner el ideal:', error);
-        }
-    );
-  }
-  setThirdIdeal(thirdIdeal: string) {
-    this.krService.setThirdIdeal(this.radiantId, thirdIdeal).subscribe(
-        response => {
-          console.log('Accepted Ideal:', response);
-          //this.router.navigate(['knightsRadiant/user/details']);
-        },
-        error => {
-          console.error('Error el poner el ideal:', error);
-        }
-    );
-  }
-  setFourthIdeal(fourthIdeal: string) {
-    this.krService.setFourthIdeal(this.radiantId, fourthIdeal).subscribe(
-        response => {
-          console.log('Accepted Ideal:', response);
-          //this.router.navigate(['knightsRadiant/user/details']);
-        },
-        error => {
-          console.error('Error el poner el ideal:', error);
-        }
-    );
-  }
-  setFifthIdeal(fifthIdeal: string) {
-    this.krService.setFifthIdeal(this.radiantId, fifthIdeal).subscribe(
-        response => {
-          console.log('Accepted Ideal:', response);
-          //this.router.navigate(['knightsRadiant/user/details']);
-        },
-        error => {
-          console.error('Error el poner el ideal:', error);
-        }
-    );
-  }
-
-    protected readonly Ideal = Ideal;
 }

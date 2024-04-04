@@ -31,6 +31,14 @@ export class UserDetailsComponent implements OnInit{
   radiantFourthIdeal: string = "";
   radiantFifthIdeal: string = "";
 
+  // Ideals
+  isRadiantIdeal: boolean = false;
+  isRadiantFirstIdeal: boolean = false;
+  isRadiantSecondIdeal: boolean = false;
+  isRadiantThirdIdeal: boolean = false;
+  isRadiantFourthIdeal: boolean = false;
+  isRadiantFifthIdeal: boolean = false;
+
   userLoginOn:boolean=false;
   editMode:boolean=false;
 
@@ -98,7 +106,8 @@ export class UserDetailsComponent implements OnInit{
 
   constructor(private userService: UserService, private krService: KnightRadiantService, private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) {
 
-      this.userService.getUserByEmail(this.loginService.currentUserEmail).subscribe({
+      //this.userService.getUserByEmail(this.loginService.currentUserEmail).subscribe({
+      this.userService.getUserByEmail("carlos@gmail.com").subscribe({
           next: (userData) => {
               this.user=userData;
               if (this.user.knightRadiant && this.user.knightRadiant.radiantOrder) {
@@ -110,6 +119,36 @@ export class UserDetailsComponent implements OnInit{
                 this.radiantThirdIdeal = this.user.knightRadiant.thirdIdeal;
                 this.radiantFourthIdeal = this.user.knightRadiant.fourthIdeal;
                 this.radiantFifthIdeal = this.user.knightRadiant.fifthIdeal;
+
+                if (this.user.knightRadiant.ideal == 1 || this.user.knightRadiant.ideal == 2 || this.user.knightRadiant.ideal == 3 || this.user.knightRadiant.ideal == 4 || this.user.knightRadiant.ideal == 5) {
+                  this.isRadiantIdeal = true;
+                }
+                if (this.user.knightRadiant.ideal == 1) {
+                  this.isRadiantFirstIdeal = true;
+                }
+                if (this.user.knightRadiant.ideal == 2) {
+                  this.isRadiantFirstIdeal = true;
+                  this.isRadiantSecondIdeal = true;
+                }
+                if (this.user.knightRadiant.ideal == 3) {
+                  this.isRadiantFirstIdeal = true;
+                  this.isRadiantSecondIdeal = true;
+                  this.isRadiantThirdIdeal = true;
+                }
+                if (this.user.knightRadiant.ideal == 4) {
+                  this.isRadiantFirstIdeal = true;
+                  this.isRadiantSecondIdeal = true;
+                  this.isRadiantThirdIdeal = true;
+                  this.isRadiantFourthIdeal = true;
+                }
+                if (this.user.knightRadiant.ideal == 5) {
+                  this.isRadiantFirstIdeal = true;
+                  this.isRadiantSecondIdeal = true;
+                  this.isRadiantThirdIdeal = true;
+                  this.isRadiantFourthIdeal = true;
+                  this.isRadiantFifthIdeal = true;
+                }
+
                 if (this.user.knightRadiant.ideal >= this.user.knightRadiant.radiantOrder.surges[0].ideal) {
                   this.firstSurgeText = "Available";
                 }
