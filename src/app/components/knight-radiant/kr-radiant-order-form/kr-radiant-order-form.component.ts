@@ -8,18 +8,23 @@ import {RadiantOrderService} from "../../../services/radiant-order/radiant-order
 import {RadiantOrder} from "../../../classes/radiant-order/radiant-order";
 import {Surge} from "../../../classes/surge/surge";
 import {UserDetailsComponent} from "../../user/user-details/user-details/user-details.component";
+import {ViewsStatesService} from "../../../services/viewsStates/views-states.service";
 
 @Component({
   selector: 'app-kr-radiant-order-form',
   templateUrl: './kr-radiant-order-form.component.html',
   styleUrl: './kr-radiant-order-form.component.css'
 })
-export class KRRadiantOrderFormComponent {
+export class KRRadiantOrderFormComponent implements OnInit{
 
 
   errorMessage:String="";
   user?:User;
   id?: number = this.user?.id;
+  knightRadiantId = 0;
+
+  userDataString = localStorage.getItem('userData');
+
 
   radiantOrderId: number = 0;
 
@@ -37,8 +42,6 @@ export class KRRadiantOrderFormComponent {
   normalColor: string = '#866c46';
 
   // Variables para controlar la visibilidad de las pantallas
-  quizScreenVisible: boolean = true;
-  orderScreenVisible: boolean = false;
   stadisticsViewVisible: boolean = false;
 
   // Initial attributes values
@@ -117,8 +120,8 @@ export class KRRadiantOrderFormComponent {
   resultsInPercentage : number[] = [];
 
 
-  constructor(private userService: UserService, private loginService: LoginService, private krService: KnightRadiantService, private userDetails: UserDetailsComponent, private router: Router, private radiantOrderService: RadiantOrderService, private elRef: ElementRef) {
-
+  constructor(private userService: UserService, private loginService: LoginService, private krService: KnightRadiantService, public viewStatesService: ViewsStatesService, private router: Router, private radiantOrderService: RadiantOrderService, private elRef: ElementRef) {
+    /*
     this.userService.getUserByEmail(loginService.currentUserEmail).subscribe({
       next: (userData) => {
         this.user=userData;
@@ -137,7 +140,7 @@ export class KRRadiantOrderFormComponent {
         this.userLoginOn=userLoginOn;
       }
     })
-
+    */
     this.thunder.src = '/assets/audio/sounds/thunder.mp3';
     this.thunder.volume = 0.3;
     this.thunder.load();
@@ -148,17 +151,31 @@ export class KRRadiantOrderFormComponent {
     document.documentElement.style.setProperty('--progress-color', this.normalColor);
   }
 
+  ngOnInit() {
+    if (this.userDataString) {
+      const userData = JSON.parse(this.userDataString);
+      console.log(userData);
+      // Ahora puedes acceder a las propiedades de userData como lo harías con cualquier otro objeto JavaScript
+      this.knightRadiantId = userData.knightRadiant.id;
+      console.log('ID del KnightRadiant:', this.knightRadiantId);
+    } else {
+      console.log('No se encontraron datos de usuario en el localStorage.');
+    }
+  }
+
   start(){
     this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
     this.thunder.play();
-    this.userDetails.orderForm = false;
-    this.userDetails.loadPage = true;
-    //this.router.navigate(['knightsRadiant/user/details']);
+    //this.userDetails.orderForm = false;
+    //this.userDetails.loadPage = true;
+    this.viewStatesService.setViewQuiz(false);
+    this.stadisticsViewVisible = false;
+    this.router.navigate(['knightsRadiant/user/details']);
   }
 
 
   setOrderRadiant(radiantOrderId: number) {
-    this.krService.setRadiantOrder(this.user?.knightRadiant.id!, radiantOrderId).subscribe(
+    this.krService.setRadiantOrder(this.knightRadiantId, radiantOrderId).subscribe(
       response => {
         console.log('Orden radiante establecida correctamente:', response);
         //this.router.navigate(['knightsRadiant/user/details']);
@@ -284,12 +301,16 @@ export class KRRadiantOrderFormComponent {
 
   // Método para cambiar entre las pantallas
   toggleScreens() {
-    this.quizScreenVisible = !this.quizScreenVisible;
-    this.orderScreenVisible = !this.orderScreenVisible;
+    this.viewStatesService.setViewQuiz(false);
+    this.viewStatesService.setViewOrder(true);
   }
 
   seeStadistics() {
-    this.stadisticsViewVisible = !this.stadisticsViewVisible;
+    // @ts-ignore
+    if (this.stadisticsViewVisible == false) {
+      this.stadisticsViewVisible = true;
+    }
+    else this.stadisticsViewVisible = false;
     const scrollStep = window.innerHeight / 60; // Divide la ventana en x pasos de desplazamiento
     let scrollCount = 0;
     const scrollInterval = setInterval(() => {

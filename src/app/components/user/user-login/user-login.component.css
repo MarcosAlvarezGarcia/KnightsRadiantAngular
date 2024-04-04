@@ -54,7 +54,7 @@ input:focus {
 
 #column-title {
   width: 69%;
-  background-image: url('/assets/img/titles/welcome-radiant.png');
+  /*background-image: url('/assets/img/titles/welcome-radiant.png');*/
   background-repeat: no-repeat; /* Evita que la imagen se repita */
   background-size: contain; /* Ajusto img al tamaño del div */
   background-position: center; /* La imagen se posiciona en el centro */

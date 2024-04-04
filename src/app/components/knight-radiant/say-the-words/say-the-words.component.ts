@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../services/user/user.service";
 import {KnightRadiantService} from "../../../services/knightRadiant/knight-radiant.service";
 import {FormBuilder} from "@angular/forms";
@@ -14,7 +14,10 @@ import {KnightRadiant} from "../../../classes/knight-radiant/knight-radiant";
   templateUrl: './say-the-words.component.html',
   styleUrl: './say-the-words.component.css'
 })
-export class SayTheWordsComponent {
+export class SayTheWordsComponent implements OnInit{
+
+  userDataString = localStorage.getItem('userData');
+  userData: any;
 
   errorMessage:String="";
   user?:User;
@@ -36,7 +39,7 @@ export class SayTheWordsComponent {
 
 
   constructor(private userService: UserService, private krService: KnightRadiantService, private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) {
-
+    /*
     this.userService.getUserByEmail(this.loginService.currentUserEmail).subscribe({
       next: (userData) => {
         this.user=userData;
@@ -63,7 +66,7 @@ export class SayTheWordsComponent {
         this.userLoginOn=userLoginOn;
       }
     })
-
+    */
     this.stormFatherVoice.src = '/assets/audio/sounds/your-words-are-accepted.mp3';
     this.stormFatherVoice.volume = 1;
     this.stormFatherVoice.load();
@@ -73,10 +76,47 @@ export class SayTheWordsComponent {
 
   }
 
+  ngOnInit() {
+    if (this.userDataString) {
+      this.userData = JSON.parse(this.userDataString);
+    } else {
+      console.log('No se encontraron datos de usuario en el localStorage.');
+    }
+
+    //this.userService.getUserByEmail(this.loginService.currentUserEmail).subscribe({
+    this.userService.getUserByEmail(this.userData.email).subscribe({
+      next: (userData) => {
+        this.user=userData;
+        if (this.user.knightRadiant && this.user.knightRadiant.radiantOrder) {
+          this.orderColor = this.user.knightRadiant.radiantOrder.color;
+          this.radiantId = this.user.knightRadiant.id;
+          this.orderId = this.user.knightRadiant.radiantOrder.id;
+          this.currentRadiantIdeal = this.user.knightRadiant.ideal;
+        } else {
+          this.orderColor = ''; // Otra acción por defecto si es necesario
+        }              let userId = userData.id.toString();
+        //this.registerForm.controls.knightRadiant.setValue(userData.knightRadiant.radiantOrder?.name);
+      },
+      error: (errorData) => {
+        this.errorMessage=errorData
+      },
+      complete: () => {
+        console.info("User Data ok");
+      }
+    })
+
+    this.loginService.userLoginOn.subscribe({
+      next:(userLoginOn)=> {
+        this.userLoginOn=userLoginOn;
+      }
+    })
+
+  }
+
 
 
   sayNextIdeal() {
-    this.userService.getUserByEmail(this.loginService.currentUserEmail).pipe(
+    this.userService.getUserByEmail(this.userData.email).pipe(
       switchMap(userData => {
         this.user = userData;
         this.radiantId = this.user.knightRadiant.id;

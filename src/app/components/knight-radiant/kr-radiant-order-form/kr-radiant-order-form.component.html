@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <div id="quiz-screen" class="div-select-order text-center" *ngIf="quizScreenVisible">
+  <div id="quiz-screen" class="div-select-order text-center" *ngIf="viewStatesService.viewQuiz | async">
     <div class="" style="display: flex">
       <div style="width: 30%"></div>
       <div class="container-quiz">
@@ -563,7 +563,7 @@
     </div>
   </div>
 
-  <div id="results-screen" class="div-select-order text-center" *ngIf="orderScreenVisible">
+  <div id="results-screen" class="div-select-order text-center" *ngIf="viewStatesService.viewOrder$ | async">
     <div class="" style="display: flex">
       <div style="width: 30%"></div>
         <div class="container-quiz">

@@ -8,6 +8,7 @@ import {LoginService} from "../../../services/auth/login.service";
 import {LoginRequest} from "../../../services/auth/loginRequest";
 import {User} from "../../../services/auth/user";
 import {UserStartComponent} from "../user-start/user-start.component";
+import {ViewsStatesService} from "../../../services/viewsStates/views-states.service";
 
 @Component({
   selector: 'app-user-login',
@@ -28,7 +29,7 @@ export class UserLoginComponent implements OnInit {
 
     thunder = new Audio();
 
-  constructor(private userService : UserService, private userStart: UserStartComponent, private router : Router, private activatedRoute : ActivatedRoute, private audioKnightsRadiantService: AudioKnightsRadiantService, private wokService: WOKService, private loginService: LoginService, private formBuilder: FormBuilder){
+  constructor(private userService : UserService, public viewStatesService: ViewsStatesService, private userStart: UserStartComponent, private router : Router, private activatedRoute : ActivatedRoute, private loginService: LoginService, private formBuilder: FormBuilder){
   this.thunder.src = '/assets/audio/sounds/thunder.mp3';
   this.thunder.volume = 0.3;
   this.thunder.load();
@@ -40,8 +41,8 @@ export class UserLoginComponent implements OnInit {
   back(){
     this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
     this.thunder.play();
-    this.userStart.viewLogin = false;
-    this.userStart.viewStart = true;
+    this.viewStatesService.setViewLogin(false);
+    this.viewStatesService.setViewStart(true);
     //this.router.navigate(['knightsRadiant/user/start']);
   }
 

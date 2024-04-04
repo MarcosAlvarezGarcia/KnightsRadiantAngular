@@ -8,6 +8,9 @@ import {Ideal} from "../../../classes/ideal/ideal";
 import {KnightRadiant} from "../../../classes/knight-radiant/knight-radiant";
 import {KnightRadiantService} from "../../../services/knightRadiant/knight-radiant.service";
 import {UserStartComponent} from "../user-start/user-start.component";
+import {AuthService} from "../../../services/auth/auth.service";
+import {KRRadiantOrderFormComponent} from "../../knight-radiant/kr-radiant-order-form/kr-radiant-order-form.component";
+import {ViewsStatesService} from "../../../services/viewsStates/views-states.service";
 
 @Component({
   selector: 'app-user-register',
@@ -19,6 +22,8 @@ export class UserRegisterComponent implements OnInit{
     email : string = '';
     password : string = '';
     repeatPassword : string = '';
+
+    knightRadiantId : number = 0;
 
     knightRadiant:KnightRadiant= new KnightRadiant(0, 0, '', '', '', '', '',0, 0, null!);
     id : number = 0;
@@ -32,34 +37,45 @@ export class UserRegisterComponent implements OnInit{
     missionsCompleted : number = 0;
     radiantOrder: RadiantOrder = null!;
 
-  thunder = new Audio();
+    thunder = new Audio();
 
-  constructor(private userService : UserService, private knightRadiantService: KnightRadiantService, private userStart: UserStartComponent, private router : Router, private activatedRoute : ActivatedRoute, private audioKnightsRadiantService: AudioKnightsRadiantService, private wokService: WOKService){
+  constructor(private userService : UserService,
+              private knightRadiantService: KnightRadiantService,
+              private authService: AuthService,
+              public viewStatesService: ViewsStatesService,
+              private router : Router,
+              private activatedRoute : ActivatedRoute,
+  ){
     this.thunder.src = '/assets/audio/sounds/thunder.mp3';
     this.thunder.volume = 0.3;
     this.thunder.load();
    }
 
   ngOnInit(): void {
+    // Recupera los datos del usuario del localStorage
+    const userData = this.authService.getUserData();
+    console.log(userData);
+    // Comprueba si los datos del usuario existen antes de obtener el knightradiant_id
+    if (userData) {
+      //this.knightRadiantId = userData.
+    }
   }
-
-  back(){
-    this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
-    this.thunder.play();
-    this.userStart.viewStart = true;
-    this.userStart.viewRegister = false;
-    //this.router.navigate(['knightsRadiant/user/start']);
-  }
-
 
   registerUser(){
     this.userService.registerUser(this.name, this.email, this.password, this.repeatPassword).subscribe(
-        () => {
-            // Registro exitoso, redireccionar a la página de inicio de sesión o a otra página
+        (response) => {
+            // Registro exitoso
+            // Guardo los datos del usuario y su token
+            this.authService.storeUserData(response.info, response.token);
+
             this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
             this.thunder.play();
-            this.userStart.viewLogin = true;
-            this.userStart.viewRegister = false;
+
+            // Cambio las ventanas
+                                      //this.userStart.viewLogin = true;
+            this.viewStatesService.setViewRadiantForm(true);
+            this.viewStatesService.setViewQuiz(true);
+            this.viewStatesService.setViewRegister(false);
             //this.router.navigate(['knightsRadiant/user/login']);
         },
         error => {
@@ -79,5 +95,13 @@ export class UserRegisterComponent implements OnInit{
             }
         )
     }
+
+  back(){
+    this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+    this.thunder.play();
+    this.viewStatesService.setViewStart(true);
+    this.viewStatesService.setViewRegister(false);
+    //this.router.navigate(['knightsRadiant/user/start']);
+  }
 
 }

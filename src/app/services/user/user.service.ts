@@ -34,10 +34,9 @@ export class UserService {
     )
   }
 
-  registerUser(name: string, email: string, password: string, repeatPassword: string):Observable<any>{
-    return this.http.post<User>(this.baseUrl + "/register", {name, email, password, repeatPassword });
+  registerUser(name: string, email: string, password: string, repeatPassword: string): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "/register", { name, email, password, repeatPassword });
   }
-
 
   private handleError(error:HttpErrorResponse){
     if(error.status===0){

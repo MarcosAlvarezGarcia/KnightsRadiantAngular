@@ -1,13 +1,14 @@
 <div class="video-background">
   <app-wok-video></app-wok-video>
-    <div id="title-zone">
+  <app-kr-radiant-order-form *ngIf="viewStatesService.viewRadiantForm$ | async"></app-kr-radiant-order-form>
+    <div id="title-zone"*ngIf="!(viewStatesService.viewRadiantForm$ | async)">
       <div id="half-one-row-one"></div>
       <div id="row-title">
         <div id="pre-column-title"></div>
         <div id="column-title"></div>
       </div>
     </div>
-    <div id="zone-buttons" *ngIf="viewStart">
+    <div id="zone-buttons" *ngIf="viewStatesService.viewStart$ | async">
       <div class="half-two"></div>
       <div class="half-two"></div>
       <div class="half-two"></div>
@@ -30,6 +31,6 @@
       <div class="half-two"></div>
       <div class="half-two"></div>
   </div>
-  <app-user-login *ngIf="viewLogin"></app-user-login>
-  <app-user-register *ngIf="viewRegister"></app-user-register>
+  <app-user-login *ngIf="viewStatesService.viewLogin$ | async"></app-user-login>
+  <app-user-register *ngIf="viewStatesService.viewRegister$ | async"></app-user-register>
 </div>
