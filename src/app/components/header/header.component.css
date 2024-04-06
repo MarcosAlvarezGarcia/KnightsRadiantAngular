@@ -23,12 +23,12 @@ nav {
 
 .nav-links li a {
   font-size: 150%;
-  color: #c5c5c5;
+  color: #ffffff;
   text-decoration: none; /* Elimina el subrayado del enlace */
   padding: 10px; /* Añade relleno alrededor del texto del enlace */
   cursor: pointer; /* Cambia el cursor a la mano */
 }
 
 .nav-links li a:hover {
-  color: white;
+  text-shadow: 2px 2px 2px rgb(255, 255, 255); /* Desplazamiento horizontal, desplazamiento vertical, desenfoque, y color de la sombra */
 }

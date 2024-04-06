@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AudioKnightsRadiantService } from '../../../services/audio/audioKnightsRadiant/audio-knights-radiant.service';
 import { WOKService } from '../../../services/wallpaper/wok.service';
 import {ViewsStatesService} from "../../../services/viewsStates/views-states.service";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-user-start',
@@ -13,14 +14,17 @@ export class UserStartComponent implements OnInit{
 
   thunder = new Audio();
 
-constructor(private router : Router, private audioKnightsRadiantService: AudioKnightsRadiantService, public viewStatesService: ViewsStatesService){
+constructor(private router : Router, private audioKnightsRadiantService: AudioKnightsRadiantService, public viewStatesService: ViewsStatesService, private authService: AuthService){
   this.thunder.src = '/assets/audio/sounds/thunder.mp3';
   this.thunder.volume = 0.3;
   this.thunder.load();
  }
 
-ngOnInit(): void {
-  this.audioKnightsRadiantService.playNextSong();
+ ngOnInit() {
+  if (!this.audioKnightsRadiantService.isAudioPlaying()) {
+    this.audioKnightsRadiantService.playNextSong();
+  }
+   this.viewStatesService.setViewOrder(false);
 }
 
 register(){

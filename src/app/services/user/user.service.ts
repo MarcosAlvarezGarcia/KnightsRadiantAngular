@@ -1,9 +1,11 @@
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {catchError, Observable, throwError} from 'rxjs';
+import {catchError, map, Observable, tap, throwError} from 'rxjs';
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {User} from "../auth/user";
 import {FormControl} from "@angular/forms";
+import {LoginRequest} from "../auth/loginRequest";
+import {calculateThresholds} from "@angular-devkit/build-angular/src/utils/bundle-calculator";
 
 @Injectable({
   providedIn: 'root'
@@ -34,8 +36,16 @@ export class UserService {
     )
   }
 
+  login(credentials:LoginRequest):Observable<any>{
+    return this.http.post<any>(this.baseUrl + "/login", credentials).pipe(
+      catchError(this.handleError)
+    )
+  }
+
   registerUser(name: string, email: string, password: string, repeatPassword: string): Observable<any> {
-    return this.http.post<any>(this.baseUrl + "/register", { name, email, password, repeatPassword });
+    return this.http.post<any>(this.baseUrl + "/register", { name, email, password, repeatPassword }).pipe(
+      catchError(this.handleError)
+    )
   }
 
   private handleError(error:HttpErrorResponse){

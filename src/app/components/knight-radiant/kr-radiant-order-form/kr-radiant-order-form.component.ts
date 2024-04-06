@@ -1,7 +1,6 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {User} from "../../../services/auth/user";
 import {UserService} from "../../../services/user/user.service";
-import {LoginService} from "../../../services/auth/login.service";
 import {KnightRadiantService} from "../../../services/knightRadiant/knight-radiant.service";
 import {Router} from "@angular/router";
 import {RadiantOrderService} from "../../../services/radiant-order/radiant-order.service";
@@ -120,7 +119,7 @@ export class KRRadiantOrderFormComponent implements OnInit{
   resultsInPercentage : number[] = [];
 
 
-  constructor(private userService: UserService, private loginService: LoginService, private krService: KnightRadiantService, public viewStatesService: ViewsStatesService, private router: Router, private radiantOrderService: RadiantOrderService, private elRef: ElementRef) {
+  constructor(private userService: UserService, private krService: KnightRadiantService, public viewStatesService: ViewsStatesService, private router: Router, private radiantOrderService: RadiantOrderService, private elRef: ElementRef) {
     /*
     this.userService.getUserByEmail(loginService.currentUserEmail).subscribe({
       next: (userData) => {

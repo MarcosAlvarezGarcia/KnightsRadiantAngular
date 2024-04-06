@@ -4,7 +4,6 @@ import {UserStartComponent} from "../user/user-start/user-start.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AudioKnightsRadiantService} from "../../services/audio/audioKnightsRadiant/audio-knights-radiant.service";
 import {WOKService} from "../../services/wallpaper/wok.service";
-import {LoginService} from "../../services/auth/login.service";
 import {FormBuilder} from "@angular/forms";
 import {AuthService} from "../../services/auth/auth.service";
 
@@ -32,6 +31,13 @@ export class HeaderComponent {
     this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
     this.thunder.play();
     this.router.navigate(['knightsRadiant/radiant/say-the-words'])
+  }
+
+  missions()
+  {
+    this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+    this.thunder.play();
+    this.router.navigate(['knightsRadiant/radiant/missions'])
   }
 
   profile()

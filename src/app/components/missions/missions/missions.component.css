@@ -1,0 +1,12 @@
+#fullScreen {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+#container-info {
+    height: 100%;
+    width: 34%;
+    opacity: 70%;
+    background-color: var(--container-info-color, #866c46);
+}

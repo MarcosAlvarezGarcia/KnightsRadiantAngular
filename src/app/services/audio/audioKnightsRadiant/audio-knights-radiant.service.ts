@@ -51,6 +51,7 @@ export class AudioKnightsRadiantService{
   }
 
   playNextSong() {
+    this.isPlaying = true;
     if (this.currentIdex >= this.kaladinDisc.length) {
       this.currentIdex = 0 // Vuelve al principio del disco al llegar al final
     }
@@ -62,6 +63,8 @@ export class AudioKnightsRadiantService{
       this.playNextSong()
     })
   }
+
+
 
   playAudio(): void {
     this.audio.play();

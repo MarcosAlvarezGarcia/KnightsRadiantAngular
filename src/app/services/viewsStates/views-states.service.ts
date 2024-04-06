@@ -18,6 +18,9 @@ export class ViewsStatesService {
   public viewOrder = new BehaviorSubject<boolean>(false);
   viewOrder$ = this.viewOrder.asObservable();
 
+  public pageStart = new BehaviorSubject<boolean>(true);
+  pageStart$ = this.pageStart.asObservable();
+
   constructor() { }
 
   setViewStart(value: boolean) {
@@ -42,6 +45,11 @@ export class ViewsStatesService {
 
   setViewOrder(value: boolean) {
     this.viewOrder.next(value);
+  }
+
+
+  setPageStart(value: boolean) {
+    this.pageStart.next(value);
   }
 
 }

@@ -2,13 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {User} from "../../../../services/auth/user";
 import {UserService} from "../../../../services/user/user.service";
 import {FormBuilder, Validators} from "@angular/forms";
-import {LoginService} from "../../../../services/auth/login.service";
 import {environment} from "../../../../../environments/environment";
 import {Role} from "../../../../classes/role/role";
 import {KnightRadiant} from "../../../../classes/knight-radiant/knight-radiant";
 import {Router} from "@angular/router";
 import {KnightRadiantService} from "../../../../services/knightRadiant/knight-radiant.service";
 import {Ideal} from "../../../../classes/ideal/ideal";
+import {AudioKnightsRadiantService} from "../../../../services/audio/audioKnightsRadiant/audio-knights-radiant.service";
+import {AuthService} from "../../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-user-details',
@@ -110,156 +111,28 @@ export class UserDetailsComponent implements OnInit{
       knightRadiant:['', Validators.required]
   })
 
-  constructor(private userService: UserService, private krService: KnightRadiantService, private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) {
-      /*
-      //this.userService.getUserByEmail(this.loginService.currentUserEmail).subscribe({
-      this.userService.getUserByEmail(this.userData.email).subscribe({
-          next: (userData) => {
-              this.user=userData;
-              if (this.user.knightRadiant && this.user.knightRadiant.radiantOrder) {
-                this.orderColor = this.user.knightRadiant.radiantOrder.color;
-                this.radiantId = this.user.knightRadiant.id;
-                this.orderId = this.user.knightRadiant.radiantOrder.id;
-                this.radiantFirstIdeal = this.user.knightRadiant.firstIdeal;
-                this.radiantSecondIdeal = this.user.knightRadiant.secondIdeal;
-                this.radiantThirdIdeal = this.user.knightRadiant.thirdIdeal;
-                this.radiantFourthIdeal = this.user.knightRadiant.fourthIdeal;
-                this.radiantFifthIdeal = this.user.knightRadiant.fifthIdeal;
-
-                if (this.user.knightRadiant.ideal == 1 || this.user.knightRadiant.ideal == 2 || this.user.knightRadiant.ideal == 3 || this.user.knightRadiant.ideal == 4 || this.user.knightRadiant.ideal == 5) {
-                  this.isRadiantIdeal = true;
-                }
-                if (this.user.knightRadiant.ideal == 1) {
-                  this.isRadiantFirstIdeal = true;
-                }
-                if (this.user.knightRadiant.ideal == 2) {
-                  this.isRadiantFirstIdeal = true;
-                  this.isRadiantSecondIdeal = true;
-                }
-                if (this.user.knightRadiant.ideal == 3) {
-                  this.isRadiantFirstIdeal = true;
-                  this.isRadiantSecondIdeal = true;
-                  this.isRadiantThirdIdeal = true;
-                }
-                if (this.user.knightRadiant.ideal == 4) {
-                  this.isRadiantFirstIdeal = true;
-                  this.isRadiantSecondIdeal = true;
-                  this.isRadiantThirdIdeal = true;
-                  this.isRadiantFourthIdeal = true;
-                }
-                if (this.user.knightRadiant.ideal == 5) {
-                  this.isRadiantFirstIdeal = true;
-                  this.isRadiantSecondIdeal = true;
-                  this.isRadiantThirdIdeal = true;
-                  this.isRadiantFourthIdeal = true;
-                  this.isRadiantFifthIdeal = true;
-                }
-
-                if (this.user.knightRadiant.ideal >= this.user.knightRadiant.radiantOrder.surges[0].ideal) {
-                  this.firstSurgeText = "Available";
-                }
-                else {
-                  this.firstSurgeText = "Locked";
-                }
-                if (this.user.knightRadiant.ideal >= this.user.knightRadiant.radiantOrder.surges[1].ideal) {
-                    this.secondSurgeText = "Available";
-                }
-                else {
-                    this.secondSurgeText = "Locked";
-                }
-                if (this.user.knightRadiant.ideal >= this.shardbladeIdealNumber) {
-                  this.shardblade = "Available";
-                }
-                else this.shardblade = "Locked";
-                if (this.user.knightRadiant.ideal >= this.shardplateIdealNumber) {
-                  this.shardplate = "Available";
-                }
-                else this.shardplate = "Locked";
-                if (this.orderId == 1) {
-                  this.firstSurgeGlyph = 0;
-                  this.secondSurgeGlyph = 1;
-                }
-                else if (this.orderId == 2) {
-                  this.firstSurgeGlyph = 1;
-                  this.secondSurgeGlyph = 2;
-                }
-                else if (this.orderId == 3) {
-                    this.firstSurgeGlyph = 2;
-                    this.secondSurgeGlyph = 3;
-                }
-                else if (this.orderId == 4) {
-                    this.firstSurgeGlyph = 3;
-                    this.secondSurgeGlyph = 4;
-                }
-                else if (this.orderId == 5) {
-                    this.firstSurgeGlyph = 4;
-                    this.secondSurgeGlyph = 5;
-                }
-                else if (this.orderId == 6) {
-                    this.firstSurgeGlyph = 5;
-                    this.secondSurgeGlyph = 6;
-                }
-                else if (this.orderId == 7) {
-                    this.firstSurgeGlyph = 6;
-                    this.secondSurgeGlyph = 7;
-                }
-                else if (this.orderId == 8) {
-                    this.firstSurgeGlyph = 7;
-                    this.secondSurgeGlyph = 8;
-                }
-                else if (this.orderId == 9) {
-                    this.firstSurgeGlyph = 8;
-                    this.secondSurgeGlyph = 9;
-                }
-                else if (this.orderId == 10) {
-                    this.firstSurgeGlyph = 9;
-                    this.secondSurgeGlyph = 0;
-                }
-                console.info(this.firstSurgeGlyph)
-                console.info(this.secondSurgeGlyph)
-              } else {
-                this.orderColor = ''; // Otra acción por defecto si es necesario
-              }              let userId = userData.id.toString();
-              this.registerForm.controls.id.setValue(userData.id.toString());
-              //this.registerForm.controls.knightRadiant.setValue(userData.knightRadiant.radiantOrder?.name);
-          },
-          error: (errorData) => {
-              this.errorMessage=errorData
-          },
-          complete: () => {
-              console.info("User Data ok");
-              if (this.user!.knightRadiant.radiantOrder == null){
-                  console.info("no order asigned")
-                  this.orderForm = true;
-                  this.loadPage = false;
-                  //this.router.navigate(['knightsRadiant/knight-radiant/radiant-order-form']);
-              }
-              else {
-                  this.loadPage = true;
-                  console.log("order asigned")
-              }
-          }
-      })
-
-      this.loginService.userLoginOn.subscribe({
-          next:(userLoginOn)=> {
-            this.userLoginOn=userLoginOn;
-          }
-      })
-      */
+  constructor(private userService: UserService, private krService: KnightRadiantService, private formBuilder: FormBuilder, private router: Router, private audioKnightsRadiantService: AudioKnightsRadiantService, private authService: AuthService) {
     document.documentElement.style.setProperty('--container-info-color', this.normalColor);
     document.documentElement.style.setProperty('--progress-color', this.normalColor);
-
   }
 
 
 
   ngOnInit() {
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['knightsRadiant/home']);
+    }
     if (this.userDataString) {
       this.userData = JSON.parse(this.userDataString);
     } else {
       console.log('No se encontraron datos de usuario en el localStorage.');
     }
+
+    if (!this.audioKnightsRadiantService.isAudioPlaying()) {
+      this.audioKnightsRadiantService.playNextSong();
+    }
+
+    this.audioKnightsRadiantService.audio.volume = 0.6;
 
     //this.userService.getUserByEmail(this.loginService.currentUserEmail).subscribe({
     this.userService.getUserByEmail(this.userData.email).subscribe({
@@ -390,12 +263,6 @@ export class UserDetailsComponent implements OnInit{
       }
     })
 
-    this.loginService.userLoginOn.subscribe({
-      next:(userLoginOn)=> {
-        this.userLoginOn=userLoginOn;
-      }
-    })
-
   }
 
     setMissionsCompleted(id: number): void {
@@ -410,27 +277,6 @@ export class UserDetailsComponent implements OnInit{
             }
         );
     }
-
-
-
-    setRadiantOrder(){
-      this.orderForm = true;
-      this.loadPage = false;
-      //this.router.navigate(['knightsRadiant/knight-radiant/radiant-order-form']);
-    }
-
-    logout()
-    {
-        this.loginService.logout();
-        this.router.navigate(['knightsRadiant/home'])
-    }
-
-
-
-    get radiantOrder()
-  {
-    return this.registerForm.controls.knightRadiant;
-  }
 
   savePersonalDetailsData()
   {

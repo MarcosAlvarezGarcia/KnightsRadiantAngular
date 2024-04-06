@@ -1,20 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../../../services/user/user.service";
 import {KnightRadiantService} from "../../../services/knightRadiant/knight-radiant.service";
 import {FormBuilder} from "@angular/forms";
-import {LoginService} from "../../../services/auth/login.service";
 import {Router} from "@angular/router";
 import {Ideal} from "../../../classes/ideal/ideal";
 import {User} from "../../../services/auth/user";
 import {forkJoin, Observable, switchMap, throwError} from "rxjs";
 import {KnightRadiant} from "../../../classes/knight-radiant/knight-radiant";
+import {AuthService} from "../../../services/auth/auth.service";
+import {AudioKnightsRadiantService} from "../../../services/audio/audioKnightsRadiant/audio-knights-radiant.service";
 
 @Component({
   selector: 'app-say-the-words',
   templateUrl: './say-the-words.component.html',
   styleUrl: './say-the-words.component.css'
 })
-export class SayTheWordsComponent implements OnInit{
+export class SayTheWordsComponent implements OnInit, AfterViewInit{
 
   userDataString = localStorage.getItem('userData');
   userData: any;
@@ -36,40 +37,14 @@ export class SayTheWordsComponent implements OnInit{
   orderId: number = 0;
 
   stormFatherVoice = new Audio();
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef;
 
-
-  constructor(private userService: UserService, private krService: KnightRadiantService, private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) {
-    /*
-    this.userService.getUserByEmail(this.loginService.currentUserEmail).subscribe({
-      next: (userData) => {
-        this.user=userData;
-        if (this.user.knightRadiant && this.user.knightRadiant.radiantOrder) {
-          this.orderColor = this.user.knightRadiant.radiantOrder.color;
-          this.radiantId = this.user.knightRadiant.id;
-          this.orderId = this.user.knightRadiant.radiantOrder.id;
-          this.currentRadiantIdeal = this.user.knightRadiant.ideal;
-        } else {
-          this.orderColor = ''; // Otra acción por defecto si es necesario
-        }              let userId = userData.id.toString();
-        //this.registerForm.controls.knightRadiant.setValue(userData.knightRadiant.radiantOrder?.name);
-      },
-      error: (errorData) => {
-        this.errorMessage=errorData
-      },
-      complete: () => {
-        console.info("User Data ok");
-      }
-    })
-
-    this.loginService.userLoginOn.subscribe({
-      next:(userLoginOn)=> {
-        this.userLoginOn=userLoginOn;
-      }
-    })
-    */
+  constructor(private userService: UserService, private krService: KnightRadiantService, private formBuilder: FormBuilder, private router: Router, private authService: AuthService, private music: AudioKnightsRadiantService) {
     this.stormFatherVoice.src = '/assets/audio/sounds/your-words-are-accepted.mp3';
     this.stormFatherVoice.volume = 1;
     this.stormFatherVoice.load();
+
+    //this.audioPlayer.nativeElement.volume = 0.5;
 
     document.documentElement.style.setProperty('--container-info-color', this.normalColor);
     document.documentElement.style.setProperty('--progress-color', this.normalColor);
@@ -77,6 +52,9 @@ export class SayTheWordsComponent implements OnInit{
   }
 
   ngOnInit() {
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['knightsRadiant/home']);
+    }
     if (this.userDataString) {
       this.userData = JSON.parse(this.userDataString);
     } else {
@@ -105,15 +83,14 @@ export class SayTheWordsComponent implements OnInit{
       }
     })
 
-    this.loginService.userLoginOn.subscribe({
-      next:(userLoginOn)=> {
-        this.userLoginOn=userLoginOn;
-      }
-    })
+    this.music.audio.volume = 0;
 
   }
 
-
+  ngAfterViewInit() {
+    // Acceso seguro al elemento audioPlayer después de que la vista haya sido inicializada
+    this.audioPlayer.nativeElement.volume = 0.3; // Establece el volumen del audioPlayer
+  }
 
   sayNextIdeal() {
     this.userService.getUserByEmail(this.userData.email).pipe(
