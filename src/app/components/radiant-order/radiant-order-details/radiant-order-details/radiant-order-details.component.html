@@ -1,0 +1,16 @@
+<div id="container-surgebinding">
+  <img [src]="orders[order.id-1]">
+</div>
+
+<div class="text-center">
+  <h4>Name: {{order.name}}</h4>
+  <h4>Herald: {{order.herald}}</h4>
+  <h4>Archetypes: {{order.archetype}}</h4>
+  <h4>Attributes: {{order.attributes}}</h4>
+  <h4>Spren: {{order.sprenType}}</h4>
+  <h4>Gemstone: {{order.gemstone}}</h4>
+  <p>{{order.oathTheme}}</p>
+  <p>{{order.description}}</p>
+</div>
+
+<button (click)=back()>Back</button>

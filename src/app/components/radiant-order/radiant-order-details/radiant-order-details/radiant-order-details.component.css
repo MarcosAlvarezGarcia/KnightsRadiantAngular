@@ -1,0 +1,22 @@
+#container-surgebinding {
+  width: 100%; /* Ancho del div */
+  height: 100%; /* Altura del div */
+  position: relative; /* Para alinear la imagen */
+  opacity: 100%;
+  margin-bottom: 5%;
+}
+
+h1, h2, h3, h4, h5, p{
+  color: white;
+}
+
+img {
+  width: 100%; /* Ajustar la imagen al ancho del div */
+  height: auto; /* Para mantener la proporción de la imagen */
+  top: 0;
+  left: 0;
+}
+
+.text-center {
+  margin: 3%;
+}
