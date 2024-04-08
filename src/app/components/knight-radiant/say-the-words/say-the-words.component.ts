@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../../../services/user/user.service";
 import {KnightRadiantService} from "../../../services/knightRadiant/knight-radiant.service";
 import {FormBuilder} from "@angular/forms";
@@ -15,7 +15,7 @@ import {AudioKnightsRadiantService} from "../../../services/audio/audioKnightsRa
   templateUrl: './say-the-words.component.html',
   styleUrl: './say-the-words.component.css'
 })
-export class SayTheWordsComponent implements OnInit, AfterViewInit{
+export class SayTheWordsComponent implements OnInit, OnDestroy{
 
   userDataString = localStorage.getItem('userData');
   userData: any;
@@ -37,14 +37,17 @@ export class SayTheWordsComponent implements OnInit, AfterViewInit{
   orderId: number = 0;
 
   stormFatherVoice = new Audio();
-  @ViewChild('audioPlayer') audioPlayer!: ElementRef;
+  backgroundTheme = new Audio();
 
   constructor(private userService: UserService, private krService: KnightRadiantService, private formBuilder: FormBuilder, private router: Router, private authService: AuthService, private music: AudioKnightsRadiantService) {
     this.stormFatherVoice.src = '/assets/audio/sounds/your-words-are-accepted.mp3';
     this.stormFatherVoice.volume = 1;
     this.stormFatherVoice.load();
 
-    //this.audioPlayer.nativeElement.volume = 0.5;
+    this.backgroundTheme.src = 'assets/audio/music/2-14-tarah-bonus-track.mp3';
+    this.backgroundTheme.volume = 0.3;
+    this.backgroundTheme.loop = true;
+    //this.backgroundTheme.autoplay = true;
 
     document.documentElement.style.setProperty('--container-info-color', this.normalColor);
     document.documentElement.style.setProperty('--progress-color', this.normalColor);
@@ -61,7 +64,8 @@ export class SayTheWordsComponent implements OnInit, AfterViewInit{
       console.log('No se encontraron datos de usuario en el localStorage.');
     }
 
-    //this.userService.getUserByEmail(this.loginService.currentUserEmail).subscribe({
+    this.backgroundTheme.play();
+
     this.userService.getUserByEmail(this.userData.email).subscribe({
       next: (userData) => {
         this.user=userData;
@@ -87,9 +91,8 @@ export class SayTheWordsComponent implements OnInit, AfterViewInit{
 
   }
 
-  ngAfterViewInit() {
-    // Acceso seguro al elemento audioPlayer después de que la vista haya sido inicializada
-    this.audioPlayer.nativeElement.volume = 0.3; // Establece el volumen del audioPlayer
+  ngOnDestroy() {
+    this.backgroundTheme.pause();
   }
 
   sayNextIdeal() {
@@ -130,7 +133,7 @@ export class SayTheWordsComponent implements OnInit, AfterViewInit{
         console.log('Ambas operaciones completadas con éxito');
         this.stormFatherVoice.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
         this.stormFatherVoice.play();
-        // Realizar acciones adicionales después de que ambas operaciones se completen
+        this.ideal = '';
       },
       (error) => {
         console.error('Error al realizar las operaciones:', error);

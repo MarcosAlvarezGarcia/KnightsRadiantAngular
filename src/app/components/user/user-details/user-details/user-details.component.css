@@ -15,6 +15,16 @@ img {
   height: auto;
 }
 
+.power-details {
+  color: #ffffff;
+  text-decoration: none; /* Elimina el subrayado del enlace */
+  cursor: pointer; /* Cambia el cursor a la mano */
+}
+
+.power-details:hover {
+  text-shadow: 2px 2px 2px rgb(255, 255, 255); /* Desplazamiento horizontal, desplazamiento vertical, desenfoque, y color de la sombra */
+}
+
 #fullScreen {
   height: 100%;
   width: 100%;
@@ -35,7 +45,6 @@ img {
   width: 100%;
   overflow: hidden; /* Para recortar la imagen si es más grande que el contenedor */
   position: relative; /* Para establecer el contexto de posición */
-  border: 1px solid black; /* Para visualizar el contenedor */
 }
 
 #container-info-text {

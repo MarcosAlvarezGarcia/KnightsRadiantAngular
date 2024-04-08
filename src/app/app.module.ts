@@ -27,6 +27,7 @@ import { RowVideoComponent } from './components/wallpaper/row-video/row-video.co
 import {HeaderComponent} from "./components/header/header.component";
 import { SayTheWordsComponent } from './components/knight-radiant/say-the-words/say-the-words.component';
 import { MissionsComponent } from './components/missions/missions/missions.component';
+import { RadiantOrderDetailsComponent } from './components/radiant-order/radiant-order-details/radiant-order-details/radiant-order-details.component';
 
 const routes : Routes = [
   {path: '', redirectTo:'/knightsRadiant/home', pathMatch:'full'}, // http://localhost:4200/knightsRadiant/home
@@ -70,7 +71,8 @@ const routes : Routes = [
     RowVideoComponent,
     HeaderComponent,
     SayTheWordsComponent,
-    MissionsComponent
+    MissionsComponent,
+    RadiantOrderDetailsComponent
   ],
     imports: [
         BrowserModule,

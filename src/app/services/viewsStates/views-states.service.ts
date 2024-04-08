@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ViewsStatesService {
+  // http://localhost:4200/knightsRadiant/user/start
   public viewStart = new BehaviorSubject<boolean>(true);
   viewStart$ = this.viewStart.asObservable();
   public viewLogin = new BehaviorSubject<boolean>(false);
@@ -21,7 +22,17 @@ export class ViewsStatesService {
   public pageStart = new BehaviorSubject<boolean>(true);
   pageStart$ = this.pageStart.asObservable();
 
+
+  // http://localhost:4200/knightsRadiant/user/details
+  public viewProfile = new BehaviorSubject<boolean>(true);
+  viewProfile$ = this.viewProfile.asObservable();
+  public viewOrderDetails = new BehaviorSubject<boolean>(false);
+  viewOrderDetails$ = this.viewOrderDetails.asObservable();
+
+
   constructor() { }
+
+  // http://localhost:4200/knightsRadiant/user/start
 
   setViewStart(value: boolean) {
     this.viewStart.next(value);
@@ -50,6 +61,18 @@ export class ViewsStatesService {
 
   setPageStart(value: boolean) {
     this.pageStart.next(value);
+  }
+
+
+
+  // http://localhost:4200/knightsRadiant/user/details
+
+  setViewProfile(value: boolean) {
+    this.viewProfile.next(value);
+  }
+
+  setViewOrderDetails(value: boolean) {
+    this.viewOrderDetails.next(value);
   }
 
 }

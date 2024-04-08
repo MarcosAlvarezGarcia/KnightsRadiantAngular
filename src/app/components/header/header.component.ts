@@ -18,7 +18,7 @@ export class HeaderComponent {
 
   constructor( private router : Router, private authService: AuthService){
     this.thunder.src = '/assets/audio/sounds/thunder.mp3';
-    this.thunder.volume = 0.3;
+    this.thunder.volume = 0.1;
     this.thunder.load();
   }
 

@@ -10,6 +10,11 @@ import {KnightRadiantService} from "../../../../services/knightRadiant/knight-ra
 import {Ideal} from "../../../../classes/ideal/ideal";
 import {AudioKnightsRadiantService} from "../../../../services/audio/audioKnightsRadiant/audio-knights-radiant.service";
 import {AuthService} from "../../../../services/auth/auth.service";
+import {SurgeService} from "../../../../services/surge/surge.service";
+import {Surge} from "../../../../classes/surge/surge";
+import {RadiantOrderService} from "../../../../services/radiant-order/radiant-order.service";
+import {PowersService} from "../../../../services/user/powers.service";
+import {ViewsStatesService} from "../../../../services/viewsStates/views-states.service";
 
 @Component({
   selector: 'app-user-details',
@@ -20,10 +25,6 @@ export class UserDetailsComponent implements OnInit{
 
   userDataString = localStorage.getItem('userData');
   userData: any;
-
-
-
-
 
   loadPage: boolean = false;
   orderForm: boolean = false;
@@ -37,6 +38,10 @@ export class UserDetailsComponent implements OnInit{
   radiantThirdIdeal: string = "";
   radiantFourthIdeal: string = "";
   radiantFifthIdeal: string = "";
+
+
+  order: any;
+  surge: any;
 
   // Ideals
   isRadiantIdeal: boolean = false;
@@ -111,9 +116,15 @@ export class UserDetailsComponent implements OnInit{
       knightRadiant:['', Validators.required]
   })
 
-  constructor(private userService: UserService, private krService: KnightRadiantService, private formBuilder: FormBuilder, private router: Router, private audioKnightsRadiantService: AudioKnightsRadiantService, private authService: AuthService) {
+  thunder = new Audio();
+
+  constructor(private userService: UserService, private krService: KnightRadiantService, private formBuilder: FormBuilder, private router: Router, private audioKnightsRadiantService: AudioKnightsRadiantService, private authService: AuthService, private orderService: RadiantOrderService, private surgeService: SurgeService, private powersService: PowersService, public viewsStatesService: ViewsStatesService) {
     document.documentElement.style.setProperty('--container-info-color', this.normalColor);
     document.documentElement.style.setProperty('--progress-color', this.normalColor);
+
+    this.thunder.src = '/assets/audio/sounds/thunder.mp3';
+    this.thunder.volume = 0.3;
+    this.thunder.load();
   }
 
 
@@ -133,6 +144,9 @@ export class UserDetailsComponent implements OnInit{
     }
 
     this.audioKnightsRadiantService.audio.volume = 0.6;
+
+    this.viewsStatesService.setViewProfile(true);
+    this.viewsStatesService.setViewOrderDetails(false);
 
     //this.userService.getUserByEmail(this.loginService.currentUserEmail).subscribe({
     this.userService.getUserByEmail(this.userData.email).subscribe({
@@ -264,6 +278,26 @@ export class UserDetailsComponent implements OnInit{
     })
 
   }
+
+  getOrderDetails() {
+    this.orderService.getRadiantOrderById(this.orderId)
+      .subscribe(response => {
+        this.order = response;
+        this.powersService.setOrder(this.order);
+        this.viewsStatesService.setViewOrderDetails(true);
+        this.viewsStatesService.setViewProfile(false);
+        this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+        this.thunder.play();
+      })
+  }
+
+  getSurgeDetails(id: number) {
+    this.surgeService.getSurgeById(id)
+      .subscribe(response => {
+        this.surge = response;
+      })
+  }
+
 
     setMissionsCompleted(id: number): void {
         this.krService.setMissionsCompleted(this.userData.knightRadiant.id).subscribe(
