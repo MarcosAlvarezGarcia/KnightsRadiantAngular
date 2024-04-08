@@ -28,7 +28,12 @@ export class ViewsStatesService {
   viewProfile$ = this.viewProfile.asObservable();
   public viewOrderDetails = new BehaviorSubject<boolean>(false);
   viewOrderDetails$ = this.viewOrderDetails.asObservable();
-
+  public viewSurgeDetails = new BehaviorSubject<boolean>(false);
+  viewSurgeDetails$ = this.viewSurgeDetails.asObservable();
+  public viewShardbladeDetails = new BehaviorSubject<boolean>(false);
+  viewShardbladeDetails$ = this.viewShardbladeDetails.asObservable();
+  public viewShardplateDetails = new BehaviorSubject<boolean>(false);
+  viewShardplateDetails$ = this.viewShardplateDetails.asObservable();
 
   constructor() { }
 
@@ -73,6 +78,18 @@ export class ViewsStatesService {
 
   setViewOrderDetails(value: boolean) {
     this.viewOrderDetails.next(value);
+  }
+
+  setViewSurgeDetails(value: boolean) {
+    this.viewSurgeDetails.next(value);
+  }
+
+  setViewShardbladeDetails(value: boolean) {
+    this.viewShardbladeDetails.next(value);
+  }
+
+  setViewShardplateDetails(value: boolean) {
+    this.viewShardplateDetails.next(value);
   }
 
 }

@@ -3,6 +3,8 @@ import { SurgeService } from '../../../services/surge/surge.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Surge } from '../../../classes/surge/surge';
 import { Ideal } from '../../../classes/ideal/ideal';
+import {PowersService} from "../../../services/user/powers.service";
+import {ViewsStatesService} from "../../../services/viewsStates/views-states.service";
 
 @Component({
   selector: 'app-surge-details',
@@ -11,44 +13,44 @@ import { Ideal } from '../../../classes/ideal/ideal';
 })
 export class SurgeDetailsComponent {
   id: number = 0;
-  surge: Surge = new Surge(0, '', '', 0);
-  surges : Surge [] = [];
+  surge: any;
 
-  constructor(private surgeService : SurgeService, private route : ActivatedRoute, private router : Router) {}
+  surges: string[] = [
+    'assets/img/sb-surges/sb-01-adhesion.jpg',
+    'assets/img/sb-surges/sb-02-gravitation.jpg',
+    'assets/img/sb-surges/sb-03-division.jpg',
+    'assets/img/sb-surges/sb-04-abrasion.jpg',
+    'assets/img/sb-surges/sb-05-progression.jpg',
+    'assets/img/sb-surges/sb-06-illumination.jpg',
+    'assets/img/sb-surges/sb-07-transformation.jpg',
+    'assets/img/sb-surges/sb-08-transportation.jpg',
+    'assets/img/sb-surges/sb-09-cohesion.jpg',
+    'assets/img/sb-surges/sb-10-tension.jpg'
+  ];
 
+  ideals: string[] = [
+    'beginning of the order',
+    'First Ideal',
+    'Second Ideal',
+    'Third Ideal',
+    'Fourth Ideal',
+    'Fifth Ideal'
+  ]
 
+  constructor(private powersService: PowersService, public viewsStatesService: ViewsStatesService) { }
 
-    ngOnInit(): void {
-      this.getSurgeById(this.id);
-    }
+  ngOnInit(): void {
+    this.powersService.surge$.subscribe(surge => {
+      this.surge = surge;
+    });
+  }
 
-    getSurgeById(id : number){
-      this.id = this.route.snapshot.params['id'];
-      this.surgeService.getSurgeById(this.id).subscribe(data => {
-        this.surge = data;
-      }, error => console.log(error));
-    }
-
-    updateSurge(id : number){
-      this.router.navigate(['knightsRadiant/surges/update', id]);
-    }
-
-    listSurges(){
-      this.surgeService.getSurgeList().subscribe(
-        data => {
-          this.surges = data;
-          console.log(this.surges);
-        }
-      );
-    }
-
-    deleteSurge(id : number){
-      console.log(id);
-      this.surgeService.deleteSurge(id).subscribe(
-        ()=> {
-          this.listSurges();
-          this.router.navigate(['knightsRadiant/surges'])}
-      );
-    }
+  back() {
+    this.viewsStatesService.setViewProfile(true);
+    this.viewsStatesService.setViewOrderDetails(false);
+    this.viewsStatesService.setViewSurgeDetails(false);
+    this.viewsStatesService.setViewShardbladeDetails(false);
+    this.viewsStatesService.setViewShardplateDetails(false);
+  }
 
 }

@@ -28,6 +28,8 @@ import {HeaderComponent} from "./components/header/header.component";
 import { SayTheWordsComponent } from './components/knight-radiant/say-the-words/say-the-words.component';
 import { MissionsComponent } from './components/missions/missions/missions.component';
 import { RadiantOrderDetailsComponent } from './components/radiant-order/radiant-order-details/radiant-order-details/radiant-order-details.component';
+import { ShardbladeComponent } from './components/shards/shardblade/shardblade.component';
+import { ShardplateComponent } from './components/shards/shardplate/shardplate.component';
 
 const routes : Routes = [
   {path: '', redirectTo:'/knightsRadiant/home', pathMatch:'full'}, // http://localhost:4200/knightsRadiant/home
@@ -72,7 +74,9 @@ const routes : Routes = [
     HeaderComponent,
     SayTheWordsComponent,
     MissionsComponent,
-    RadiantOrderDetailsComponent
+    RadiantOrderDetailsComponent,
+    ShardbladeComponent,
+    ShardplateComponent
   ],
     imports: [
         BrowserModule,

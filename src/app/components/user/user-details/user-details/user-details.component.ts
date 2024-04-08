@@ -39,9 +39,13 @@ export class UserDetailsComponent implements OnInit{
   radiantFourthIdeal: string = "";
   radiantFifthIdeal: string = "";
 
-
   order: any;
+
+  firstSurge = 0;
+  secondSurge = 0;
+
   surge: any;
+
 
   // Ideals
   isRadiantIdeal: boolean = false;
@@ -147,6 +151,9 @@ export class UserDetailsComponent implements OnInit{
 
     this.viewsStatesService.setViewProfile(true);
     this.viewsStatesService.setViewOrderDetails(false);
+    this.viewsStatesService.setViewSurgeDetails(false);
+    this.viewsStatesService.setViewShardbladeDetails(false);
+    this.viewsStatesService.setViewShardplateDetails(false);
 
     //this.userService.getUserByEmail(this.loginService.currentUserEmail).subscribe({
     this.userService.getUserByEmail(this.userData.email).subscribe({
@@ -156,6 +163,8 @@ export class UserDetailsComponent implements OnInit{
           this.orderColor = this.user.knightRadiant.radiantOrder.color;
           this.radiantId = this.user.knightRadiant.id;
           this.orderId = this.user.knightRadiant.radiantOrder.id;
+          this.firstSurge = this.user.knightRadiant.radiantOrder.surges[0].id;
+          this.secondSurge = this.user.knightRadiant.radiantOrder.surges[1].id;
           this.radiantFirstIdeal = this.user.knightRadiant.firstIdeal;
           this.radiantSecondIdeal = this.user.knightRadiant.secondIdeal;
           this.radiantThirdIdeal = this.user.knightRadiant.thirdIdeal;
@@ -285,19 +294,64 @@ export class UserDetailsComponent implements OnInit{
         this.order = response;
         this.powersService.setOrder(this.order);
         this.viewsStatesService.setViewOrderDetails(true);
+        this.viewsStatesService.setViewSurgeDetails(false);
+        this.viewsStatesService.setViewShardbladeDetails(false);
+        this.viewsStatesService.setViewShardplateDetails(false);
         this.viewsStatesService.setViewProfile(false);
         this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
         this.thunder.play();
       })
   }
 
-  getSurgeDetails(id: number) {
-    this.surgeService.getSurgeById(id)
+  getFirstSurgeDetails() {
+    this.surgeService.getSurgeById(this.firstSurge)
       .subscribe(response => {
         this.surge = response;
+        this.powersService.setSurge(this.surge);
+        this.viewsStatesService.setViewProfile(false);
+        this.viewsStatesService.setViewOrderDetails(false);
+        this.viewsStatesService.setViewSurgeDetails(true);
+        this.viewsStatesService.setViewShardbladeDetails(false);
+        this.viewsStatesService.setViewShardplateDetails(false);
+        this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+        this.thunder.play();
       })
   }
 
+  getSecondSurgeDetails() {
+    this.surgeService.getSurgeById(this.secondSurge)
+      .subscribe(response => {
+        this.surge = response;
+        this.powersService.setSurge(this.surge);
+        this.viewsStatesService.setViewProfile(false);
+        this.viewsStatesService.setViewOrderDetails(false);
+        this.viewsStatesService.setViewSurgeDetails(true);
+        this.viewsStatesService.setViewShardbladeDetails(false);
+        this.viewsStatesService.setViewShardplateDetails(false);
+        this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+        this.thunder.play();
+      })
+  }
+
+  getShardbladeDetails() {
+    this.viewsStatesService.setViewProfile(false);
+    this.viewsStatesService.setViewOrderDetails(false);
+    this.viewsStatesService.setViewSurgeDetails(false);
+    this.viewsStatesService.setViewShardbladeDetails(true);
+    this.viewsStatesService.setViewShardplateDetails(false);
+    this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+    this.thunder.play();
+  }
+
+  getShardplateDetails() {
+    this.viewsStatesService.setViewProfile(false);
+    this.viewsStatesService.setViewOrderDetails(false);
+    this.viewsStatesService.setViewSurgeDetails(false);
+    this.viewsStatesService.setViewShardbladeDetails(false);
+    this.viewsStatesService.setViewShardplateDetails(true);
+    this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+    this.thunder.play();
+  }
 
     setMissionsCompleted(id: number): void {
         this.krService.setMissionsCompleted(this.userData.knightRadiant.id).subscribe(

@@ -35,8 +35,11 @@ export class RadiantOrderDetailsComponent {
   }
 
   back() {
-    this.viewsStatesService.setViewOrderDetails(false);
     this.viewsStatesService.setViewProfile(true);
+    this.viewsStatesService.setViewOrderDetails(false);
+    this.viewsStatesService.setViewSurgeDetails(false);
+    this.viewsStatesService.setViewShardbladeDetails(false);
+    this.viewsStatesService.setViewShardplateDetails(false);
   }
 
 }
