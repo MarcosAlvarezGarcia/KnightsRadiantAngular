@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth/auth.service";
+import {ClickedLiknkHeaderService} from "../../services/clickedLinkHeader/clicked-liknk-header.service";
 
 @Component({
   selector: 'app-header',
@@ -9,9 +10,11 @@ import {AuthService} from "../../services/auth/auth.service";
 })
 export class HeaderComponent {
 
+  lastClickedLink: string | null = null;
+
   thunder = new Audio();
 
-  constructor( private router : Router, private authService: AuthService){
+  constructor( private router : Router, private authService: AuthService, public lastClickedService: ClickedLiknkHeaderService){
     this.thunder.src = '/assets/audio/sounds/thunder.mp3';
     this.thunder.volume = 0.1;
     this.thunder.load();
@@ -23,23 +26,32 @@ export class HeaderComponent {
 
   sayTheWords()
   {
-    this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
-    this.thunder.play();
-    this.router.navigate(['knightsRadiant/radiant/say-the-words'])
+    if (this.lastClickedService.lastClickedLink != 'sayTheWords') {
+      this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+      this.thunder.play();
+      this.router.navigate(['knightsRadiant/radiant/say-the-words'])
+    }
+    this.lastClickedService.lastClickedLink = 'sayTheWords';
   }
 
   missions()
   {
-    this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
-    this.thunder.play();
-    this.router.navigate(['knightsRadiant/radiant/missions'])
+    if (this.lastClickedService.lastClickedLink != 'missions') {
+      this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+      this.thunder.play();
+      this.router.navigate(['knightsRadiant/radiant/missions'])
+    }
+    this.lastClickedService.lastClickedLink = 'missions';
   }
 
   profile()
   {
-    this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
-    this.thunder.play();
-    this.router.navigate(['knightsRadiant/user/details'])
+    if (this.lastClickedService.lastClickedLink != 'profile') {
+      this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
+      this.thunder.play();
+      this.router.navigate(['knightsRadiant/user/details'])
+    }
+    this.lastClickedService.lastClickedLink = 'profile';
   }
 
   logout()

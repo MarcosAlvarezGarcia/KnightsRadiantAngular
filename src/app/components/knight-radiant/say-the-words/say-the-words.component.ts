@@ -39,7 +39,7 @@ export class SayTheWordsComponent implements OnInit, OnDestroy{
   stormFatherVoice = new Audio();
   backgroundTheme = new Audio();
 
-  constructor(private userService: UserService, private krService: KnightRadiantService, private formBuilder: FormBuilder, private router: Router, private authService: AuthService, private music: AudioKnightsRadiantService) {
+  constructor(private userService: UserService, private krService: KnightRadiantService, private router: Router, private authService: AuthService, private music: AudioKnightsRadiantService) {
     this.stormFatherVoice.src = '/assets/audio/sounds/your-words-are-accepted.mp3';
     this.stormFatherVoice.volume = 1;
     this.stormFatherVoice.load();
@@ -64,6 +64,7 @@ export class SayTheWordsComponent implements OnInit, OnDestroy{
       console.log('No se encontraron datos de usuario en el localStorage.');
     }
 
+    this.music.pauseAudio();
     this.backgroundTheme.play();
 
     this.userService.getUserByEmail(this.userData.email).subscribe({

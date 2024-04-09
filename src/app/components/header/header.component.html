@@ -1,8 +1,8 @@
 <nav>
   <ul class="nav-links">
-    <li><a (click)="sayTheWords()">Say the Words</a></li>
-    <li><a (click)="missions()">Missions</a></li>
-    <li><a (click)="profile()">Profile</a></li>
+    <li [class.last-clicked]="lastClickedService.lastClickedLink === 'sayTheWords'"><a (click)="sayTheWords()">Say the Words</a></li>
+    <li [class.last-clicked]="lastClickedService.lastClickedLink === 'missions'"><a (click)="missions()">Missions</a></li>
+    <li [class.last-clicked]="lastClickedService.lastClickedLink === 'profile'"><a (click)="profile()">Profile</a></li>
     <li><a routerLink="knightsRadiant/user/details">Options</a></li>
     <li><a (click)="logout()">Log out</a></li>
   </ul>

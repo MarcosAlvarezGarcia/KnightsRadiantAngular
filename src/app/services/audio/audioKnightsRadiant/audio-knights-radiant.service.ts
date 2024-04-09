@@ -85,7 +85,11 @@ export class AudioKnightsRadiantService{
     })
   }
 
-
+  resetDisc(): void {
+    this.currentIndex = 30; //Empiezo desde la última canción del disco
+    this.currentTime = 0;
+    this.saveToLocalStorage();
+  }
 
   playAudio(): void {
     this.audio.play();

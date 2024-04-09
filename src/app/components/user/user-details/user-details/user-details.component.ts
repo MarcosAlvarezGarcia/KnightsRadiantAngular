@@ -21,7 +21,7 @@ import {ViewsStatesService} from "../../../../services/viewsStates/views-states.
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.css'
 })
-export class UserDetailsComponent implements OnInit, OnDestroy{
+export class UserDetailsComponent implements OnInit{
 
   userDataString = localStorage.getItem('userData');
   userData: any;
@@ -162,8 +162,6 @@ export class UserDetailsComponent implements OnInit, OnDestroy{
           this.radiantFourthIdeal = this.user.knightRadiant.fourthIdeal;
           this.radiantFifthIdeal = this.user.knightRadiant.fifthIdeal;
 
-          this.audioKnightsRadiantService.playNextSong();
-
           if (this.user.knightRadiant.ideal == 1 || this.user.knightRadiant.ideal == 2 || this.user.knightRadiant.ideal == 3 || this.user.knightRadiant.ideal == 4 || this.user.knightRadiant.ideal == 5) {
             this.isRadiantIdeal = true;
           }
@@ -277,11 +275,6 @@ export class UserDetailsComponent implements OnInit, OnDestroy{
       }
     })
 
-  }
-
-  ngOnDestroy(): void {
-    // Detener el audio al salir del componente
-    this.audioKnightsRadiantService.pauseAudio();
   }
 
   @HostListener('document:click', ['$event'])

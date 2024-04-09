@@ -30,5 +30,11 @@ nav {
 }
 
 .nav-links li a:hover {
-  text-shadow: 2px 2px 2px rgb(255, 255, 255); /* Desplazamiento horizontal, desplazamiento vertical, desenfoque, y color de la sombra */
+  text-shadow: 2px 2px 2px rgb(255, 255, 255); /* Efecto brillo al estar encima */
+}
+
+.nav-links li.last-clicked a {
+  /* Estilo para el último enlace clicado */
+  text-shadow: 2px 2px 2px rgb(255, 255, 255); /* Efecto brillo al estar encima */
+  text-decoration: underline;
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {isPlatformBrowser} from "@angular/common";
 import {ViewsStatesService} from "../../services/viewsStates/views-states.service";
 import {AuthService} from "../../services/auth/auth.service";
+import {AudioKnightsRadiantService} from "../../services/audio/audioKnightsRadiant/audio-knights-radiant.service";
 
 @Component({
   selector: 'app-home-page',
@@ -13,7 +14,7 @@ export class HomePageComponent implements OnInit{
 
   thunder = isPlatformBrowser(this.platformId) ? new Audio('/assets/audio/sounds/thunder.mp3') : null ;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router, public viewsStatesService: ViewsStatesService, private authService: AuthService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router, public viewsStatesService: ViewsStatesService, private audioKnightsRadiantService: AudioKnightsRadiantService) {
     if (this.thunder) {
       this.thunder.volume = 0.3;
       this.thunder.load();
@@ -21,7 +22,7 @@ export class HomePageComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
+    this.audioKnightsRadiantService.resetDisc();
   }
 
   enter(){
