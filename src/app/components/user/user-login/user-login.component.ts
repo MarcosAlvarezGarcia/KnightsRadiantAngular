@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AudioKnightsRadiantService } from '../../../services/audio/audioKnightsRadiant/audio-knights-radiant.service';
-import { WOKService } from '../../../services/wallpaper/wok.service';
+import { Router } from '@angular/router';
 import {FormBuilder, Validators} from "@angular/forms";
 import {LoginRequest} from "../../../services/auth/loginRequest";
 import {User} from "../../../services/auth/user";

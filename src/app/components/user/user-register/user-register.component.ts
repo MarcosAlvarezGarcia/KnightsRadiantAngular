@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AudioKnightsRadiantService } from '../../../services/audio/audioKnightsRadiant/audio-knights-radiant.service';
-import { WOKService } from '../../../services/wallpaper/wok.service';
 import {RadiantOrder} from "../../../classes/radiant-order/radiant-order";
-import {Ideal} from "../../../classes/ideal/ideal";
 import {KnightRadiant} from "../../../classes/knight-radiant/knight-radiant";
 import {KnightRadiantService} from "../../../services/knightRadiant/knight-radiant.service";
-import {UserStartComponent} from "../user-start/user-start.component";
 import {AuthService} from "../../../services/auth/auth.service";
-import {KRRadiantOrderFormComponent} from "../../knight-radiant/kr-radiant-order-form/kr-radiant-order-form.component";
 import {ViewsStatesService} from "../../../services/viewsStates/views-states.service";
 
 @Component({

@@ -13,7 +13,6 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
 import { UserStartComponent } from './components/user/user-start/user-start.component';
 import { UserLoginComponent } from './components/user/user-login/user-login.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { WOKComponent } from './components/wallpaper/wok/wok.component';
 import { CustomCursorLightBallComponent } from './components/custom-cursor-light-ball/custom-cursor-light-ball.component';
 import { RadiantOrderListComponent } from './components/radiant-order/radiant-order-list/radiant-order-list.component';
 import {JwtInterceptorService} from "./services/auth/jwt-interceptor.service";
@@ -62,7 +61,6 @@ const routes : Routes = [
     UserStartComponent,
     UserLoginComponent,
     HomePageComponent,
-    WOKComponent,
     CustomCursorLightBallComponent,
     RadiantOrderListComponent,
     UserDetailsComponent,

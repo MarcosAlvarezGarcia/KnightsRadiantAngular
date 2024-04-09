@@ -87,7 +87,6 @@ export class SayTheWordsComponent implements OnInit, OnDestroy{
       }
     })
 
-    this.music.audio.volume = 0;
 
   }
 

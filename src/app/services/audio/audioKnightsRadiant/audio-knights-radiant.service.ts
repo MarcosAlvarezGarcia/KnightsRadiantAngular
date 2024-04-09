@@ -41,25 +41,46 @@ export class AudioKnightsRadiantService{
     'assets/audio/music/2-15-knights-radiant-theme.mp3',
   ];
 
-  currentIdex: number = 30; // Empiezo desde la última canción del disco
+  currentIndex: number = 30; // Empiezo desde la última canción del disco
+
+  currentTime: number = 0; // Guardaré el tiempo de la canción actual
 
 
   constructor() {
-    //this.audio.src = 'assets/audio/music/2-15-knights-radiant-theme.mp3'; // Establece la ruta de tu archivo de audio
     this.audio.volume = 0.6;
-    //this.audio.loop = true;
+    this.loadFromLocalStorage();
+  }
+
+  private loadFromLocalStorage(): void {
+    const savedIndex = localStorage.getItem('currentSongIndex');
+    const savedTime = localStorage.getItem('currentTime');
+    if (savedIndex !== null && savedTime !== null) {
+      this.currentIndex = +savedIndex;
+      this.currentTime = +savedTime;
+    }
+  }
+
+  private saveToLocalStorage(): void {
+    localStorage.setItem('currentSongIndex', this.currentIndex.toString());
+    localStorage.setItem('currentTime', this.currentTime.toString());
   }
 
   playNextSong() {
     this.isPlaying = true;
-    if (this.currentIdex >= this.kaladinDisc.length) {
-      this.currentIdex = 0 // Vuelve al principio del disco al llegar al final
+    if (this.currentIndex >= this.kaladinDisc.length) {
+      this.currentIndex = 0 // Vuelve al principio del disco al llegar al final
     }
-    this.audio.src = this.kaladinDisc[this.currentIdex];
+    this.audio.src = this.kaladinDisc[this.currentIndex];
+    this.audio.currentTime = this.currentTime;
     this.audio.load();
     this.audio.play();
+    this.audio.addEventListener('timeupdate', () => {
+      this.currentTime = this.audio.currentTime;
+      this.saveToLocalStorage()
+    })
     this.audio.addEventListener('ended', () => {
-      this.currentIdex++;
+      this.currentIndex++;
+      this.currentTime = 0;
       this.playNextSong()
     })
   }
@@ -74,6 +95,7 @@ export class AudioKnightsRadiantService{
   pauseAudio(): void {
     this.audio.pause();
     this.isPlaying = false;
+    this.saveToLocalStorage();
   }
 
   isAudioPlaying(): boolean {

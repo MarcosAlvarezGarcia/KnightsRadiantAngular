@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import {UserService} from "../../services/user/user.service";
-import {UserStartComponent} from "../user/user-start/user-start.component";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AudioKnightsRadiantService} from "../../services/audio/audioKnightsRadiant/audio-knights-radiant.service";
-import {WOKService} from "../../services/wallpaper/wok.service";
-import {FormBuilder} from "@angular/forms";
+import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth/auth.service";
 
 @Component({

@@ -32,10 +32,12 @@ export class HomePageComponent implements OnInit{
     this.viewsStatesService.setViewRadiantForm(false);
     this.viewsStatesService.setViewStart(true);
     this.viewsStatesService.setPageStart(true);
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['knightsRadiant/user/details']);
-    }
-    else this.router.navigate(['knightsRadiant/user/start']);
+    //if (this.authService.isAuthenticated()) {
+    //  this.router.navigate(['knightsRadiant/user/details']);
+    //}
+    //else {
+      this.router.navigate(['knightsRadiant/user/start']);
+    //}
   }
 
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {User} from "../../../../services/auth/user";
 import {UserService} from "../../../../services/user/user.service";
 import {FormBuilder, Validators} from "@angular/forms";
@@ -21,7 +21,7 @@ import {ViewsStatesService} from "../../../../services/viewsStates/views-states.
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.css'
 })
-export class UserDetailsComponent implements OnInit{
+export class UserDetailsComponent implements OnInit, OnDestroy{
 
   userDataString = localStorage.getItem('userData');
   userData: any;
@@ -115,11 +115,6 @@ export class UserDetailsComponent implements OnInit{
     'assets/img/Surges_Glyphs/10_Tension_Surge-glyph.svg'
   ];
 
-  registerForm=this.formBuilder.group({
-      id:[''],
-      knightRadiant:['', Validators.required]
-  })
-
   thunder = new Audio();
 
   constructor(private userService: UserService, private krService: KnightRadiantService, private formBuilder: FormBuilder, private router: Router, private audioKnightsRadiantService: AudioKnightsRadiantService, private authService: AuthService, private orderService: RadiantOrderService, private surgeService: SurgeService, private powersService: PowersService, public viewsStatesService: ViewsStatesService) {
@@ -141,10 +136,6 @@ export class UserDetailsComponent implements OnInit{
       this.userData = JSON.parse(this.userDataString);
     } else {
       console.log('No se encontraron datos de usuario en el localStorage.');
-    }
-
-    if (!this.audioKnightsRadiantService.isAudioPlaying()) {
-      this.audioKnightsRadiantService.playNextSong();
     }
 
     this.audioKnightsRadiantService.audio.volume = 0.6;
@@ -170,6 +161,8 @@ export class UserDetailsComponent implements OnInit{
           this.radiantThirdIdeal = this.user.knightRadiant.thirdIdeal;
           this.radiantFourthIdeal = this.user.knightRadiant.fourthIdeal;
           this.radiantFifthIdeal = this.user.knightRadiant.fifthIdeal;
+
+          this.audioKnightsRadiantService.playNextSong();
 
           if (this.user.knightRadiant.ideal == 1 || this.user.knightRadiant.ideal == 2 || this.user.knightRadiant.ideal == 3 || this.user.knightRadiant.ideal == 4 || this.user.knightRadiant.ideal == 5) {
             this.isRadiantIdeal = true;
@@ -265,8 +258,6 @@ export class UserDetailsComponent implements OnInit{
         } else {
           this.orderColor = ''; // Otra acción por defecto si es necesario
         }              let userId = userData.id.toString();
-        this.registerForm.controls.id.setValue(userData.id.toString());
-        //this.registerForm.controls.knightRadiant.setValue(userData.knightRadiant.radiantOrder?.name);
       },
       error: (errorData) => {
         this.errorMessage=errorData
@@ -286,6 +277,21 @@ export class UserDetailsComponent implements OnInit{
       }
     })
 
+  }
+
+  ngOnDestroy(): void {
+    // Detener el audio al salir del componente
+    this.audioKnightsRadiantService.pauseAudio();
+  }
+
+  @HostListener('document:click', ['$event'])
+  @HostListener('document:keydown', ['$event'])
+  handleUserInteraction(event: Event) {
+    // Reproduce la música cuando el usuario interactúa con la página
+    if (!this.audioKnightsRadiantService.isAudioPlaying()) {
+      this.audioKnightsRadiantService.playNextSong();
+      //this.wokvideo.playVideo();
+    }
   }
 
   getOrderDetails() {
@@ -366,16 +372,4 @@ export class UserDetailsComponent implements OnInit{
         );
     }
 
-  savePersonalDetailsData()
-  {
-      if (this.registerForm.valid)
-      {
-          this.userService.updateUser(this.registerForm.value as unknown as User).subscribe({
-              next:() => {
-                  this.editMode=false;
-                  this.user=this.registerForm.value as unknown as User;
-              }, error:(errorData)=> console.error(errorData)
-          })
-      }
-  }
 }
