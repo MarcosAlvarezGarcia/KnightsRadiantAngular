@@ -1,0 +1,23 @@
+<div class="containers">
+  <div class="container">
+    <a (click)="logOut()" class="btn btn-primary"> Log out</a>
+
+    <h1>Users list</h1>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">NAME</th>
+        <th scope="col">EMAIL</th>
+        <th scope="col">KICK OUT</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let u of users">
+        <td>{{u.name}}</td>
+        <td>{{u.email}}</td>
+        <td><button class="btn btn-danger" (click)="deleteUser(u.email)">Kick out</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
