@@ -29,6 +29,7 @@ import { MissionsComponent } from './components/missions/missions/missions.compo
 import { RadiantOrderDetailsComponent } from './components/radiant-order/radiant-order-details/radiant-order-details/radiant-order-details.component';
 import { ShardbladeComponent } from './components/shards/shardblade/shardblade.component';
 import { ShardplateComponent } from './components/shards/shardplate/shardplate.component';
+import { HerladComponent } from './components/herlad/herlad.component';
 
 const routes : Routes = [
   {path: '', redirectTo:'/knightsRadiant/home', pathMatch:'full'}, // http://localhost:4200/knightsRadiant/home
@@ -47,6 +48,8 @@ const routes : Routes = [
   {path: 'knightsRadiant/surges/create', component:SurgeAddComponent}, // http://localhost:4200/knightsRadiant/surges/create
   {path: 'knightsRadiant/surges/update/:id', component:SurgeUpdateComponent}, // http://localhost:4200/knightsRadiant/surges/update
   {path: 'knightsRadiant/radiant-orders', component: RadiantOrderListComponent}, // http://localhost:4200/knightsRadiant/radiant-orders
+
+  {path: 'knightsRadiant/herald', component: HerladComponent}, // http://localhost:4200/knightsRadiant/herald
 
 ];
 
@@ -74,7 +77,8 @@ const routes : Routes = [
     MissionsComponent,
     RadiantOrderDetailsComponent,
     ShardbladeComponent,
-    ShardplateComponent
+    ShardplateComponent,
+    HerladComponent
   ],
     imports: [
         BrowserModule,

@@ -150,6 +150,12 @@ export class UserDetailsComponent implements OnInit{
     this.userService.getUserByEmail(this.userData.email).subscribe({
       next: (userData) => {
         this.user=userData;
+        console.log (this.user.role)
+        if (this.user.role == 'HERALD'){
+          console.log ('heraldooooooooo')
+
+            this.router.navigate(['knightsRadiant/herald']);
+        }
         if (this.user.knightRadiant && this.user.knightRadiant.radiantOrder) {
           this.orderColor = this.user.knightRadiant.radiantOrder.color;
           this.radiantId = this.user.knightRadiant.id;
@@ -262,6 +268,7 @@ export class UserDetailsComponent implements OnInit{
       },
       complete: () => {
         console.info("User Data ok");
+
         if (this.user!.knightRadiant.radiantOrder == null){
           console.info("no order asigned")
           this.orderForm = true;
@@ -351,18 +358,5 @@ export class UserDetailsComponent implements OnInit{
     this.thunder.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
     this.thunder.play();
   }
-
-    setMissionsCompleted(id: number): void {
-        this.krService.setMissionsCompleted(this.userData.knightRadiant.id).subscribe(
-            response => {
-                console.log('Misiones completadas establecidas correctamente:', response);
-                // Manejar la respuesta si es necesario
-            },
-            error => {
-                console.error('Error al establecer misiones completadas:', error);
-                // Manejar el error si es necesario
-            }
-        );
-    }
 
 }

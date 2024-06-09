@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {ViewsStatesService} from "../viewsStates/views-states.service";
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   private readonly TOKEN_KEY = 'userToken';
   private readonly USER_KEY = 'userData';
-  constructor() { }
+  constructor(private viewsStateService: ViewsStatesService) { }
 
   // Método para almacenar el token y los datos del usuario en el almacenamiento local
   // ¡¡¡¡¡¡¡IMPORTANTE!!!!!!!!
@@ -31,6 +32,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
+    this.viewsStateService.setViewLogin(false);
   }
 
   // Método para verificar si el usuario está autenticado (tiene un token válido)

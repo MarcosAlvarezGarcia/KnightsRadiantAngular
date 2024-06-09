@@ -6,6 +6,7 @@ import {User} from "../auth/user";
 import {FormControl} from "@angular/forms";
 import {LoginRequest} from "../auth/loginRequest";
 import {calculateThresholds} from "@angular-devkit/build-angular/src/utils/bundle-calculator";
+import {KnightRadiant} from "../../classes/knight-radiant/knight-radiant";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,11 @@ export class UserService {
   private baseUrl : string = 'http://localhost:8080/knightsRadiant' + this.zone;
 
   constructor(private http:HttpClient) { }
-
+  getAllUsers(): Observable<User []> {
+    return this.http.get<User[]>(this.baseUrl).pipe(
+      catchError(this.handleError)
+    )
+  }
   getUser(id : number):Observable<User>{
     return this.http.get<User>(this.baseUrl + "/id/" + id).pipe(
       catchError(this.handleError)
@@ -46,6 +51,11 @@ export class UserService {
     return this.http.post<any>(this.baseUrl + "/register", { name, email, password, repeatPassword }).pipe(
       catchError(this.handleError)
     )
+  }
+
+  deleteUser(email: string): Observable<any> {
+    const url = `${this.baseUrl}/delete/${email}`;
+    return this.http.delete<any>(url);
   }
 
   private handleError(error:HttpErrorResponse){

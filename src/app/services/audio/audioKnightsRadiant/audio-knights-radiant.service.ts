@@ -68,21 +68,31 @@ export class AudioKnightsRadiantService{
   playNextSong() {
     this.isPlaying = true;
     if (this.currentIndex >= this.kaladinDisc.length) {
-      this.currentIndex = 0 // Vuelve al principio del disco al llegar al final
+      this.currentIndex = 0; // Vuelve al principio del disco al llegar al final
     }
     this.audio.src = this.kaladinDisc[this.currentIndex];
     this.audio.currentTime = this.currentTime;
     this.audio.load();
     this.audio.play();
-    this.audio.addEventListener('timeupdate', () => {
-      this.currentTime = this.audio.currentTime;
-      this.saveToLocalStorage()
-    })
-    this.audio.addEventListener('ended', () => {
-      this.currentIndex++;
-      this.currentTime = 0;
-      this.playNextSong()
-    })
+
+    // Desvinculo event listeners para evitar múltiples llamadas y que salte varias canciones
+    this.audio.removeEventListener('timeupdate', this.timeUpdateListener);
+    this.audio.removeEventListener('ended', this.endedListener);
+
+    // Volver a agregar event listeners
+    this.audio.addEventListener('timeupdate', this.timeUpdateListener);
+    this.audio.addEventListener('ended', this.endedListener);
+  }
+
+  private timeUpdateListener = () => {
+    this.currentTime = this.audio.currentTime;
+    this.saveToLocalStorage(); // Guardo el tiempo de la cancion
+  }
+
+  private endedListener = () => { // Paso a la siguiente canción
+    this.currentIndex++;
+    this.currentTime = 0;
+    this.playNextSong();
   }
 
   resetDisc(): void {

@@ -11,10 +11,10 @@
                 <app-header></app-header>
             </div>
             <div id="container-say-the-words" class="text-center">
-                <h1 id="text-say-the-words">SAY THE WORDS</h1>
+                <h1 id="text-say-the-words">{{title}}</h1>
                 <div id="container-input-say-the-words">
-                    <input id="input-say-the-words" [(ngModel)]="ideal" type="text" placeholder="Say the Words, Radiant"><br>
-                    <button id="bttn-say-the-words" (click)="sayNextIdeal()">Say the words</button>
+                    <input id="input-say-the-words" [(ngModel)]="ideal" type="text" [placeholder]="placeholderText" [disabled]="inputDisabled"><br>
+                    <button id="bttn-say-the-words" (click)="validateIdeal()">Say the words</button>
                 </div>
             </div>
             </div>

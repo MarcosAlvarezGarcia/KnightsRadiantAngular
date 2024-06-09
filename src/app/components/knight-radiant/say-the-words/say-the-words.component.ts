@@ -24,7 +24,9 @@ export class SayTheWordsComponent implements OnInit, OnDestroy{
   user?:User;
   id?: number = this.user?.id;
   radiantId : number = 0;
+  orderName: string = "";
   currentRadiantIdeal : number = 0;
+  missionsCompleted : number = 0;
   nextIdeal: boolean = false;
 
   ideal: string = "";
@@ -38,6 +40,10 @@ export class SayTheWordsComponent implements OnInit, OnDestroy{
 
   stormFatherVoice = new Audio();
   backgroundTheme = new Audio();
+
+  title : String = 'SAY THE WORDS';
+  placeholderText : String = 'Say the Words, Radiant';
+  inputDisabled: boolean = true;
 
   constructor(private userService: UserService, private krService: KnightRadiantService, private router: Router, private authService: AuthService, private music: AudioKnightsRadiantService) {
     this.stormFatherVoice.src = '/assets/audio/sounds/your-words-are-accepted.mp3';
@@ -74,7 +80,11 @@ export class SayTheWordsComponent implements OnInit, OnDestroy{
           this.orderColor = this.user.knightRadiant.radiantOrder.color;
           this.radiantId = this.user.knightRadiant.id;
           this.orderId = this.user.knightRadiant.radiantOrder.id;
+          this.orderName = this.user.knightRadiant.radiantOrder.name;
           this.currentRadiantIdeal = this.user.knightRadiant.ideal;
+          this.missionsCompleted = this.user.knightRadiant.missionsCompleted;
+
+          this.updateInterface();
         } else {
           this.orderColor = ''; // Otra acción por defecto si es necesario
         }              let userId = userData.id.toString();
@@ -93,6 +103,102 @@ export class SayTheWordsComponent implements OnInit, OnDestroy{
 
   ngOnDestroy() {
     this.backgroundTheme.pause();
+  }
+
+  updateInterface() {
+    switch (this.currentRadiantIdeal) {
+      case 0:
+        this.title = 'SAY THE FIRST IDEAL';
+        if (this.missionsCompleted >= 1) {
+          this.placeholderText = 'Say the Words, Radiant';
+          this.inputDisabled = false;
+        }
+        else {
+          this.placeholderText = 'You are not ready yet';
+          this.inputDisabled = true;
+        }
+        break;
+      case 1:
+        this.title = 'SAY THE SECOND IDEAL';
+        if (this.missionsCompleted >= 5) {
+          this.placeholderText = 'Say the Words, Radiant';
+          this.inputDisabled = false;
+        }
+        else {
+          this.placeholderText = 'You are not ready yet';
+          this.inputDisabled = true;
+        }
+        break;
+      case 2:
+        this.title = 'SAY THE THIRD IDEAL';
+        if (this.missionsCompleted >= 10) {
+          this.placeholderText = 'Say the Words, Radiant';
+          this.inputDisabled = false;
+        }
+        else {
+          this.placeholderText = 'You are not ready yet';
+          this.inputDisabled = true;
+        }
+        break;
+      case 3:
+        this.title = 'SAY THE FOURTH IDEAL';
+        if (this.missionsCompleted >= 15) {
+          this.placeholderText = 'Say the Words, Radiant';
+          this.inputDisabled = false;
+        }
+        else {
+          this.placeholderText = 'You are not ready yet';
+          this.inputDisabled = true;
+        }
+        break;
+      case 4:
+        this.title = 'SAY THE FIFTH IDEAL';
+        if (this.missionsCompleted >= 0) {
+          this.placeholderText = 'Say the Words, Radiant';
+          this.inputDisabled = false;
+        }
+        else {
+          this.placeholderText = 'You are not ready yet';
+          this.inputDisabled = true;
+        }
+        break;
+      case 5:
+        this.title = "THERE'S ALWAYS ANOTHER STEP";
+        this.placeholderText = "THERE'S ALWAYS ANOTHER STEP";
+        this.inputDisabled = true;
+        break;
+    }
+  }
+  validateIdeal() {
+    if (this.currentRadiantIdeal == 0) {
+      if (this.ideal == "Life before death. Strength before weakness. Journey before destination.") {
+        this.sayNextIdeal();
+      } else {
+        this.ideal = '';
+      }
+    } else if (this.currentRadiantIdeal == 5) {
+      this.ideal = '';
+    } else {
+      const validIdeals: { [key: string]: string } = {
+        'Windrunners': 'protect',
+        'Skybreakers': 'justice',
+        'Dustbringers': 'self mastery',
+        'Edgedancers': 'remember',
+        'Truthwatchers': 'truth',
+        'Elsecallers': 'potential',
+        'Willshapers': 'freedom',
+        'Stonewards': 'need',
+        'Bondsmiths': 'unite'
+      };
+
+      if (this.orderName == 'Lightweavers') {
+        this.sayNextIdeal();
+      } else if (this.ideal.includes(validIdeals[this.orderName])) {
+        this.sayNextIdeal();
+      } else {
+        this.ideal = '';
+      }
+    }
   }
 
   sayNextIdeal() {
@@ -127,13 +233,22 @@ export class SayTheWordsComponent implements OnInit, OnDestroy{
         }
 
         return nextIdealMethod;
-      })
+      }),
+      switchMap(() => this.userService.getUserByEmail(this.userData.email)) // Obtener los datos actualizados del usuario
     ).subscribe(
-      () => {
-        console.log('Ambas operaciones completadas con éxito');
+      (updatedUserData) => {
+        this.user = updatedUserData;
+        this.currentRadiantIdeal = this.user.knightRadiant.ideal; // Actualizar el currentRadiantIdeal con el valor actualizado
         this.stormFatherVoice.currentTime = 0; // Reiniciar el sonido si ya está reproduciéndose
         this.stormFatherVoice.play();
         this.ideal = '';
+        this.inputDisabled = true;
+        this.stormFatherVoice.addEventListener('ended', () => {
+          setTimeout(() => {
+            this.updateInterface(); // Actualizar la interfaz después de un retraso
+            console.log('Ambas operaciones completadas con éxito');
+          }, 1000); // Ajustar el tiempo de retraso según sea necesario
+        });
       },
       (error) => {
         console.error('Error al realizar las operaciones:', error);
